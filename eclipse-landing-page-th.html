@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คู่มือเลือกจุดชมสุริยุปราคาเต็มดวง | DownloadMapImage.com</title>
+<meta name="description" content="คู่มือฉบับสมบูรณ์สำหรับเลือกจุดชมสุริยุปราคาเต็มดวง ตั้งแต่การสำรวจพื้นที่ การจำลองภาพด้วย Street View 360 และ Stellarium ไปจนถึงการตัดสินใจขั้นสุดท้ายในวันงาน">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Taviraj:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Noto+Sans+Thai:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #0a0e1a;
+    --void-soft: #10162c;
+    --panel: #151d3b;
+    --panel-hi: #1b2547;
+    --border: #2b3660;
+    --corona: #f2b64c;
+    --corona-soft: #ffd98a;
+    --ember: #e2673a;
+    --silver: #c7cbdb;
+    --parchment: #f6f1e4;
+    --ink: #e7eaf6;
+    --ink-dim: #97a0c2;
+    --max: 1100px;
+    --maxr: 760px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--void);
+    color: var(--ink);
+    font-family: 'Noto Sans Thai', -apple-system, sans-serif;
+    font-size: 17px;
+    line-height: 1.9;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .field {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background:
+      radial-gradient(1px 1px at 8% 12%, #ffffff66, transparent 60%),
+      radial-gradient(1px 1px at 22% 38%, #ffffff44, transparent 60%),
+      radial-gradient(1.5px 1.5px at 35% 8%, #ffffff55, transparent 60%),
+      radial-gradient(1px 1px at 48% 55%, #ffffff33, transparent 60%),
+      radial-gradient(1.5px 1.5px at 62% 22%, #ffffff55, transparent 60%),
+      radial-gradient(1px 1px at 75% 68%, #ffffff33, transparent 60%),
+      radial-gradient(1px 1px at 88% 15%, #ffffff44, transparent 60%),
+      radial-gradient(1.5px 1.5px at 94% 48%, #ffffff55, transparent 60%),
+      var(--void);
+    background-attachment: fixed;
+  }
+
+  a { color: inherit; }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72em;
+    letter-spacing: 0.08em;
+    color: var(--corona);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 22px;
+    height: 1px;
+    background: var(--corona);
+    opacity: 0.7;
+  }
+
+  h1, h2, h3 { font-family: 'Taviraj', serif; color: var(--parchment); margin: 0; }
+
+  .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+  .container-r { max-width: var(--maxr); margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- NAV ---------- */
+  nav.topbar { position: relative; z-index: 5; padding: 22px 0; }
+  nav.topbar .container { display: flex; align-items: center; justify-content: space-between; }
+  .wordmark {
+    font-family: 'Taviraj', serif;
+    font-weight: 600;
+    font-size: 1.05em;
+    color: var(--parchment);
+    text-decoration: none;
+    letter-spacing: 0.2px;
+  }
+  .wordmark span { color: var(--corona); }
+  .nav-cta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74em;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 9px 16px;
+    border-radius: 100px;
+    transition: border-color .18s ease, color .18s ease, background .18s ease;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { border-color: var(--corona); color: var(--corona); background: rgba(242,182,76,0.06); }
+
+  /* ---------- HERO ---------- */
+  .hero { position: relative; padding: 40px 0 30px; text-align: center; overflow: hidden; }
+  .hero .eyebrow { justify-content: center; margin-bottom: 22px; }
+  .hero .eyebrow::before { display: none; }
+  .hero h1 {
+    font-size: clamp(1.9em, 4.6vw, 2.9em);
+    font-weight: 600;
+    line-height: 1.55;
+    max-width: 17ch;
+    margin: 0 auto 24px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--corona-soft);
+  }
+  .hero p.lead {
+    max-width: 52ch;
+    margin: 0 auto 36px;
+    color: var(--ink-dim);
+    font-size: 1.04em;
+  }
+  .hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 56px; }
+  .btn {
+    font-family: 'Noto Sans Thai', sans-serif;
+    font-weight: 600;
+    font-size: 0.92em;
+    padding: 14px 26px;
+    border-radius: 10px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--corona), var(--ember));
+    color: #1a0f04;
+    box-shadow: 0 10px 30px -8px rgba(226,103,58,0.55);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 34px -8px rgba(226,103,58,0.7); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--border); }
+  .btn-ghost:hover { border-color: var(--silver); color: var(--parchment); }
+
+  .corona-dial { position: relative; width: min(340px, 70vw); aspect-ratio: 1; margin: 0 auto; }
+  .corona-dial .rays {
+    position: absolute; inset: -18%; border-radius: 50%;
+    background: conic-gradient(from 0deg,
+      rgba(242,182,76,0.0) 0deg, rgba(242,182,76,0.35) 8deg, rgba(242,182,76,0.0) 16deg,
+      rgba(242,182,76,0.0) 34deg, rgba(242,182,76,0.28) 42deg, rgba(242,182,76,0.0) 50deg,
+      rgba(242,182,76,0.0) 70deg, rgba(242,182,76,0.32) 78deg, rgba(242,182,76,0.0) 86deg,
+      rgba(242,182,76,0.0) 112deg, rgba(242,182,76,0.24) 120deg, rgba(242,182,76,0.0) 128deg,
+      rgba(242,182,76,0.0) 150deg, rgba(242,182,76,0.3) 158deg, rgba(242,182,76,0.0) 166deg,
+      rgba(242,182,76,0.0) 190deg, rgba(242,182,76,0.3) 198deg, rgba(242,182,76,0.0) 206deg,
+      rgba(242,182,76,0.0) 230deg, rgba(242,182,76,0.26) 238deg, rgba(242,182,76,0.0) 246deg,
+      rgba(242,182,76,0.0) 270deg, rgba(242,182,76,0.34) 278deg, rgba(242,182,76,0.0) 286deg,
+      rgba(242,182,76,0.0) 310deg, rgba(242,182,76,0.28) 318deg, rgba(242,182,76,0.0) 326deg,
+      rgba(242,182,76,0.0) 344deg, rgba(242,182,76,0.3) 352deg, rgba(242,182,76,0.0) 360deg);
+    filter: blur(1.5px);
+    animation: spin 90s linear infinite;
+  }
+  .corona-dial .corona-glow {
+    position: absolute; inset: 8%; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,217,138,0.95) 0%, rgba(242,182,76,0.55) 34%, rgba(242,182,76,0.14) 62%, rgba(242,182,76,0) 74%);
+  }
+  .corona-dial .moon {
+    position: absolute; inset: 22%; border-radius: 50%;
+    background: radial-gradient(circle at 38% 34%, #232a44, #0a0e1a 70%);
+    box-shadow: 0 0 0 1px rgba(199,203,219,0.12);
+    animation: drift 14s ease-in-out infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes drift { 0%, 100% { transform: translate(-6%, 0); } 50% { transform: translate(6%, 0); } }
+
+  .hero-caption {
+    margin-top: 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7em;
+    letter-spacing: 0.05em;
+    color: var(--ink-dim);
+  }
+
+  /* ---------- STAT STRIP ---------- */
+  .stats { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 34px 0; }
+  .stats .container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center; }
+  .stat b { display: block; font-family: 'Taviraj', serif; font-size: 1.85em; color: var(--corona-soft); font-weight: 600; }
+  .stat span { font-size: 0.84em; color: var(--ink-dim); }
+
+  /* ---------- SECTION shared ---------- */
+  section { padding: 88px 0; }
+  section.tight { padding: 60px 0; }
+  .section-head { max-width: 640px; margin-bottom: 46px; }
+  .section-head .eyebrow { margin-bottom: 16px; }
+  .section-head h2 { font-size: clamp(1.45em, 3.1vw, 1.9em); font-weight: 600; line-height: 1.55; }
+  .section-head p { color: var(--ink-dim); margin-top: 14px; }
+
+  /* ---------- TOOL SPOTLIGHT ---------- */
+  .tool-spotlight { background: linear-gradient(180deg, var(--void-soft), var(--void)); }
+  .spotlight-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
+  .spotlight-copy h2 { font-size: clamp(1.45em, 3.3vw, 2em); line-height: 1.55; margin-bottom: 18px; font-weight: 600; }
+  .spotlight-copy p { color: var(--ink-dim); margin-bottom: 26px; }
+  .feature-list { list-style: none; padding: 0; margin: 0 0 30px; display: grid; gap: 14px; }
+  .feature-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.95em; color: var(--ink); }
+  .feature-list .tick {
+    flex: none; width: 20px; height: 20px; border-radius: 50%;
+    background: rgba(242,182,76,0.12); border: 1px solid rgba(242,182,76,0.4);
+    color: var(--corona); display: flex; align-items: center; justify-content: center;
+    font-size: 0.7em; margin-top: 2px;
+  }
+
+  .mock { background: var(--panel); border: 1px solid var(--border); border-radius: 18px; padding: 4px; box-shadow: 0 30px 70px -30px rgba(0,0,0,0.6); }
+  .mock-inner { background: var(--void-soft); border-radius: 14px; padding: 22px; }
+  .mock-topbar { display: flex; gap: 6px; margin-bottom: 18px; }
+  .mock-topbar span { width: 9px; height: 9px; border-radius: 50%; background: var(--border); }
+  .mock-url {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.72em; color: var(--ink-dim);
+    background: var(--void); border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 12px; margin-bottom: 18px; overflow-x: auto; white-space: nowrap;
+  }
+  .mock-panorama {
+    position: relative; height: 150px; border-radius: 10px; overflow: hidden;
+    background: radial-gradient(120% 90% at 50% 0%, #2c3a63 0%, #141b34 60%), linear-gradient(180deg, #0e1428, #1a2440);
+    margin-bottom: 16px; border: 1px solid var(--border);
+  }
+  .mock-panorama .sun { position: absolute; top: 22px; left: 65%; width: 34px; height: 34px; border-radius: 50%; background: radial-gradient(circle, var(--corona-soft), var(--corona) 60%, transparent 75%); }
+  .mock-panorama .ground {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 46%;
+    background: linear-gradient(180deg, #1c2544, #0c1122);
+    clip-path: polygon(0 40%, 15% 20%, 32% 45%, 50% 10%, 68% 38%, 84% 15%, 100% 34%, 100% 100%, 0 100%);
+  }
+  .mock-row { display: flex; justify-content: space-between; align-items: center; font-family: 'IBM Plex Mono', monospace; font-size: 0.74em; color: var(--ink-dim); margin-bottom: 10px; }
+  .mock-row b { color: var(--parchment); font-weight: 500; }
+  .mock-btn { margin-top: 14px; width: 100%; text-align: center; padding: 12px; border-radius: 9px; background: linear-gradient(135deg, var(--corona), var(--ember)); color: #1a0f04; font-weight: 600; font-size: 0.85em; }
+
+  /* ---------- PROCESS ---------- */
+  .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+  .process-card { background: var(--void-soft); padding: 32px 26px; position: relative; }
+  .process-num { font-family: 'Taviraj', serif; font-size: 2.2em; -webkit-text-stroke: 1px var(--corona); color: transparent; line-height: 1; margin-bottom: 18px; }
+  .process-card h3 { font-size: 1.02em; margin-bottom: 10px; font-weight: 600; line-height: 1.5; }
+  .process-card p { font-size: 0.9em; color: var(--ink-dim); margin: 0; }
+  .process-card a.jump {
+    display: inline-block; margin-top: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 0.7em;
+    letter-spacing: 0.02em; color: var(--corona); text-decoration: none; border-bottom: 1px solid rgba(242,182,76,0.4);
+  }
+
+  /* ---------- ARTICLE ---------- */
+  .article-wrap { background: var(--void); }
+  article { max-width: var(--maxr); margin: 0 auto; padding: 0 24px; }
+  article h2 {
+    font-size: 1.38em; font-weight: 600; line-height: 1.6; margin-top: 3em; margin-bottom: 0.8em;
+    padding-top: 0.9em; border-top: 1px solid var(--border); scroll-margin-top: 24px;
+  }
+  article h2:first-of-type { border-top: none; padding-top: 0; margin-top: 0.4em; }
+  article h3 { font-size: 1.08em; font-weight: 600; color: var(--silver); line-height: 1.6; margin-top: 2em; margin-bottom: 0.7em; }
+  article p { margin: 0 0 1.3em; color: var(--ink); }
+  article em { color: var(--ink-dim); font-style: normal; }
+  article strong { color: var(--parchment); }
+  article a { color: var(--corona-soft); text-decoration: none; border-bottom: 1px solid rgba(242,182,76,0.35); }
+  article a:hover { border-color: var(--corona-soft); }
+  article hr { border: none; border-top: 1px solid var(--border); margin: 3em 0; }
+  article ul, article ol { padding-left: 1.3em; margin-bottom: 1.15em; }
+  article li { margin-bottom: 0.5em; }
+
+  article figure { margin: 2.2em 0; }
+  article .img-wrap { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 6px; box-shadow: 0 20px 50px -24px rgba(0,0,0,0.6); }
+  article .img-wrap svg { display: block; width: 100%; height: auto; border-radius: 9px; }
+  article figcaption { margin-top: 10px; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 0.7em; letter-spacing: 0.02em; color: var(--ink-dim); }
+
+  /* ---------- FINAL CTA ---------- */
+  .final-cta { text-align: center; padding: 100px 0 110px; position: relative; overflow: hidden; }
+  .final-cta::before {
+    content: ""; position: absolute; top: -20%; left: 50%; width: 700px; height: 700px; transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(242,182,76,0.14), transparent 65%); pointer-events: none;
+  }
+  .final-cta h2 { font-size: clamp(1.45em, 3.6vw, 2.1em); max-width: 19ch; margin: 0 auto 18px; font-weight: 600; line-height: 1.6; position: relative; }
+  .final-cta p { color: var(--ink-dim); max-width: 44ch; margin: 0 auto 34px; position: relative; }
+  .final-cta .hero-ctas { position: relative; }
+
+  /* ---------- FOOTER ---------- */
+  footer { border-top: 1px solid var(--border); padding: 44px 0 60px; }
+  footer .container { display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-between; align-items: center; }
+  footer .foot-links { display: flex; gap: 22px; flex-wrap: wrap; }
+  footer a { color: var(--ink-dim); text-decoration: none; font-size: 0.86em; }
+  footer a:hover { color: var(--corona); }
+  footer .copyright {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.72em; color: var(--ink-dim);
+    width: 100%; margin-top: 20px; border-top: 1px solid var(--border); padding-top: 20px; line-height: 1.9;
+  }
+
+  @media (max-width: 860px) {
+    .spotlight-grid { grid-template-columns: 1fr; gap: 40px; }
+    .process-grid { grid-template-columns: 1fr 1fr; }
+    .stats .container { grid-template-columns: 1fr; gap: 30px; }
+  }
+  @media (max-width: 520px) {
+    body { font-size: 16px; }
+    .process-grid { grid-template-columns: 1fr; }
+    section { padding: 64px 0; }
+  }
+</style>
+</head>
+<body>
+<div class="field"></div>
+
+<nav class="topbar">
+  <div class="container">
+    <a class="wordmark" href="https://downloadmapimage.com">Download<span>Map</span>Image</a>
+    <a class="nav-cta" href="https://downloadmapimage.com/360-dl/" target="_blank" rel="noopener">เปิด Street View 360 →</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="eyebrow">คู่มือชมสุริยุปราคา · ปรับปรุงกรกฎาคม 2569</div>
+    <h1>เลือกจุดยืนให้ถูกต้อง เพื่อ<em>ไม่กี่นาที</em>ที่หายากที่สุดบนท้องฟ้า</h1>
+    <p class="lead">ตั้งแต่การสำรวจพื้นที่ล่วงหน้า การจำลองภาพด้วย Street View 360 และ Stellarium ไปจนถึงการตัดสินใจขั้นสุดท้ายในวันงาน รวมทุกขั้นตอนไว้ในที่เดียว เพื่อให้ท่านไม่พลาดคราสเต็มดวง</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#สวนท-1-สำรวจพนทจากระยะไกล">อ่านคู่มือฉบับเต็ม ↓</a>
+      <a class="btn btn-ghost" href="https://downloadmapimage.com/360-dl/" target="_blank" rel="noopener">ใช้ Street View 360 Downloader</a>
+    </div>
+
+    <div class="corona-dial" aria-hidden="true">
+      <div class="rays"></div>
+      <div class="corona-glow"></div>
+      <div class="moon"></div>
+    </div>
+    <div class="hero-caption">จำลองภาพช่วงคราสเต็มดวง</div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="container">
+    <div class="stat"><b>ราว 17 ครั้ง</b><span>สุริยุปราคาเต็มดวงที่เดินทางไปถึงได้จริงตั้งแต่ปี 2000</span></div>
+    <div class="stat"><b>ไม่ถึง 1 ชม.</b><span>เวลารวมของคราสเต็มดวงตลอด 25 ปีที่ผ่านมา</span></div>
+    <div class="stat"><b>2613</b><span>ปีที่คราสเต็มดวงจะกลับมาเยือนแผ่นดินไทยอีกครั้ง</span></div>
+  </div>
+</div>
+<section class="tool-spotlight">
+  <div class="container">
+    <div class="spotlight-grid">
+      <div class="spotlight-copy">
+        <div class="eyebrow">เครื่องมือที่ใช้ในคู่มือนี้</div>
+        <h2>ดาวน์โหลดภาพ Street View 360° เพื่อจำลองสุริยุปราคาล่วงหน้าใน Stellarium</h2>
+        <p>ก่อนเดินทางไปถึงสถานที่จริง ท่านสามารถสร้างทิวทัศน์ 360 องศาของจุดที่ตั้งใจจะยืนขึ้นมาใหม่ แล้วจำลองตำแหน่งดวงอาทิตย์และดวงจันทร์ ณ ช่วงเวลาคราสเต็มดวงได้อย่างแม่นยำ Street View 360 Downloader คือก้าวแรกของกระบวนการนี้</p>
+        <ul class="feature-list">
+          <li><span class="tick">✓</span> วางลิงก์หรือรหัสพาโนรามาจาก Google Maps แล้วดาวน์โหลดภาพ equirectangular ความละเอียดสูงได้ทันที</li>
+          <li><span class="tick">✓</span> ไม่ต้องติดตั้งโปรแกรม ใช้งานผ่านเบราว์เซอร์ได้ทั้งบน Windows และ macOS</li>
+          <li><span class="tick">✓</span> คงพิกัดและทิศทางของภาพต้นฉบับไว้ครบถ้วน พร้อมนำไปใช้กับ Stellarium</li>
+        </ul>
+        <a class="btn btn-primary" href="https://downloadmapimage.com/360-dl/" target="_blank" rel="noopener">เปิด Street View 360 Downloader →</a>
+      </div>
+
+      <div class="mock" aria-hidden="true">
+        <div class="mock-inner">
+          <div class="mock-topbar"><span></span><span></span><span></span></div>
+          <div class="mock-url">downloadmapimage.com/360-dl/</div>
+          <div class="mock-panorama">
+            <div class="sun"></div>
+            <div class="ground"></div>
+          </div>
+          <div class="mock-row"><span>พิกัด</span><b>18.7883° N, 98.9853° E</b></div>
+          <div class="mock-row"><span>ความละเอียด</span><b>16384 × 8192</b></div>
+          <div class="mock-row"><span>รูปแบบไฟล์</span><b>Equirectangular PNG</b></div>
+          <div class="mock-btn">ดาวน์โหลดภาพ 360°</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="container">
+    <div class="section-head" style="margin-left:auto;margin-right:auto;text-align:center;">
+      <div class="eyebrow" style="justify-content:center;">4 ขั้นตอน</div>
+      <h2>จากแผนที่บนโต๊ะทำงาน สู่วินาทีคราสเต็มดวง</h2>
+    </div>
+    <div class="process-grid">
+      <div class="process-card">
+        <div class="process-num">01</div>
+        <h3>สำรวจพื้นที่</h3>
+        <p>ใช้ข้อมูลเมฆระยะยาวและค่าการบดบัง เลือกการผูกมัดกับพื้นที่ที่เหมาะกับสถานการณ์ของท่าน</p>
+        <a class="jump" href="#สวนท-1-สำรวจพนทจากระยะไกล">ดูรายละเอียด ↓</a>
+      </div>
+      <div class="process-card">
+        <div class="process-num">02</div>
+        <h3>ขึ้นบัญชีจุดชม</h3>
+        <p>กำหนดขอบเขตการเดินทาง ตัดสิ่งกีดขวางทางภูมิประเทศออก แล้วเลือกจุดที่เข้าถึงได้จริง</p>
+        <a class="jump" href="#สวนท-2-ขนบญชจดชมทเปนไปได">ดูรายละเอียด ↓</a>
+      </div>
+      <div class="process-card">
+        <div class="process-num">03</div>
+        <h3>จำลองภาพสุริยุปราคา</h3>
+        <p>สร้างทิวทัศน์ 360 องศาด้วย Street View 360 Downloader และ Stellarium เพื่อดูล่วงหน้าทั้งเหตุการณ์</p>
+        <a class="jump" href="#สวนท-3-จำลองภาพสรยปราคาดวย-street-view-และ-stellarium">ดูรายละเอียด ↓</a>
+      </div>
+      <div class="process-card">
+        <div class="process-num">04</div>
+        <h3>ตัดสินใจวันงาน</h3>
+        <p>ติดตามพยากรณ์เมฆในช่วง 72 ชั่วโมงสุดท้าย และรักษาความยืดหยุ่นจนถึงนาทีสุดท้าย</p>
+        <a class="jump" href="#สวนท-4-ตดสนใจเลอกจดชมขนสดทายในวนงาน">ดูรายละเอียด ↓</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="article-wrap">
+<article>
+<figure>
+<div class="img-wrap" role="img" aria-label="แต่ละช่วงของสุริยุปราคาเต็มดวง"><svg viewBox="0 0 1000 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a1128"/>
+      <stop offset="100%" stop-color="#1b2a4a"/>
+    </linearGradient>
+    <radialGradient id="corona" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff7d6" stop-opacity="0.95"/>
+      <stop offset="35%" stop-color="#ffe9a8" stop-opacity="0.55"/>
+      <stop offset="70%" stop-color="#ffdb7a" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#ffdb7a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff4c2"/>
+      <stop offset="60%" stop-color="#ffcf4d"/>
+      <stop offset="100%" stop-color="#ff9d2f"/>
+    </radialGradient>
+  </defs>
+  <rect width="1000" height="320" fill="url(#sky)"/>
+  <text x="500" y="40" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#f4ead0">แต่ละช่วงของสุริยุปราคาเต็มดวง</text>
+
+  <g transform="translate(100,170)">
+    <circle r="42" fill="url(#sunGlow)"/>
+    <text y="80" text-anchor="middle" font-family="Arial" font-size="15" fill="#cfd6e8">ก่อนเกิดคราส</text>
+  </g>
+
+  <g transform="translate(300,170)">
+    <circle r="42" fill="url(#sunGlow)"/>
+    <circle cx="18" cy="-14" r="42" fill="#0a1128"/>
+    <text y="80" text-anchor="middle" font-family="Arial" font-size="15" fill="#cfd6e8">คราสบางส่วน</text>
+  </g>
+
+  <g transform="translate(500,170)">
+    <circle r="40" fill="#0a1128" stroke="#ffdb7a" stroke-width="3"/>
+    <circle cx="34" cy="-18" r="7" fill="#fff7d6"/>
+    <text y="80" text-anchor="middle" font-family="Arial" font-size="15" fill="#cfd6e8">ลูกปัดเบลลี่ / ไดอมอนด์ริง</text>
+  </g>
+
+  <g transform="translate(700,170)">
+    <circle r="70" fill="url(#corona)"/>
+    <circle r="38" fill="#05070f"/>
+    <text y="95" text-anchor="middle" font-family="Arial" font-size="15" fill="#cfd6e8">คราสเต็มดวง เห็นโคโรนา</text>
+  </g>
+
+  <g transform="translate(900,170)">
+    <circle r="42" fill="url(#sunGlow)"/>
+    <circle cx="-18" cy="14" r="42" fill="#0a1128"/>
+    <text y="80" text-anchor="middle" font-family="Arial" font-size="15" fill="#cfd6e8">หลังคราสเต็มดวง</text>
+  </g>
+
+  <line x1="60" y1="250" x2="940" y2="250" stroke="#3a4a72" stroke-width="1" stroke-dasharray="4 4"/>
+</svg></div>
+<figcaption aria-hidden="true">แต่ละช่วงของสุริยุปราคาเต็มดวง</figcaption>
+</figure>
+<h2 id="ขอควรระวงดานความปลอดภยกอนเรมอาน">ข้อควรระวังด้านความปลอดภัยก่อนเริ่มอ่าน</h2>
+<p>การได้เห็นสุริยุปราคาเต็มดวงด้วยตาตัวเองถือเป็นหนึ่งในประสบการณ์ที่น่าจดจำที่สุดในชีวิต แต่สิ่งที่แลกมาคือความเสี่ยงต่อดวงตาอย่างแท้จริง โปรดระมัดระวังอย่างยิ่งเมื่อสังเกตการณ์หรือถ่ายภาพดวงอาทิตย์</p>
+<p>บทความนี้เป็นเพียงข้อมูลอ้างอิง ไม่สามารถทดแทนความรอบคอบตามปกติของท่านได้ แม้ดวงอาทิตย์จะถูกบดบังไปแล้วถึง 99.9% ท่านก็ยังไม่ควรมองตรงไปที่ดวงอาทิตย์โดยไม่มีแว่นกรองแสงเฉพาะสำหรับดูสุริยุปราคา มีเพียงช่วงเวลาสั้น ๆ ของคราสเต็มดวง คือขณะที่ดวงอาทิตย์ถูกบดบังทั้งดวงเท่านั้น ที่ท่านจะถอดแว่นออกมองด้วยตาเปล่าได้อย่างปลอดภัย</p>
+<p>อีกเรื่องที่ควรจำไว้คือ การมองดวงอาทิตย์ผ่านเลนส์เทเลโฟโต้หรือกล้องโทรทรรศน์ในช่วงคราสบางส่วน แม้จะติดฟิลเตอร์กรองแสงที่ถูกต้องแล้วก็ตาม ความผิดพลาดเพียงเล็กน้อยก็อาจทำให้ดวงตาเสียหายถาวรได้ ขอให้ประสบการณ์นี้เป็นความทรงจำที่ดีด้วยเหตุผลที่ถูกต้อง</p>
+<p>คู่มือนี้เขียนขึ้นสำหรับสุริยุปราคาเต็มดวงเป็นหลัก แต่เนื้อหาส่วนใหญ่สามารถนำไปใช้ได้กับสุริยุปราคาวงแหวน (เมื่อดวงจันทร์บดบังดวงอาทิตย์ไม่มิด เหลือเป็นวงแสงคล้ายแหวน) สุริยุปราคาผสม (ที่อาจเป็นทั้งแบบเต็มดวงหรือวงแหวนขึ้นอยู่กับตำแหน่งผู้สังเกต) และในระดับหนึ่งกับสุริยุปราคาบางส่วนด้วย บทความนี้ไม่ได้ครอบคลุมเรื่องจันทรุปราคา</p>
+<hr />
+<h2 id="ทำไมการวางแผนลวงหนาจงสำคญมาก">ทำไมการวางแผนล่วงหน้าจึงสำคัญมาก</h2>
+<p>สำหรับผู้สังเกตการณ์ที่ยืนอยู่จุดใดจุดหนึ่งบนโลก สุริยุปราคาเต็มดวงถือเป็นปรากฏการณ์ที่หายากอย่างยิ่ง นับตั้งแต่ปี 2000 เป็นต้นมา โลกมีสุริยุปราคาเต็มดวงเกิดขึ้นประมาณ 17 ครั้ง ในจำนวนนี้ 3 ครั้งเกิดในพื้นที่ใกล้ขั้วโลกที่แทบจะเข้าถึงไม่ได้ อีก 1 ครั้งเกิดขึ้นช่วงปลายปี 2020 ท่ามกลางการระบาดของโควิด ทำให้แทบมีแต่คนที่อยู่ในชิลีหรืออาร์เจนตินาอยู่แล้วเท่านั้นที่ได้เห็น และอีก 2 ครั้งเกิดในพื้นที่ห่างไกลของแอฟริกากลาง เท่ากับว่าตลอด 20 กว่าปีที่ผ่านมา มีสุริยุปราคาเต็มดวงที่ “เดินทางไปถึงได้จริง” เพียงราว 12 ครั้งเท่านั้น และต่อให้ทุ่มเงินและแรงกายไปให้ถึงทุกครั้ง เวลารวมที่ได้อยู่ในความมืดของคราสเต็มดวงก็ยังไม่ถึงหนึ่งชั่วโมงด้วยซ้ำ</p>
+<p>สำหรับคนไทย ตัวเลขนี้ยิ่งโหดร้ายกว่านั้นมาก ครั้งล่าสุดที่สุริยุปราคาเต็มดวงพาดผ่านแผ่นดินไทยคือวันที่ 24 ตุลาคม 2538 เงามืดของดวงจันทร์แตะแผ่นดินไทยครั้งแรกที่อำเภอแม่ระมาด จังหวัดตาก แล้วเคลื่อนผ่านกำแพงเพชร นครสวรรค์ ลพบุรี นครราชสีมา บุรีรัมย์ ก่อนสิ้นสุดที่จังหวัดสระแก้ว รวมทั้งสิ้น 11 จังหวัด ครั้งนั้นสมเด็จพระกนิษฐาธิราชเจ้า กรมสมเด็จพระเทพรัตนราชสุดาฯ เสด็จฯ ทอดพระเนตรที่จังหวัดนครราชสีมาด้วย นับจากวันนั้นจนถึงวันนี้ก็เกือบ 30 ปีแล้ว และครั้งต่อไปที่คราสเต็มดวงจะกลับมาเยือนแผ่นดินไทยคือวันที่ 11 เมษายน 2613 (ค.ศ. 2070) อีกกว่า 40 ปีข้างหน้า นั่นหมายความว่าสำหรับคนไทยส่วนใหญ่ การได้เห็นคราสเต็มดวงสักครั้งในชีวิตแทบจะเป็นไปไม่ได้เลยหากไม่เดินทางไปต่างประเทศ</p>
+<p>เพราะช่วงเวลาคราสเต็มดวงนั้นสั้นมากและหายากมาก ความผิดพลาดที่เลวร้ายที่สุดที่อาจเกิดขึ้นได้คือการไปยืนอยู่ใต้เมฆหนา ถูกภูเขาหรือตึกบดบังทัศนวิสัย หรือวิ่งหาที่ทางกันวุ่นวายในนาทีสุดท้ายจนพลาดช่วงเวลาที่สำคัญที่สุดในชีวิตไปอย่างน่าเสียดาย เป้าหมายของบทความนี้คือการมอบกระบวนการวางแผนที่ชัดเจน ตั้งแต่การเลือกพื้นที่ทางภูมิศาสตร์ การขึ้นบัญชีรายชื่อจุดชมที่เป็นไปได้ การจำลองภาพล่วงหน้า ไปจนถึงการตัดสินใจขั้นสุดท้ายในวันงานจริง</p>
+<p>หากท่านมีทัวร์ที่กำหนดจุดชมไว้แล้ว และต้องการเพียงจินตนาการล่วงหน้าว่าภาพที่จะเห็นเป็นอย่างไร สามารถข้ามสองส่วนแรกไปอ่านส่วนที่ 3 ซึ่งพูดถึงการจำลองภาพสุริยุปราคาได้เลย</p>
+<figure>
+<div class="img-wrap" role="img" aria-label="4 ขั้นตอนของการเลือกจุดชมสุริยุปราคา"><svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0b1229"/>
+      <stop offset="100%" stop-color="#1a2547"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="300" fill="url(#bg3)"/>
+  <text x="500" y="40" text-anchor="middle" font-family="Georgia, serif" font-size="20" fill="#f4ead0">4 ขั้นตอนของการเลือกจุดชมสุริยุปราคา</text>
+
+  <line x1="110" y1="150" x2="890" y2="150" stroke="#3a4a72" stroke-width="2" stroke-dasharray="6 6"/>
+
+  <g transform="translate(140,150)">
+    <circle r="46" fill="#20305c" stroke="#ffdb7a" stroke-width="2"/>
+    <text y="7" text-anchor="middle" font-family="Arial" font-size="26" fill="#ffdb7a">1</text>
+    <text y="80" text-anchor="middle" font-family="Arial" font-size="14" fill="#e5eaf7">สำรวจพื้นที่</text>
+    <text y="100" text-anchor="middle" font-family="Arial" font-size="11" fill="#8fa0c9">เมฆ ค่าการบดบัง การผูกมัดพื้นที่</text>
+  </g>
+
+  <g transform="translate(380,150)">
+    <circle r="46" fill="#20305c" stroke="#ffdb7a" stroke-width="2"/>
+    <text y="7" text-anchor="middle" font-family="Arial" font-size="26" fill="#ffdb7a">2</text>
+    <text y="80" text-anchor="middle" font-family="Arial" font-size="14" fill="#e5eaf7">ขึ้นบัญชีจุดชม</text>
+    <text y="100" text-anchor="middle" font-family="Arial" font-size="11" fill="#8fa0c9">ภูมิประเทศ การเข้าถึง</text>
+  </g>
+
+  <g transform="translate(620,150)">
+    <circle r="46" fill="#20305c" stroke="#ffdb7a" stroke-width="2"/>
+    <text y="7" text-anchor="middle" font-family="Arial" font-size="26" fill="#ffdb7a">3</text>
+    <text y="80" text-anchor="middle" font-family="Arial" font-size="14" fill="#e5eaf7">จำลองภาพสุริยุปราคา</text>
+    <text y="100" text-anchor="middle" font-family="Arial" font-size="11" fill="#8fa0c9">Street View 360 + Stellarium</text>
+  </g>
+
+  <g transform="translate(860,150)">
+    <circle r="46" fill="#20305c" stroke="#ffdb7a" stroke-width="2"/>
+    <text y="7" text-anchor="middle" font-family="Arial" font-size="26" fill="#ffdb7a">4</text>
+    <text y="80" text-anchor="middle" font-family="Arial" font-size="14" fill="#e5eaf7">ตัดสินใจวันงาน</text>
+    <text y="100" text-anchor="middle" font-family="Arial" font-size="11" fill="#8fa0c9">พยากรณ์เมฆระยะสั้น</text>
+  </g>
+</svg></div>
+<figcaption aria-hidden="true">4 ขั้นตอนของการเลือกจุดชมสุริยุปราคา</figcaption>
+</figure>
+<hr />
+<h2 id="สวนท-1-สำรวจพนทจากระยะไกล">ส่วนที่ 1: สำรวจพื้นที่จากระยะไกล</h2>
+<figure>
+<div class="img-wrap" role="img" aria-label="ทำไมสุริยุปราคาเต็มดวงจึงเห็นได้เพียงแถบแคบ ๆ บนโลก"><svg viewBox="0 0 1000 420" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sunG" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#fff4c2"/>
+      <stop offset="100%" stop-color="#ff9d2f"/>
+    </radialGradient>
+    <radialGradient id="earthG" cx="35%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#7fb8e0"/>
+      <stop offset="100%" stop-color="#2c5f8a"/>
+    </radialGradient>
+    <radialGradient id="moonG" cx="35%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#e6e6ec"/>
+      <stop offset="100%" stop-color="#9a9aa8"/>
+    </radialGradient>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1229"/>
+      <stop offset="100%" stop-color="#141c3a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="420" fill="url(#bg2)"/>
+  <text x="500" y="42" text-anchor="middle" font-family="Georgia, serif" font-size="20" fill="#f4ead0">ทำไมสุริยุปราคาเต็มดวงจึงเห็นได้เพียงแถบแคบ ๆ บนโลก</text>
+
+  <circle cx="140" cy="220" r="90" fill="url(#sunG)"/>
+  <text x="140" y="330" text-anchor="middle" font-family="Arial" font-size="15" fill="#cfd6e8">ดวงอาทิตย์</text>
+
+  <circle cx="560" cy="220" r="22" fill="url(#moonG)"/>
+  <text x="560" y="260" text-anchor="middle" font-family="Arial" font-size="15" fill="#cfd6e8">ดวงจันทร์</text>
+
+  <circle cx="850" cy="220" r="55" fill="url(#earthG)"/>
+  <text x="850" y="292" text-anchor="middle" font-family="Arial" font-size="15" fill="#cfd6e8">โลก</text>
+
+  <path d="M 230 190 L 560 210 L 640 220 L 560 230 L 230 250 Z" fill="#05070f" opacity="0.85"/>
+  <path d="M 210 130 L 560 205 L 900 218 L 560 235 L 210 310 Z" fill="#ffdb7a" opacity="0.12"/>
+
+  <text x="700" y="150" text-anchor="middle" font-family="Arial" font-size="13" fill="#a9b3cf">เงามัว (เห็นคราสบางส่วน)</text>
+  <line x1="800" y1="200" x2="825" y2="212" stroke="#a9b3cf" stroke-width="1"/>
+
+  <text x="640" y="270" text-anchor="middle" font-family="Arial" font-size="13" fill="#ffdb7a">แถบเงามืดแคบ ๆ (เห็นคราสเต็มดวง)</text>
+  <line x1="700" y1="230" x2="660" y2="222" stroke="#ffdb7a" stroke-width="1"/>
+
+  <text x="500" y="380" text-anchor="middle" font-family="Arial" font-size="14" fill="#8fa0c9">เงาของดวงจันทร์กวาดผ่านเพียงแถบแคบ ๆ บนโลก การเลือกจุดชมจึงสำคัญที่สุด</text>
+</svg></div>
+<figcaption aria-hidden="true">ทำไมสุริยุปราคาเต็มดวงจึงเห็นได้เพียงแถบแคบ ๆ บนโลก</figcaption>
+</figure>
+<p>ดวงจันทร์มีขนาดเล็กกว่าโลกมาก เมื่อเคลื่อนผ่านระหว่างดวงอาทิตย์กับโลก เงามืด (umbra) ของดวงจันทร์จึงกวาดผ่านพื้นผิวโลกเป็นแถบแคบ ๆ เท่านั้น มักมีความกว้างเพียงไม่กี่สิบกิโลเมตรไปจนถึงราวร้อยกิโลเมตร หากยืนอยู่นอกแถบนั้นแม้เพียงไม่กี่กิโลเมตร ก็จะไม่มีวันได้เห็นโคโรนาและท้องฟ้าที่มืดสนิทกลางวันเลย จะเห็นได้เพียงคราสบางส่วนเท่านั้น นี่คือเหตุผลที่การเลือกจุดชมสำคัญกว่าปรากฏการณ์ทางดาราศาสตร์อื่น ๆ อย่างมาก</p>
+<p>ขั้นตอนแรกของการวางแผนชมหรือถ่ายภาพสุริยุปราคาเต็มดวงคือการตัดสินใจว่าจะมุ่งหน้าไปยังพื้นที่ใด การวางแผนด้วยตัวเองต้องใช้ความพยายามมากกว่าการซื้อทัวร์ แต่แลกมาด้วยความยืดหยุ่นสูงสุดและโอกาสความสำเร็จที่มากที่สุด ผมเชื่อว่าความพยายามนี้คุ้มค่าอย่างแน่นอน</p>
+<p>กระบวนการเลือกจุดชมแบ่งออกเป็นสามขั้นตอน ได้แก่ การสำรวจพื้นที่จากระยะไกล (เพื่อกำหนดพื้นที่ทางภูมิศาสตร์ที่เหมาะกับความต้องการของท่าน) การขึ้นบัญชีจุดชมที่เป็นไปได้ และสุดท้ายคือการตัดสินใจขั้นสุดท้ายโดยอิงข้อมูลล่าสุดใกล้วันงาน เริ่มต้นกันที่ปัจจัยที่สำคัญที่สุดในการชมและถ่ายภาพสุริยุปราคาเต็มดวง นั่นคือสภาพอากาศ</p>
+<h3 id="การพยากรณเมฆระยะยาว">การพยากรณ์เมฆระยะยาว</h3>
+<p>คงไม่ต้องอธิบายมากว่าเมฆเป็นอุปสรรคใหญ่แค่ไหนสำหรับผู้ที่ต้องการชมหรือถ่ายภาพสุริยุปราคาเต็มดวง โชคดีที่มีเครื่องมือมากมายที่ช่วยรับมือกับศัตรูตัวนี้ได้</p>
+<p>เครื่องมือที่ผมใช้บ่อยที่สุดคือหน้าเว็บสุริยุปราคาของ <a href="https://www.timeanddate.com/eclipse/">timeanddate.com</a> ซึ่งรวบรวมสุริยุปราคาทุกครั้งที่กำลังจะเกิดขึ้น ท่านเพียงเลือกหมวดสุริยุปราคาเท่านั้น ตัวอย่างเช่น <a href="https://www.timeanddate.com/eclipse/solar/2026-august-12">หน้าข้อมูลสุริยุปราคาเต็มดวงวันที่ 12 สิงหาคม 2569</a> ที่จะพาดผ่านไอซ์แลนด์และสเปน ท่านจะเห็นเส้นทางคราสและเปอร์เซ็นต์ที่ดวงอาทิตย์ถูกบดบังแสดงบนแผนที่อย่างชัดเจน รวมถึงแนวคราสเต็มดวงด้วย</p>
+<p>หน้านี้ใช้งานได้เหมือนกันกับสุริยุปราคาวงแหวน สุริยุปราคาผสม และสุริยุปราคาบางส่วน โดยจะบอกเปอร์เซ็นต์การบดบังดวงอาทิตย์ตามแต่ละสถานที่และเวลา</p>
+<p>เมื่อคลิกบนแผนที่ หน้าต่างข้อมูลที่ปรากฏขึ้นจะบอกประเภทของสุริยุปราคา (เต็มดวงหรือบางส่วน) ค่าการบดบัง (obscuration หรือสัดส่วนพื้นที่ดวงอาทิตย์ที่ถูกบัง) ขนาดคราส (magnitude หรือสัดส่วนเส้นผ่านศูนย์กลางดวงจันทร์ที่บังดวงอาทิตย์ ซึ่งจะอยู่ที่ 1.0 ขึ้นไปเสมอสำหรับคราสเต็มดวง) ระยะเวลารวมของสุริยุปราคาและระยะเวลาคราสเต็มดวงโดยเฉพาะ เวลาเริ่มต้นและสิ้นสุด รวมถึงข้อมูลเมฆเฉลี่ยจากสถิติในอดีต ท่านยังสามารถพิมพ์ค้นหาสถานที่เฉพาะเจาะจงได้ด้วย</p>
+<p>สิ่งหนึ่งที่ควรจำไว้คือ ยิ่งอยู่ใกล้ขอบของแนวคราสเต็มดวงมากเท่าไร ระยะเวลาคราสเต็มดวงก็จะยิ่งสั้นลงอย่างรวดเร็ว ดังนั้นควรเลือกตำแหน่งที่ใกล้เส้นกึ่งกลางแนวคราส (centerline) ให้มากที่สุดเท่าที่จะทำได้ เพราะเป็นจุดที่คราสเต็มดวงจะกินเวลานานที่สุด</p>
+<p>ตัวเลขสำคัญสามตัวที่ควรให้ความสนใจคือ ค่าการบดบัง (หรือขนาดคราส) ปริมาณเมฆ และระยะเวลาคราสเต็มดวง เพื่อให้มีโอกาสเห็นคราสเต็มดวงมากที่สุด ท่านต้องการสามสิ่งนี้ คือค่าการบดบัง 100% หรือขนาดคราสตั้งแต่ 1.0 ขึ้นไป ปริมาณเมฆเฉลี่ยที่ต่ำที่สุดเท่าที่จะเป็นไปได้ และถ้าเป็นไปได้ ควรอยู่ใกล้เส้นกึ่งกลางแนวคราสเพื่อให้ได้ระยะเวลานานที่สุด</p>
+<p>ควรทราบไว้ว่าข้อมูลเมฆระยะยาวจากเว็บไซต์ใด ๆ ก็ตาม รวมถึง timeanddate เป็นเพียงค่าเฉลี่ยทางสถิติจากหลายปี ไม่ได้สะท้อนสภาพอากาศจริงของวันที่ท่านจะไปชมเสมอไป การพยากรณ์เมฆที่แม่นยำจริง ๆ จะปรากฏเฉพาะในช่วงไม่กี่วันก่อนวันงานเท่านั้น เรื่องนี้จะพูดถึงอย่างละเอียดในส่วนที่ 4</p>
+<p>นอกจาก timeanddate แล้ว เว็บไซต์ที่วิเคราะห์สภาพอากาศเฉพาะสำหรับสุริยุปราคาอย่าง <a href="https://eclipsophile.com/">Eclipsophile</a> ก็น่าสนใจไม่แพ้กัน มักมีการวิเคราะห์สภาพภูมิอากาศรายพื้นที่ รวมถึงความเสี่ยงจากพายุฝนฟ้าคะนองหรือพายุทอร์นาโดตามฤดูกาลของแต่ละพื้นที่ด้วย</p>
+<h3 id="สามรปแบบของการ-ผกมดกบพนท">สามรูปแบบของการ “ผูกมัดกับพื้นที่”</h3>
+<p>การรอให้ถึงวินาทีสุดท้ายก่อนจองตั๋วเครื่องบิน รถเช่า หรือโรงแรมนั้นแทบเป็นไปไม่ได้ในทางปฏิบัติ ดังนั้นจากสถานการณ์ของท่านเองและข้อมูลเมฆระยะยาว ท่านจำเป็นต้องกำหนดพื้นที่ทางภูมิศาสตร์คร่าว ๆ ที่มีโอกาสเห็นคราสเต็มดวงไว้ล่วงหน้าอย่างน้อยหนึ่งพื้นที่ ผมเรียกสิ่งนี้ว่า “การผูกมัดกับพื้นที่” ซึ่งโดยรวมแล้วมีอยู่สามรูปแบบหลัก</p>
+<p>รูปแบบแรกคือการผูกมัดตาม “สภาพการชมที่ดีที่สุด” คือท่านมุ่งหน้าไปยังช่วงของแนวคราสที่มีความสมดุลระหว่างระยะเวลาคราสเต็มดวงกับปริมาณเมฆเฉลี่ยที่ต่ำมากที่สุด รูปแบบที่สองคือการผูกมัดตาม “จุดหมายปลายทาง” คือท่านเลือกสถานที่ใดที่หนึ่งด้วยเหตุผลอื่น เช่น ความสะดวก ความปลอดภัย มีคนรู้จักอยู่ที่นั่น หรือต้องการรวมการท่องเที่ยวเข้าไปด้วย รูปแบบที่สามคือการผูกมัดแบบ “ใกล้บ้าน” คือท่านตัดสินใจชมสุริยุปราคาใกล้ที่พักอาศัยของตัวเอง ซึ่งใช้ได้เฉพาะกรณีที่บ้านของท่านอยู่ในหรือใกล้แนวคราสเต็มดวงเท่านั้น</p>
+<p>สำหรับสุริยุปราคาเต็มดวงในอนาคตที่คนไทยสนใจเดินทางไปชม เช่น วันที่ 12 สิงหาคม 2569 ที่พาดผ่านไอซ์แลนด์และสเปน หรือวันที่ 2 สิงหาคม 2570 ที่พาดผ่านแอฟริกาเหนือและตะวันออกกลาง ท่านจำเป็นต้องเลือกรูปแบบ “จุดหมายปลายทาง” เนื่องจากไม่มีทางเลือกแบบ “ใกล้บ้าน” ให้ใช้ได้เลย บางครั้งแนวคราสก็แคบมากจนแทบไม่มีทางเลือกอื่นนอกจากรูปแบบนี้ เช่น สุริยุปราคาปี 2566 ที่พาดผ่านเพียงพื้นที่เล็ก ๆ ในออสเตรเลีย ติมอร์ตะวันออก และบางส่วนของอินโดนีเซียเท่านั้น ในทางกลับกัน บางครั้งปัญหาเรื่องเมฆก็แทบไม่ใช่อุปสรรคเลย เช่นแนวคราสส่วนใหญ่ของสุริยุปราคาปี 2570 ที่ขึ้นชื่อเรื่องโอกาสท้องฟ้าแจ่มใสสูงมาก</p>
+<p>สุดท้ายแล้ว มีเพียงตัวท่านเองเท่านั้นที่จะตัดสินใจได้ว่ารูปแบบการผูกมัดพื้นที่แบบใดเหมาะกับสถานการณ์และงบประมาณของตัวเองมากที่สุด</p>
+<h3 id="สรปสวนท-1">สรุปส่วนที่ 1</h3>
+<p>มาถึงตรงนี้ ท่านควรจะรู้วิธีดูข้อมูลสุริยุปราคาบน timeanddate วิธีดูข้อมูลภูมิศาสตร์โดยคลิกบนแผนที่ เข้าใจสามปัจจัยสำคัญในการเลือกจุดชม ได้แก่ ค่าการบดบัง เมฆ และระยะเวลาคราสเต็มดวง รวมถึงเข้าใจสามรูปแบบของการผูกมัดกับพื้นที่ เพื่อเลือกแนวทางที่เหมาะกับตัวเองแล้ว</p>
+<hr />
+<h2 id="สวนท-2-ขนบญชจดชมทเปนไปได">ส่วนที่ 2: ขึ้นบัญชีจุดชมที่เป็นไปได้</h2>
+<p>ลองจินตนาการว่าในเช้าวันสุริยุปราคา ท่านตื่นขึ้นในโรงแรมหรือที่บ้าน โดยมีบัญชีรายชื่อจุดชมสุริยุปราคาที่เป็นไปได้อยู่ในมือแล้ว แต่ละแห่งท่านรู้ล่วงหน้าแล้วว่าหน้าตาเป็นอย่างไร สุริยุปราคาจะเริ่มและจบเมื่อไร ดวงอาทิตย์จะอยู่ตำแหน่งใดบนท้องฟ้าขณะคราสเต็มดวง ที่สำคัญคือท่านยังไม่เคยไปสถานที่เหล่านั้นด้วยตัวเองเลยแม้แต่แห่งเดียว</p>
+<p>หากท่านอ่านส่วนที่ 1 มาแล้ว คงเข้าใจแล้วว่าทำไมต้องเลือกการผูกมัดกับพื้นที่ก่อนเป็นอันดับแรก ในส่วนนี้เราจะย่อการผูกมัดกับพื้นที่นั้นให้เหลือเป็นจุดชมที่เจาะจงมากขึ้น พร้อมทั้งรวบรวมข้อมูลที่จำเป็นทั้งหมดก่อนถึงวันสำคัญนั้น</p>
+<p>กระบวนการนี้ยังใช้ได้ดีกับสุริยุปราคาประเภทอื่นด้วย โดยเฉพาะมีประโยชน์มากสำหรับการวางแผนชมสุริยุปราคาวงแหวน ซึ่งมักต้องคำนึงถึงองค์ประกอบภาพร่วมกับทิวทัศน์ในการถ่ายภาพ</p>
+<p>ก่อนเข้าเรื่องเครื่องมือ ผมอยากเน้นย้ำสักหน่อยว่า ไม่มีสิ่งใดในธรรมชาติที่เทียบได้กับสุริยุปราคาเต็มดวง ความแตกต่างระหว่างดวงอาทิตย์ที่ถูกบัง 99% กับ 100% นั้นห่างกันคนละโลก หากมีเงื่อนไขเอื้ออำนวย จงทุ่มความพยายามทั้งหมดเพื่อไปให้ถึงแนวคราสเต็มดวงให้ได้ นั่นจะเป็นช่วงเวลาที่ท่านไม่มีวันลืม</p>
+<h3 id="ความสำคญของความยดหยนในวนงาน">ความสำคัญของความยืดหยุ่นในวันงาน</h3>
+<p>หลังจากเลือกการผูกมัดกับพื้นที่ตามสถานการณ์และระดับความเสี่ยงเรื่องเมฆที่ยอมรับได้แล้ว สิ่งที่สำคัญที่สุดจากนี้ไปคือความยืดหยุ่นในวันสุริยุปราคาจริง ดังที่กล่าวไปแล้ว การพยากรณ์เมฆที่เชื่อถือได้จริง ๆ จะปรากฏเฉพาะในช่วงไม่กี่วันก่อนวันงานเท่านั้น มีความเป็นไปได้สูงที่ท่านจะต้องปรับเปลี่ยนจุดชมที่เลือกไว้ในช่วง 24 ชั่วโมงสุดท้าย</p>
+<h3 id="สรางบญชจดชมจากจดศนยกลางแหงหนง">สร้างบัญชีจุดชมจากจุดศูนย์กลางแห่งหนึ่ง</h3>
+<p>ส่วนนี้ต้องใช้ความพยายามเพิ่มขึ้นอีกนิด แต่ไม่ยากเกินไป และผมจะอธิบายทีละขั้นตอน</p>
+<p>ก่อนอื่นให้ทำความรู้จักกับ <a href="https://www.smappen.com">Smappen</a> เครื่องมือที่ช่วยแสดงพื้นที่ที่ท่านสามารถขับรถไปถึงได้จากจุดเริ่มต้นภายในระยะเวลาหนึ่ง สูงสุดสามชั่วโมง สมัครบัญชีฟรี เข้าไปที่หน้าแผนที่ แล้วหาปุ่ม “Add an area” เพื่อเริ่มวาดขอบเขตการเดินทาง</p>
+<p>หนึ่งในฟีเจอร์ที่มีประโยชน์ของ Smappen คือความสามารถในการซ้อนข้อมูลภูมิศาสตร์แบบ KML ลงบนแผนที่ สำหรับการวางแผนสุริยุปราคา เราจะซ้อนแผนที่แนวคราสเต็มดวงของเหตุการณ์ที่สนใจ <a href="http://xjubier.free.fr/en/site_pages/SolarEclipsesGoogleEarth.html">ชุดข้อมูลรูปทรงเรขาคณิตของสุริยุปราคา</a> ที่ครบถ้วนที่สุดเท่าที่ผมรู้จักคือของ Xavier Jubier ซึ่งรวบรวมข้อมูลตั้งแต่ปี 1961 ถึง 2099 ดาวน์โหลดไฟล์ KMZ ของเหตุการณ์ที่ต้องการ จากนั้นเนื่องจาก Smappen อ่านไฟล์ KMZ ไม่ได้ ท่านต้องแปลงเป็น KML ด้วยเครื่องมือแปลงไฟล์ฟรีอย่าง <a href="https://mygeodata.cloud/converter/kmz-to-kml">MyGeodata Converter</a></p>
+<p>เมื่อได้ไฟล์ KML แล้ว กลับไปที่ Smappen แล้วลากไฟล์นั้นวางบนแผนที่ แนวคราสเต็มดวงจะปรากฏขึ้นทันที เลือกเมืองใดเมืองหนึ่งในแนวคราสเต็มดวง กำหนดระยะเวลาการขับรถที่ต้องการ ท่านจะเห็นชัดเจนว่าพื้นที่ที่เข้าถึงได้ในช่วงเวลานั้นยังอยู่ในแนวคราสเต็มดวงหรือไม่</p>
+<p>ท่านยังใช้วิธีเดียวกันนี้เพื่อกำหนดขอบเขตที่เดินทางไปถึงได้ภายในสามชั่วโมง หากออกเดินทางจากที่พักในวันงานจริงได้ด้วย</p>
+<p>ลองเปรียบเทียบชั้นข้อมูลนี้กับข้อมูลเมฆบน timeanddate เพื่อดูว่ามีพื้นที่ใกล้เคียงที่มีโอกาสท้องฟ้าแจ่มใสมากกว่าที่ท่านสามารถเข้าถึงได้หรือไม่ ในกรณีที่ต้องเปลี่ยนแผนกะทันหัน</p>
+<p>ในโลกอุดมคติ ทุกคนอยากพักโรงแรมที่ใกล้เส้นกึ่งกลางแนวคราสเต็มดวงที่สุดและอยู่ในพื้นที่ที่มีเมฆน้อยที่สุด แต่ในความเป็นจริง สถานที่ที่เหมาะกับการชมสุริยุปราคามักมีจำนวนโรงแรมน้อย ทำให้หลายครั้งท่านต้องพักที่ขอบแนวคราสเต็มดวงในเมืองใหญ่กว่าที่มีราคาห้องพักเข้าถึงง่ายกว่าแทน</p>
+<p>การพักที่ขอบแนวคราสเต็มดวงย่อมทำให้จำนวนจุดชมที่เข้าถึงได้แคบลงตามธรรมชาติ นี่เป็นข้อแลกเปลี่ยนที่ท่านยินดียอมรับหรือไม่ หรือจำเป็นต้องยอมรับเพราะเหตุผลด้านงบประมาณหรือโรงแรมเต็ม ชั้นข้อมูลบน Smappen จะช่วยให้ท่านเห็นภาพข้อแลกเปลี่ยนนี้ได้ชัดเจนขึ้น แต่ยังมีอีกปัจจัยสำคัญที่ยังไม่ได้พูดถึง นั่นคือภูมิประเทศ</p>
+<h3 id="ทศทางและมมเงยของดวงอาทตยในวนสรยปราคา">ทิศทางและมุมเงยของดวงอาทิตย์ในวันสุริยุปราคา</h3>
+<p>ในส่วนที่ 1 ผมได้พูดถึงปุ่มเล่นสีเขียวบนหน้า timeanddate และบอกให้ท่านจดจำไว้ใช้ในภายหลัง ตอนนี้ถึงเวลาใช้งานแล้ว คลิกที่ตำแหน่งใดก็ได้ในแนวคราสเต็มดวงบนแผนที่สุริยุปราคา แล้วกดปุ่มเล่นสีเขียว ท่านจะถูกพาไปยังหน้าข้อมูลรายละเอียด ข้อมูลที่สำคัญที่สุดในหน้านี้คือทิศทางและมุมเงยของดวงอาทิตย์ในขณะเกิดคราสเต็มดวง</p>
+<p>ขึ้นอยู่กับตำแหน่งที่เลือก ทิศทางของดวงอาทิตย์มักอยู่ระหว่างทิศตะวันออกเฉียงใต้ (135 องศา) ถึงทิศตะวันตกเฉียงใต้ (225 องศา) ส่วนมุมเงยอาจมีตั้งแต่ราว 24 องศาไปจนถึงเกือบ 70 องศา ขึ้นอยู่กับตำแหน่งทางภูมิศาสตร์และฤดูกาลที่เกิดเหตุการณ์ สิ่งนี้มีความหมายในทางปฏิบัติอย่างมาก เพราะการจะเห็นคราสเต็มดวงได้ ท่านต้องอยู่ในตำแหน่งที่หันหน้าไปทางดวงอาทิตย์และไม่มีสิ่งใดบดบังเหนือมุมเงยนั้น หากดวงอาทิตย์อยู่ในตำแหน่งต่ำใกล้เส้นขอบฟ้า ท่านจะต้องการพื้นที่โล่งกว้างกว่ามากเมื่อเทียบกับตอนที่ดวงอาทิตย์อยู่สูง และยิ่งมุมเงยต่ำเท่าไร เมฆและหมอกในชั้นบรรยากาศก็ยิ่งส่งผลต่อทัศนวิสัยมากขึ้นเท่านั้น</p>
+<p>จุดชมหลายแห่งที่ท่านเข้าถึงได้บนชั้นข้อมูล Smappen อาจกลายเป็นสถานที่ที่ใช้ไม่ได้เพราะมีสิ่งกีดขวางบางอย่าง เราจะแก้ปัญหานี้ในขั้นตอนสุดท้ายของการขึ้นบัญชีจุดชม ซึ่งเป็นหัวข้อถัดไป</p>
+<h3 id="ภมประเทศและสงกดขวางอน-ๆ">ภูมิประเทศและสิ่งกีดขวางอื่น ๆ</h3>
+<p>ผมมองว่าการขึ้นบัญชีจุดชมที่เป็นไปได้เป็นกระบวนการของการตัดออกมากกว่าการเพิ่มเข้าไป กล่าวคือ ท่านควรเริ่มต้นด้วยตาข่ายที่กว้างที่สุด (ในกรณีนี้คือแนวคราสเต็มดวงทั้งหมด) แล้วค่อย ๆ ตัดพื้นที่ที่ไม่เหมาะสมออกทีละน้อยจนเหลือจำนวนจุดชมที่จัดการได้</p>
+<p>ภูมิประเทศเป็นปัจจัยแรกที่ควรพิจารณา และโชคดีที่วิเคราะห์ได้ค่อนข้างสะดวก เพราะต่างจากเมฆตรงที่ภูมิประเทศแทบไม่เปลี่ยนแปลง ข้อเสียคือแผนที่ Smappen เวอร์ชันฟรีไม่มีชั้นข้อมูลภูมิประเทศ ท่านจึงต้องเปิด <a href="https://www.google.com/maps">Google Maps</a> อีกแท็บหนึ่งพร้อมเปิดฟิลเตอร์ภูมิประเทศ เพื่อดูสิ่งกีดขวางตามธรรมชาติ เช่น ภูเขาหรือเนินเขา</p>
+<p>ขั้นตอนนี้อาจเป็นหนึ่งในขั้นตอนที่ต้องใช้ความอดทนที่สุดในกระบวนการวางแผน ตัวอย่างที่ชัดเจนคือสุริยุปราคาเต็มดวงปี 2019 ในอเมริกาใต้ ซึ่งเทือกเขาแอนดีสเป็นทั้งสิ่งกีดขวางขนาดใหญ่และยังเป็นสาเหตุที่ทำให้เกิดกำแพงเมฆแทบตลอดเวลาทางฝั่งที่หันสู่มหาสมุทรแปซิฟิก ยิ่งไปกว่านั้น ขณะคราสเต็มดวงยังเป็นช่วงใกล้พระอาทิตย์ตก ทำให้ดวงอาทิตย์อยู่ในตำแหน่งต่ำมากทางทิศตะวันตก ตรงกับทิศที่เทือกเขาแอนดีสตั้งตระหง่านอยู่พอดี ทางออกสุดท้ายคือการหาเนินเขาที่มองเห็นทะเลสาบเกลือ ซึ่งอยู่ห่างจากเทือกเขาเพียงพอ แม้จะเฉียดฉิวมากก็ตาม</p>
+<p>การเลือกจุดชมไม่ได้ยากลำบากเสมอไปขนาดนี้ มีภูมิประเทศหลายแบบที่มักมีสิ่งกีดขวางน้อยหรือแทบไม่มีเลย ซึ่งคุ้มค่าแก่การมองหา เช่น สนามกีฬาขนาดใหญ่ที่ไม่มีเสาไฟสูง ริมทะเลสาบและชายหาด ทะเลสาบเกลือหรือที่ราบแห้งแล้ง พื้นที่เกษตรกรรม หรือยอดเขาที่ไม่มีต้นไม้และที่ราบสูง</p>
+<p>นอกจากภูมิประเทศธรรมชาติแล้ว ยังต้องระวังสิ่งกีดขวางที่มนุษย์สร้างขึ้น เช่น ต้นไม้ อาคาร สายไฟ และเสาไฟถนน โดยเฉพาะเมื่อเลือกจุดชมในเขตเมือง</p>
+<p>เครื่องมือที่มีประโยชน์สำหรับงานนี้คือ <a href="https://www.google.com/earth/about/versions/">Google Earth Pro เวอร์ชันคอมพิวเตอร์</a> ซึ่งช่วยให้ดูภูมิประเทศและสิ่งกีดขวางอย่างอาคารได้ในหลายพื้นที่ แม้จะไม่สมบูรณ์แบบเพราะไม่มีมุมมองระดับสายตาจากพื้นดิน ผมจึงแนะนำให้ใช้ควบคู่กับ Google Street View เพื่อเห็นภาพจริงจากมุมมองพื้นดิน แม้ Street View จะมีข้อเสียคือเป็นเพียงภาพช่วงเวลาหนึ่งในอดีตและไม่บอกตำแหน่งดวงอาทิตย์ในวันที่ต้องการ แต่ไม่ต้องกังวลไป เราจะใช้ประโยชน์จาก Street View อย่างเต็มที่ในส่วนถัดไป</p>
+<h3 id="ความสะดวกในการเขาถง">ความสะดวกในการเข้าถึง</h3>
+<p>หลังจากย่อการผูกมัดกับพื้นที่ให้เหลือเพียงไม่กี่พื้นที่แล้ว สิ่งที่ควรพิจารณาต่อไปคือความสะดวกในการเข้าถึง ซึ่งมีสองด้าน ด้านแรกคือความสามารถในการเข้าถึงตามกฎหมาย คือสถานที่นั้นเปิดให้ประชาชนทั่วไปเข้าได้หรือไม่ ด้านที่สองคือความสะดวกด้านโลจิสติกส์ คือท่านสามารถเดินทางไปถึงได้จริงหรือไม่</p>
+<p>ปัญหาด้านกฎหมายมักแก้ไขได้ไม่ยาก เพราะสวนสาธารณะและถนนสาธารณะมีอยู่ทั่วไปในเกือบทุกพื้นที่ Smappen ยังมีฟีเจอร์ “Points of interest” ที่ช่วยเพิ่มชั้นข้อมูลค้นหาสวนสาธารณะเพื่อทำเครื่องหมายบนแผนที่ได้ แม้ชื่อสวนบางครั้งอาจแสดงไม่ครบ ท่านจึงควรตรวจสอบเพิ่มเติมกับ Google Maps หรือ <a href="https://www.openstreetmap.org">OpenStreetMap</a></p>
+<p>ความสะดวกด้านโลจิสติกส์มักเป็นปัญหาที่ยุ่งยากกว่า สำหรับสวนสาธารณะหรือพื้นที่ริมถนน ที่จอดรถอาจเป็นปัญหาใหญ่ เพราะสถานที่เหล่านี้มักไม่ได้ออกแบบมาเพื่อรองรับผู้มาเยือนจำนวนมากอย่างกะทันหันในวันสุริยุปราคา</p>
+<p>ความสะดวกด้านกายภาพก็สำคัญเช่นกัน หากท่านวางแผนชมสุริยุปราคาจากยอดเขา ที่ราบสูง หรือกลางทะเลสาบเกลือ ท่านสามารถขนอุปกรณ์ทั้งหมดที่จำเป็นไปถึงที่นั่นได้ด้วยตัวเองหรือไม่</p>
+<p>การจราจรก็เป็นเรื่องที่มองข้ามไม่ได้ บางครั้งการต่อคิวเข้าที่จอดรถอาจใช้เวลาถึง 30 นาที ซึ่งอาจสร้างความแตกต่างได้มาก ควรเผื่อเวลาไว้เสมอ</p>
+<p>คำแนะนำของผมคือให้จัดทำบัญชีจุดชมประมาณ 10 แห่ง กระจายทั่วทั้งการผูกมัดกับพื้นที่ของท่าน พื้นที่ที่เข้าถึงได้ภายในสามชั่วโมงจากจุดศูนย์กลางนั้นค่อนข้างกว้าง และจะมีความแตกต่างของสภาพอากาศเฉพาะพื้นที่ระหว่างขอบทั้งสองด้านของพื้นที่นั้นอย่างแน่นอนในวันงานจริง พยายามเลือกจุดที่ใกล้เส้นกึ่งกลางแนวคราสเต็มดวงให้มากที่สุด แต่ก็อย่าลังเลที่จะสละเวลาคราสเต็มดวงไปสักสองสามวินาที เพื่อแลกกับจุดชมที่ดีกว่า</p>
+<h3 id="สรปสวนท-2">สรุปส่วนที่ 2</h3>
+<p>มาถึงตรงนี้ ท่านควรเข้าใจความสำคัญของความยืดหยุ่นในวันงาน รู้วิธีสร้างแผนที่บน Smappen พร้อมชั้นข้อมูลแนวคราสเต็มดวงและขอบเขตการเดินทางจากจุดศูนย์กลาง รู้วิธีใช้ timeanddate เพื่อหาทิศทางและมุมเงยของดวงอาทิตย์ ณ จุดชมที่เจาะจง และมีบัญชีรายชื่อจุดชมที่เป็นไปได้จากปัจจัยด้านภูมิประเทศและความสะดวกในการเข้าถึงแล้ว</p>
+<p>ยินดีด้วย ท่านมีบัญชีรายชื่อจุดชมสุริยุปราคาเต็มดวงแล้ว ต่อไปเราจะยกระดับจุดชมเหล่านี้ไปอีกขั้น ด้วยการจำลองภาพว่าสุริยุปราคาจะเป็นอย่างไรจากตำแหน่งนั้นในเวลานั้นอย่างแม่นยำ</p>
+<hr />
+<h2 id="สวนท-3-จำลองภาพสรยปราคาดวย-street-view-และ-stellarium">ส่วนที่ 3: จำลองภาพสุริยุปราคาด้วย Street View และ Stellarium</h2>
+<p>ขอเตือนไว้ก่อนว่านี่คือส่วนที่ต้องใช้เทคนิคมากที่สุดในคู่มือทั้งหมด ต้องใช้ทักษะการใช้คอมพิวเตอร์พอสมควร ท่านจะต้องใช้เครื่องมือสี่อย่าง ได้แก่ Google Maps เครื่องมือดาวน์โหลดภาพ Street View 360 องศา โปรแกรมจำลองท้องฟ้า Stellarium และโปรแกรมแต่งภาพอย่าง Adobe Photoshop หรือโปรแกรมที่เทียบเท่า หากท่านไม่คุ้นเคยกับการใช้คอมพิวเตอร์หรือไม่มีโปรแกรมแต่งภาพ ส่วนนี้อาจไม่เหมาะกับท่านนัก</p>
+<p>แนวคิดหลักของส่วนนี้คือการสร้างภาพพาโนรามา 360 องศาจริงของจุดชมที่ท่านเลือกขึ้นมาใหม่ใน Stellarium เพื่อให้โปรแกรมสามารถจำลองตำแหน่งดวงอาทิตย์และดวงจันทร์ได้อย่างแม่นยำบนพื้นหลังทิวทัศน์จริงนั้น ผลลัพธ์สุดท้ายคือท่านสามารถ “ดูล่วงหน้า” เหตุการณ์ทั้งหมดบนหน้าจอคอมพิวเตอร์ได้ ตั้งแต่ดวงอาทิตย์เริ่มถูกบดบังไปจนถึงคราสเต็มดวง ก่อนที่จะเดินทางไปถึงสถานที่จริง</p>
+<h3 id="เครองมอดาวนโหลดภาพ-street-view-360-องศา">เครื่องมือดาวน์โหลดภาพ Street View 360 องศา</h3>
+<p>ในขั้นตอนนี้ แทนที่จะใช้เครื่องมือของบุคคลที่สามตามที่คู่มืออื่น ๆ บนอินเทอร์เน็ตแนะนำ ผมขอแนะนำให้ใช้เครื่องมือ <a href="https://downloadmapimage.com/360-dl/">Street View 360 Downloader</a> ของ DownloadMapImage.com เครื่องมือนี้ให้ท่านวางลิงก์ (URL) หรือรหัสพาโนรามาของภาพทรงกลม 360 องศาบน Google Maps ได้โดยตรง จากนั้นดาวน์โหลดไฟล์ภาพในรูปแบบ equirectangular (ภาพทรงกลมที่คลี่ออกเป็นสี่เหลี่ยมผืนผ้า) ที่ความละเอียดสูงสุดเท่าที่จะทำได้ ตรงตามรูปแบบที่ Stellarium ต้องการสำหรับสร้างทิวทัศน์ขึ้นใหม่</p>
+<p>ข้อดีของเครื่องมือนี้เมื่อเทียบกับโปรแกรมดาวน์โหลด Street View อื่น ๆ คือท่านไม่ต้องติดตั้งอะไรลงในคอมพิวเตอร์เลย ใช้แค่เว็บเบราว์เซอร์ก็พอ และเนื่องจากทุกอย่างประมวลผลออนไลน์ จึงใช้งานได้ดีทั้งบน Windows และ macOS นอกจากนี้เครื่องมือยังคงข้อมูลเมทาดาต้าของพิกัดและทิศทางการถ่ายภาพต้นฉบับไว้ ทำให้ท่านนำข้อมูลละติจูดและลองจิจูดที่แม่นยำไปใช้ในขั้นตอนคำนวณต่อไปได้อย่างง่ายดาย</p>
+<h3 id="ขนตอนการทำงาน">ขั้นตอนการทำงาน</h3>
+<p>ขั้นตอนแรกคือการกำหนดจุดชมที่ท่านต้องการจำลอง หากท่านทำตามสองส่วนแรกของคู่มือมาแล้ว ท่านน่าจะมีบัญชีรายชื่อจุดชมที่เป็นไปได้อยู่แล้ว หรืออาจมีสถานที่ที่ต้องการอยู่ในใจอยู่แล้ว ในตัวอย่างของบทความนี้ เราจะใช้สะพานเรนโบว์ที่มองเห็นน้ำตกไนแอการาเป็นจุดอ้างอิง เช่นเดียวกับคู่มือต้นฉบับภาษาอังกฤษ</p>
+<p>ขั้นตอนที่สองคือการเลือกภาพ Street View ที่เหมาะกับสถานที่นั้น เปิด Google Maps ซูมไปยังตำแหน่งที่ต้องการ ลากไอคอนคนสีส้มที่มุมล่างขวา แล้วเลือกจุดกลมสีฟ้า (photosphere) ที่ใกล้กับตำแหน่งที่ท่านตั้งใจจะยืนที่สุด หากมี photosphere ให้เลือกหลายจุด ควรเลือกภาพที่มีเมฆน้อย มีสิ่งกีดขวางอย่างคนหรือรถยนต์น้อย และต่อภาพได้เนียนไม่มีรอยต่อที่เห็นชัด คัดลอกลิงก์ของ photosphere นั้นเก็บไว้ในไฟล์บันทึกชั่วคราว</p>
+<p>ขั้นตอนที่สามคือการเปิดแท็บใหม่ ไปที่หน้าสุริยุปราคาของ timeanddate สำหรับเหตุการณ์ที่สนใจ หาลิงก์ “Detailed eclipse path map” ซูมไปยังตำแหน่งที่เลือกในขั้นตอนที่สอง คลิกบนแผนที่เพื่อตรวจสอบค่าการบดบัง (ควรแสดง 100% หากเป็นคราสเต็มดวง) จากนั้นกดปุ่มเล่นสีเขียวเพื่อเปิดหน้าข้อมูลรายละเอียดของตำแหน่งนั้น</p>
+<p>ขั้นตอนที่สี่คือการดาวน์โหลดภาพ Street View 360 องศา เปิดแท็บใหม่ (ตอนนี้ท่านควรมีสามแท็บเปิดพร้อมกัน) เข้าไปที่ <a href="https://downloadmapimage.com/360-dl/">Street View 360 Downloader</a> วางลิงก์ photosphere ที่บันทึกไว้ในขั้นตอนที่สองลงในช่องกรอกข้อมูล เลือกความละเอียดสูงสุดที่มี แล้วดาวน์โหลดภาพลงเครื่อง อย่าปิดแท็บอื่น เพราะท่านจะต้องกลับไปใช้ข้อมูลพิกัดและเมทาดาต้าจากภาพที่ดาวน์โหลดในขั้นตอนถัดไป</p>
+<p>ขั้นตอนที่ห้าคือการลบพื้นหลังท้องฟ้าด้วย Photoshop เปิดไฟล์ภาพที่ดาวน์โหลดมา ไปที่ Layer เลือก Sky เพิ่ม Layer Mask แล้วกลับด้านมาสก์ จากนั้นส่งออกภาพเป็นไฟล์ PNG ผ่าน File, Export, Quick Export as PNG หากไม่มี Photoshop ท่านสามารถใช้โปรแกรมแต่งภาพพื้นฐานอย่าง Microsoft Paint แล้วระบายสีขาวทับบริเวณท้องฟ้าด้วยพู่กันได้เช่นกัน วิธีนี้ช้ากว่าแต่ให้ผลลัพธ์ใกล้เคียงกัน หรือใช้โปรแกรมฟรีอย่าง Gimp เพื่อลบท้องฟ้าได้เร็วกว่า Paint แม้จะยังช้ากว่า Photoshop ก็ตาม</p>
+<p>ขั้นตอนที่หกคือการสร้างโฟลเดอร์ทิวทัศน์ใหม่ใน Stellarium หากยังไม่ได้ติดตั้ง <a href="https://stellarium.org">Stellarium</a> ให้ดาวน์โหลดจากเว็บไซต์หลัก หลังติดตั้งแล้ว ให้หาโฟลเดอร์ “Landscapes” (สำหรับ Mac ให้เข้าไปที่ Applications คลิกขวาที่ Stellarium เลือก Show Package Contents แล้วเข้าไปที่ Contents, Resources, Landscapes ตามลำดับ สำหรับ Windows มักอยู่ที่ C:Files) คัดลอกโฟลเดอร์ที่มีอยู่แล้วหนึ่งโฟลเดอร์ (โฟลเดอร์ grossmugl เป็นตัวอย่างที่ดี) เปลี่ยนชื่อตามโปรเจกต์ของท่าน ลบไฟล์ทั้งหมดยกเว้นไฟล์ landscape.ini แล้ววางไฟล์ PNG ที่ส่งออกไว้ในโฟลเดอร์นั้น</p>
+<p>ขั้นตอนที่เจ็ดคือการแก้ไขไฟล์ landscape.ini เปิดไฟล์นี้ด้วยโปรแกรมแก้ไขข้อความ ลบบรรทัดที่ไม่จำเป็นออก เหลือเพียงข้อมูลพื้นฐาน สิ่งสำคัญที่สุดคือต้องคงบรรทัด “type = spherical” ไว้เสมอ ห้ามลบเด็ดขาด เพราะหากลบบรรทัดนี้ ทิวทัศน์จะไม่แสดงผลอย่างถูกต้องใน Stellarium เวอร์ชันปัจจุบัน</p>
+<p>ท่านสามารถเปลี่ยนช่อง “name” เป็นชื่อจุดชม “author” ระบุแหล่งที่มาจาก Google Maps “description” เขียนคำอธิบายสั้น ๆ คงค่า “type” เป็น spherical ไว้ และ “maptex” ให้ชี้ไปยังชื่อไฟล์ PNG ที่บันทึกไว้</p>
+<p>สำหรับพิกัดละติจูดและลองจิจูด ท่านต้องดึงข้อมูลจากเมทาดาต้าของภาพ Street View ที่ดาวน์โหลดมา (เครื่องมือ Street View 360 Downloader จะแสดงพิกัดแบบทศนิยมของภาพต้นฉบับให้) จากนั้นแปลงเป็นรูปแบบองศา-ลิปดา-ฟิลิปดา (DMS) ด้วย<a href="https://www.fcc.gov/media/radio/dms-decimal">เครื่องมือแปลงพิกัดออนไลน์ของ FCC</a> แล้วนำไปใส่ในไฟล์ landscape.ini อย่าลืมเปลี่ยนเครื่องหมายบวกเป็นลบหากพิกัดอยู่ในซีกโลกตะวันตกหรือใต้</p>
+<p>สำหรับระดับความสูง ให้ใช้<a href="https://www.freemaptools.com/elevation-finder.htm">เครื่องมือค้นหาระดับความสูงออนไลน์</a> ป้อนพิกัดที่ได้มาเพื่อหาความสูงเหนือระดับน้ำทะเลเป็นเมตร (เนื่องจาก Stellarium ใช้หน่วยเมตร) ควรตรวจสอบตัวเลขซ้ำกับ<a href="https://www.dcode.fr/earth-elevation">เครื่องมือค้นหาระดับความสูงอีกตัวหนึ่ง</a> เพื่อความแน่ใจ หากจุดชมของท่านมีความสูงเพิ่มจากสิ่งปลูกสร้าง เช่น ยืนอยู่บนสะพาน ให้บวกความสูงนั้นเข้าไปด้วย</p>
+<p>ช่องที่ยากที่สุดและสำคัญที่สุดคือมุมหมุน Angle_Rotatez ซึ่งใช้ปรับทิศใต้ในภาพ 360 องศาให้ตรงกับทิศใต้จริงในโลก สูตรคำนวณมุมนี้เกี่ยวข้องกับตำแหน่งจุดสังเกตที่ชัดเจนในภาพ (เช่น อาคารหรือสิ่งปลูกสร้างที่จำได้ง่าย) ผลต่างมุมทิศจากตำแหน่งที่ยืนไปยังจุดสังเกตนั้น (หาได้จาก<a href="https://www.sunearthtools.com/dp/tools/pos_earth.php">เครื่องมือวัดมุมทิศออนไลน์</a>) และตำแหน่งพิกเซลของจุดสังเกตนั้นตามแนวนอนของภาพเทียบกับความกว้างทั้งหมดของภาพ ความแม่นยำในขั้นตอนนี้สำคัญมาก จึงควรทำอย่างระมัดระวังและวัดซ้ำหลายครั้ง</p>
+<figure>
+<div class="img-wrap" role="img" aria-label="ปรับทิศทางภาพ 360 องศาใน Stellarium"><svg viewBox="0 0 1000 380" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1229"/>
+      <stop offset="100%" stop-color="#161f3d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="380" fill="url(#bg5)"/>
+  <text x="500" y="40" text-anchor="middle" font-family="Georgia, serif" font-size="19" fill="#f4ead0">ปรับทิศทางภาพ 360 องศาใน Stellarium</text>
+
+  <circle cx="500" cy="220" r="8" fill="#ffdb7a"/>
+  <text x="500" y="250" text-anchor="middle" font-family="Arial" font-size="13" fill="#e5eaf7">จุดที่ถ่ายภาพ</text>
+
+  <line x1="500" y1="220" x2="500" y2="90" stroke="#7fd3ff" stroke-width="2"/>
+  <polygon points="500,80 494,96 506,96" fill="#7fd3ff"/>
+  <text x="500" y="68" text-anchor="middle" font-family="Arial" font-size="13" fill="#7fd3ff">ทิศเหนือ (0 องศาใน Stellarium)</text>
+
+  <line x1="500" y1="220" x2="700" y2="130" stroke="#ffdb7a" stroke-width="2"/>
+  <polygon points="705,124 692,132 698,142" fill="#ffdb7a"/>
+  <text x="740" y="120" text-anchor="middle" font-family="Arial" font-size="13" fill="#ffdb7a">จุดสังเกตอ้างอิง</text>
+  <text x="740" y="138" text-anchor="middle" font-family="Arial" font-size="11" fill="#c9b06a">(อาคาร ยอดเขา ฯลฯ)</text>
+
+  <line x1="500" y1="220" x2="880" y2="220" stroke="#8fa0c9" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="880" y="240" text-anchor="end" font-family="Arial" font-size="11" fill="#8fa0c9">ตำแหน่งพิกเซล x บนภาพ 360 องศา</text>
+
+  <path d="M 540 220 A 40 40 0 0 0 528 187" fill="none" stroke="#e5eaf7" stroke-width="2"/>
+  <text x="560" y="195" font-family="Arial" font-size="12" fill="#e5eaf7">มุมต่าง</text>
+
+  <rect x="100" y="290" width="800" height="60" rx="10" fill="#141c3a" stroke="#3a4a72"/>
+  <text x="500" y="315" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#ffdb7a">angle_rotatez = มุมทิศจุดสังเกต + 219 − (360 × pixel_x ÷ ความกว้างภาพทั้งหมด)</text>
+  <text x="500" y="336" text-anchor="middle" font-family="Arial" font-size="11" fill="#8fa0c9">ยิ่งวัดแม่นยำเท่าไร การจำลองใน Stellarium ยิ่งใกล้เคียงความจริง</text>
+</svg></div>
+<figcaption aria-hidden="true">ปรับทิศทางภาพ 360 องศาใน Stellarium</figcaption>
+</figure>
+<p>เมื่อแก้ไขไฟล์ landscape.ini เสร็จแล้ว ให้บันทึกแล้วเปิด Stellarium ไปที่หน้าต่าง “Sky and viewing options” เลือกแท็บ “Landscape” หาทิวทัศน์ที่สร้างขึ้น เพิ่มความสว่างขั้นต่ำเป็น 1 เพื่อให้มองเห็นชัดขึ้น แล้วปิดหน้าต่าง ภาพ 360 องศาของท่านจะปรากฏขึ้นในพื้นที่จำลองทันที ตรงนี้ควรหมุนมุมมองไปรอบ ๆ เพื่อตรวจสอบว่าทิศใต้ใน Stellarium ตรงกับจุดสังเกตที่คุ้นเคยในภาพหรือไม่ หากยังไม่ตรง แสดงว่ามุมหมุนในขั้นตอนก่อนหน้าต้องปรับใหม่</p>
+<p>ขั้นตอนสุดท้ายคือการจำลองสุริยุปราคา เปิดหน้าต่าง “Location” แล้วป้อนพิกัดแบบองศา-ลิปดา-ฟิลิปดาและระดับความสูงที่คำนวณไว้ ตั้งชื่อจุดชมแล้วเพิ่มลงในรายการเพื่อใช้ซ้ำในภายหลัง เปิดหน้าต่าง “Date and time” แล้วป้อนวันที่และเวลาที่แน่นอนของเหตุการณ์ ข้อควรระวังคือ Stellarium ใช้เขตเวลาของอุปกรณ์ที่ท่านใช้งานอยู่ ไม่ใช่เขตเวลาของจุดชมโดยอัตโนมัติ ท่านจึงต้องคำนวณและปรับเวลาต่างเองให้ถูกต้อง</p>
+<p>หากทำถูกต้องทุกขั้นตอน ท่านจะเห็นภาพจำลองที่เกือบเหมือนจริงของดวงอาทิตย์ที่กำลังจะถูกบดบัง ซ้อนทับกับทิวทัศน์จริงของจุดชมที่ท่านตั้งใจจะไปยืน นี่เป็นประสบการณ์ที่น่าสนใจทีเดียว ช่วยให้ท่านจินตนาการล่วงหน้าได้อย่างเต็มที่ว่ากำลังจะได้เห็นอะไร</p>
+<p>สำหรับผู้ที่หลงใหลการถ่ายภาพและต้องการผสมผสานทิวทัศน์เข้ากับภาพสุริยุปราคา Stellarium ยังมีฟีเจอร์เส้นกริดมุมทิศ (Azimuthal grid) ที่ช่วยให้ทราบแน่ชัดว่าดวงอาทิตย์จะอยู่สูงจากเส้นขอบฟ้าเท่าไร เพื่อเลือกเลนส์มุมกว้างที่เหมาะสม (จะใช้<a href="http://www.acapixus.dk/photography/angle_of_view.htm">ตารางมุมรับภาพตามทางยาวโฟกัสของเลนส์</a> ประกอบการเลือกเลนส์ก็ได้) ท่านยังสามารถเพิ่มข้อมูลเซนเซอร์และเลนส์กล้องจริงของท่านลงใน Stellarium เพื่อจินตนาการกรอบภาพที่จะถ่ายได้แม่นยำยิ่งขึ้น โดยดู<a href="http://astroescape.com/software-guides/stellarium-for-beginners-how-to-add-your-gear/">คำแนะนำการเพิ่มอุปกรณ์ใน Stellarium</a> ประกอบ</p>
+<p>เทคนิคนี้ยังใช้ได้ดีมากกับสุริยุปราคาวงแหวน ช่วยให้จินตนาการล่วงหน้าถึงภาพวงแหวนสีทองลอยอยู่เหนือสิ่งปลูกสร้างหรือทิวทัศน์ที่น่าประทับใจได้</p>
+<p>หากติดขัดในขั้นตอนใด อย่าลังเลที่จะลองฝึกซ้อมกับสถานที่ที่คุ้นเคยก่อน เช่น บริเวณที่ท่านอาศัยอยู่ในกรุงเทพฯ หรือเชียงใหม่ เพื่อทำความคุ้นเคยกับขั้นตอนทั้งหมดก่อนนำไปใช้กับจุดชมสุริยุปราคาจริง</p>
+<h3 id="สรปสวนท-3">สรุปส่วนที่ 3</h3>
+<p>มาถึงตรงนี้ ท่านควรรู้วิธีค้นหาและดาวน์โหลดภาพ Street View 360 องศาสำหรับจุดชมที่เป็นไปได้ด้วย Street View 360 Downloader รู้วิธีใช้โปรแกรมแต่งภาพร่วมกับการแก้ไขไฟล์เล็กน้อยเพื่อนำภาพ 360 องศานั้นเข้าสู่ Stellarium และรู้วิธีจำลองสุริยุปราคาใน Stellarium ราวกับท่านกำลังยืนอยู่ ณ สถานที่นั้นจริง ๆ ในช่วงเวลาที่เหตุการณ์เกิดขึ้น</p>
+<p>ทำได้ดีมาก ท่านจำลองสุริยุปราคาจากสถานที่และวันที่เฉพาะเจาะจงสำเร็จแล้ว สิ่งที่เหลืออยู่คือการนำการเตรียมตัวทั้งหมดนี้ไปใช้ในวันงานจริง</p>
+<hr />
+<h2 id="สวนท-4-ตดสนใจเลอกจดชมขนสดทายในวนงาน">ส่วนที่ 4: ตัดสินใจเลือกจุดชมขั้นสุดท้ายในวันงาน</h2>
+<p>วันสุริยุปราคาใกล้เข้ามาแล้ว ท่านมีบัญชีรายชื่อจุดชมที่สำรวจและจำลองภาพมาอย่างละเอียดแล้ว เหลือเพียงสิ่งเดียวที่ต้องทำ คือการเลือกจุดชมอย่างเป็นทางการ นับจากนี้ไปมีเพียงสิ่งเดียวที่สำคัญจริง ๆ นั่นคือเมฆ</p>
+<h3 id="การพยากรณเมฆระยะสน">การพยากรณ์เมฆระยะสั้น</h3>
+<p>ในส่วนก่อนหน้านี้ เราพยายามเลือกพื้นที่ทางภูมิศาสตร์ที่มีโอกาสท้องฟ้าแจ่มใสสูงตามสถิติ แต่ไม่มีสิ่งใดแน่นอน 100% ท่านจึงต้องรักษาความยืดหยุ่นไว้เสมอ จากประสบการณ์ของผู้ติดตามสุริยุปราคามาอย่างยาวนาน การพยากรณ์เมฆมักเชื่อถือได้ในช่วง 72 ชั่วโมงก่อนเหตุการณ์ ดังนั้นประมาณสามวันก่อนวันสำคัญ ท่านควรเริ่มติดตามโมเดลพยากรณ์เมฆอย่างใกล้ชิด และติดตามต่อเนื่องจนถึงวินาทีที่ขึ้นรถมุ่งหน้าไปยังจุดชม</p>
+<p>เครื่องมือพยากรณ์เมฆระยะสั้นที่น่าเชื่อถือมากและใช้ได้ทั่วโลกคือ <a href="https://weather.us/model-charts/euro/usa/total-cloud-coverage.html">weather.us</a> มีข้อสำคัญมากที่ต้องจำไว้เมื่อใช้เว็บนี้ นั่นคือ สีเหลืองยิ่งสว่างเท่าไร ยิ่งหมายถึงเมฆน้อยเท่านั้น ซึ่งตรงข้ามกับสัญชาตญาณของคนส่วนใหญ่ที่มักคิดว่าบริเวณที่มืดบนแผนที่คือบริเวณที่ฟ้าโปร่ง</p>
+<figure>
+<div class="img-wrap" role="img" aria-label="วิธีอ่านแผนที่เมฆบน weather.us"><svg viewBox="0 0 1000 260" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cloudScale" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#141a2e"/>
+      <stop offset="40%" stop-color="#3d3a55"/>
+      <stop offset="70%" stop-color="#c98f3a"/>
+      <stop offset="100%" stop-color="#ffe98a"/>
+    </linearGradient>
+    <linearGradient id="bg4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1229"/>
+      <stop offset="100%" stop-color="#161f3d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="260" fill="url(#bg4)"/>
+  <text x="500" y="42" text-anchor="middle" font-family="Georgia, serif" font-size="20" fill="#f4ead0">วิธีอ่านแผนที่เมฆบน weather.us</text>
+
+  <rect x="120" y="90" width="760" height="40" rx="8" fill="url(#cloudScale)"/>
+  <text x="140" y="80" font-family="Arial" font-size="13" fill="#cfd6e8">เมฆมาก</text>
+  <text x="820" y="80" text-anchor="end" font-family="Arial" font-size="13" fill="#ffe98a">เมฆน้อย ฟ้าโปร่ง</text>
+
+  <circle cx="180" cy="180" r="18" fill="#2a2f45"/>
+  <text x="180" y="215" text-anchor="middle" font-family="Arial" font-size="12" fill="#8fa0c9">บริเวณสีเข้ม</text>
+  <text x="180" y="232" text-anchor="middle" font-family="Arial" font-size="12" fill="#8fa0c9">= เมฆหนา</text>
+
+  <circle cx="820" cy="180" r="18" fill="#ffe98a"/>
+  <text x="820" y="215" text-anchor="middle" font-family="Arial" font-size="12" fill="#8fa0c9">สีเหลืองสว่าง</text>
+  <text x="820" y="232" text-anchor="middle" font-family="Arial" font-size="12" fill="#8fa0c9">= ฟ้าโปร่ง</text>
+
+  <text x="500" y="180" text-anchor="middle" font-family="Arial" font-size="14" fill="#e5eaf7">ตรงข้ามกับสัญชาตญาณ สีเหลืองยิ่งสว่าง</text>
+  <text x="500" y="200" text-anchor="middle" font-family="Arial" font-size="14" fill="#e5eaf7">ยิ่งหมายถึงเมฆน้อย</text>
+</svg></div>
+<figcaption aria-hidden="true">วิธีอ่านแผนที่เมฆบน weather.us</figcaption>
+</figure>
+<p>บนหน้าเว็บ weather.us ตัวเลือกที่สำคัญที่สุดสองอย่างคือ “Change map selection” และ “Change date” การเลือกช่วงเวลาที่ใกล้เคียงกับเวลาคราสเต็มดวงมากที่สุดเป็นเรื่องสำคัญอย่างยิ่ง โมเดลมาตรฐานสามารถดูล่วงหน้าได้สูงสุดประมาณ 10 วัน และหากเปลี่ยนไปใช้โมเดลอื่นบนแถบเครื่องมือด้านบนแผนที่ ท่านจะเห็นว่าความละเอียดและช่วงเวลาพยากรณ์แตกต่างกันไป โดยโมเดล GFS มักมีช่วงเวลาพยากรณ์ยาวที่สุด ประมาณ 16 วัน คุ้มค่าอย่างยิ่งที่จะเปรียบเทียบหลายโมเดลเมื่อวันงานใกล้เข้ามา เพื่อหาจุดร่วมและความแตกต่างระหว่างโมเดลเหล่านั้น</p>
+<h3 id="เลอกจดชมในวนงานจรง">เลือกจุดชมในวันงานจริง</h3>
+<p>นี่คือช่วงเวลาที่ความพยายามทั้งหมดจะได้รับผลตอบแทน ท่านสามารถนำบัญชีรายชื่อจุดชมมาเทียบกับข้อมูลพยากรณ์เมฆระยะสั้นล่าสุดได้แล้ว</p>
+<p>เข้า weather.us ประมาณ 12 ถึง 24 ชั่วโมงก่อนเหตุการณ์ ดูโมเดลเมฆทั้งหมดที่มีสำหรับพื้นที่ของท่าน หากมีบริเวณสีเหลืองสว่างชัดเจนปรากฏในโมเดลส่วนใหญ่ตรงกับช่วงเวลาคราสเต็มดวง ให้ตรวจสอบว่ามีจุดชมใดในบัญชีรายชื่อของท่านตกอยู่ในบริเวณนั้นหรือไม่ หากมี นั่นอาจเป็นจุดชมที่ดีที่สุดสำหรับท่าน อย่าลืมเตรียมทางเลือกสำรองไว้สักสองสามแห่งด้วย</p>
+<p>ให้ทำซ้ำขั้นตอนนี้ทันทีที่ตื่นนอนในวันสุริยุปราคาจริง นี่อาจเป็นโอกาสสุดท้ายในการตรวจสอบโมเดลพยากรณ์เมฆก่อนต้องเลือกจุดชมขั้นสุดท้าย เมื่อตัดสินใจแล้ว ให้เก็บทางเลือกสำรองไว้ในใจเสมอ เผื่อสถานการณ์เปลี่ยนแปลง</p>
+<p>โปรดจำไว้ว่าหลายโมเดลพยากรณ์อัปเดตทุกชั่วโมง ดังนั้นหากเป็นไปได้ ควรตรวจสอบพยากรณ์เมฆอีกครั้งแม้ในระหว่างการเดินทาง มีเรื่องราวจริงที่น่าคิดตามอยู่เรื่องหนึ่ง ในการชมสุริยุปราคาปี 2017 ที่สหรัฐอเมริกา มีกลุ่มผู้สังเกตการณ์กลุ่มหนึ่งตั้งใจจะชมที่ Carhenge สถานที่จำลอง Stonehenge จากรถยนต์เก่าที่นำมาวางเรียงซ้อนกัน แต่เมื่อเดินทางไปได้ครึ่งทาง เมฆเริ่มเคลื่อนตัวไปทางตะวันออกมากกว่าที่คาดการณ์ไว้ พวกเขาจึงเปลี่ยนเส้นทางไปยังสถานที่สำคัญทางประวัติศาสตร์อีกแห่งทางตะวันตกเฉียงเหนือที่ไม่ไกลนัก ซึ่งท้องฟ้าแจ่มใสกว่าอย่างเห็นได้ชัด แม้จะห่างกันไม่ถึงหนึ่งชั่วโมงในการขับรถ กลุ่มที่อยู่ที่ Carhenge ก็ยังได้เห็นคราสเต็มดวงเช่นกัน เพียงแต่ท้องฟ้ามีเมฆมากกว่าอย่างชัดเจน</p>
+<h3 id="กรณเลวรายทสด-สภาพอากาศไมดในวนงาน">กรณีเลวร้ายที่สุด สภาพอากาศไม่ดีในวันงาน</h3>
+<p>หากท่านตื่นขึ้นในวันสุริยุปราคาแล้วไม่มีจุดชมใดในระยะที่ไปถึงได้มีสภาพอากาศดีเลย โปรดจำไว้ว่าท่านได้ทำทุกอย่างเท่าที่ทำได้เพื่อตัดสินใจให้ดีที่สุดแล้ว และแม้โมเดลคอมพิวเตอร์จะพยากรณ์ว่ามีเมฆ ก็ไม่ได้หมายความว่าดวงอาทิตย์จะถูกบดบังในช่วงไม่กี่นาทีของคราสเต็มดวงอย่างแน่นอนเสมอไป จงออกไปข้างนอกและเปิดใจรับประสบการณ์นั้น บางทีท่านอาจโชคดีก็ได้</p>
+<p>สภาพอากาศเป็นสิ่งเดียวที่ท่านไม่สามารถควบคุมได้ จงทำใจยอมรับไว้แต่เนิ่น ๆ</p>
+<h3 id="เคลดลบปฏบตเพมเตม">เคล็ดลับปฏิบัติเพิ่มเติม</h3>
+<figure>
+<div class="img-wrap" role="img" aria-label="รายการของที่ต้องเตรียมในวันสุริยุปราคา"><svg viewBox="0 0 1000 340" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1229"/>
+      <stop offset="100%" stop-color="#161f3d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="340" fill="url(#bg6)"/>
+  <text x="500" y="42" text-anchor="middle" font-family="Georgia, serif" font-size="20" fill="#f4ead0">รายการของที่ต้องเตรียมในวันสุริยุปราคา</text>
+
+  <g font-family="Arial" font-size="15" fill="#e5eaf7">
+    <g transform="translate(90,90)">
+      <rect width="22" height="22" rx="5" fill="none" stroke="#ffdb7a" stroke-width="2"/>
+      <path d="M4 12 L9 17 L18 5" stroke="#ffdb7a" stroke-width="2" fill="none"/>
+      <text x="36" y="17">แว่นดูสุริยุปราคาที่ได้มาตรฐาน</text>
+    </g>
+    <g transform="translate(90,140)">
+      <rect width="22" height="22" rx="5" fill="none" stroke="#ffdb7a" stroke-width="2"/>
+      <path d="M4 12 L9 17 L18 5" stroke="#ffdb7a" stroke-width="2" fill="none"/>
+      <text x="36" y="17">ฟิลเตอร์กรองแสงสำหรับเลนส์ / กล้องโทรทรรศน์</text>
+    </g>
+    <g transform="translate(90,190)">
+      <rect width="22" height="22" rx="5" fill="none" stroke="#ffdb7a" stroke-width="2"/>
+      <path d="M4 12 L9 17 L18 5" stroke="#ffdb7a" stroke-width="2" fill="none"/>
+      <text x="36" y="17">นาฬิกาที่แม่นยำ แบตเตอรี่ชาร์จเต็ม</text>
+    </g>
+    <g transform="translate(90,240)">
+      <rect width="22" height="22" rx="5" fill="none" stroke="#ffdb7a" stroke-width="2"/>
+      <path d="M4 12 L9 17 L18 5" stroke="#ffdb7a" stroke-width="2" fill="none"/>
+      <text x="36" y="17">น้ำมันเต็มถัง อาหารและน้ำดื่มสำรอง</text>
+    </g>
+
+    <g transform="translate(560,90)">
+      <rect width="22" height="22" rx="5" fill="none" stroke="#ffdb7a" stroke-width="2"/>
+      <path d="M4 12 L9 17 L18 5" stroke="#ffdb7a" stroke-width="2" fill="none"/>
+      <text x="36" y="17">บัญชีจุดชมสำรองที่บันทึกไว้แล้ว</text>
+    </g>
+    <g transform="translate(560,140)">
+      <rect width="22" height="22" rx="5" fill="none" stroke="#ffdb7a" stroke-width="2"/>
+      <path d="M4 12 L9 17 L18 5" stroke="#ffdb7a" stroke-width="2" fill="none"/>
+      <text x="36" y="17">กล้องสองตัวสำหรับถ่ายภาพ</text>
+    </g>
+    <g transform="translate(560,190)">
+      <rect width="22" height="22" rx="5" fill="none" stroke="#ffdb7a" stroke-width="2"/>
+      <path d="M4 12 L9 17 L18 5" stroke="#ffdb7a" stroke-width="2" fill="none"/>
+      <text x="36" y="17">เก้าอี้ เสื่อรองนั่ง กระติกน้ำแข็ง</text>
+    </g>
+    <g transform="translate(560,240)">
+      <rect width="22" height="22" rx="5" fill="none" stroke="#ffdb7a" stroke-width="2"/>
+      <path d="M4 12 L9 17 L18 5" stroke="#ffdb7a" stroke-width="2" fill="none"/>
+      <text x="36" y="17">ใจที่พร้อมยืดหยุ่นจนถึงนาทีสุดท้าย</text>
+    </g>
+  </g>
+</svg></div>
+<figcaption aria-hidden="true">รายการของที่ต้องเตรียมในวันสุริยุปราคา</figcaption>
+</figure>
+<p>ควรเตรียมอุปกรณ์ให้ครบถ้วนล่วงหน้าหนึ่งถึงสองวันก่อนวันงาน ตรวจสอบฟิลเตอร์กรองแสงให้ดี รวมถึงของใช้ที่ไม่ใช่กล้อง เช่น กระติกน้ำแข็ง เก้าอี้พับ โต๊ะพับ และแบตเตอรี่สำรอง และอย่าลืมแว่นดูสุริยุปราคาโดยเฉพาะ</p>
+<p>การเติมน้ำมันรถให้เต็มถังก่อนออกเดินทางก็สำคัญมากเช่นกัน เพราะหลายพื้นที่ในแนวคราสเต็มดวงมักไม่คุ้นเคยกับจำนวนนักท่องเที่ยวที่หลั่งไหลเข้ามาในเหตุการณ์แบบนี้ แม้แต่ปั๊มน้ำมันก็อาจน้ำมันหมดหรือมีคิวยาวได้</p>
+<p>ควรบันทึกจุดชมสำรองทั้งหมดลงในโทรศัพท์ไว้ล่วงหน้า เพื่อไม่ต้องเสียเวลาพิมพ์ในนาทีสุดท้าย ตรวจสอบเส้นทางไปยังจุดชมที่ต้องการให้เร็วที่สุดเท่าที่จะทำได้ เพราะเครื่องมืออย่าง Smappen ไม่สามารถคำนวณสภาพการจราจรแบบเรียลไทม์ได้ การตรวจสอบบ่อย ๆ จะช่วยให้ท่านหลีกเลี่ยงรถติดในช่วงเวลาสำคัญได้</p>
+<p>ควรออกเดินทางทันทีที่เลือกจุดชมได้แล้ว เพราะท่านไม่มีทางรู้ว่าจะเจอปัญหาอะไรระหว่างทาง แม้จะคิดว่ามีเวลาเหลือหลายชั่วโมงก็ตาม บางทีที่จอดรถอาจเต็มแล้ว และท่านต้องเปลี่ยนแผนทันที</p>
+<p>อย่าลืมเตรียมอาหารและเครื่องดื่มติดตัวไปด้วย เพราะบริการอาหารในพื้นที่ที่ท่านไปอาจมีจำกัดมากในวันนั้น</p>
+<p>พกนาฬิกาที่แม่นยำไปด้วย การรู้เวลาเริ่มต้นและสิ้นสุดของคราสเต็มดวงอย่างแม่นยำไม่เพียงช่วยให้รู้ว่าเมื่อไรจึงจะถอดแว่นได้อย่างปลอดภัย แต่ยังช่วยให้ไม่พลาดปรากฏการณ์ “ลูกปัดเบลลี่” (Baily’s beads) อันโด่งดัง ซึ่งเป็นช่วงที่แสงอาทิตย์ลอดผ่านหุบเขาบนพื้นผิวดวงจันทร์ก่อนและหลังคราสเต็มดวง ข้อควรระวังคือห้ามใช้ช่องมองภาพแบบออปติคัลของกล้อง DSLR หรือช่องมองของกล้องโทรทรรศน์ในการดูลูกปัดเบลลี่เด็ดขาด ให้ใช้หน้าจอ LCD ของกล้องแทน</p>
+<p>หากท่านเป็นช่างภาพ ควรพิจารณาใช้กล้องสองตัวพร้อมกัน เพราะช่วงเปลี่ยนผ่านจากคราสบางส่วนไปเป็นคราสเต็มดวงเกิดขึ้นรวดเร็วมาก ท่านคงไม่อยากเสียเวลาอันมีค่านั้นไปกับการถอดฟิลเตอร์กรองแสง</p>
+<p>และสุดท้าย แม้ท่านจะเป็นช่างภาพที่มุ่งเน้นการถ่ายภาพ ก็อย่าลืมใช้เวลาสักหนึ่งนาทีมองท้องฟ้าด้วยตาของท่านเอง โดยเฉพาะในช่วงคราสเต็มดวง กล้องสามารถบันทึกภาพได้ แต่มีเพียงท่านเท่านั้นที่จะรู้สึกถึงประสบการณ์นั้นได้อย่างแท้จริง</p>
+<h3 id="สรปสวนท-4">สรุปส่วนที่ 4</h3>
+<p>มาถึงตรงนี้ ท่านควรรู้วิธีใช้ weather.us เพื่อหาจุดชมที่ดีที่สุด รู้วิธีเลือกจุดชมขั้นสุดท้ายในวันงานจริง และเตรียมใจพร้อมรับมือกับสภาพอากาศที่ไม่เป็นใจแล้ว</p>
+<p>ทำได้ดีมาก ท่านพร้อมแล้วสำหรับหนึ่งในภาพที่น่าอัศจรรย์ที่สุดของธรรมชาติ</p>
+<hr />
+<h2 id="โอกาสสำหรบคนไทยในอนาคต">โอกาสสำหรับคนไทยในอนาคต</h2>
+<figure>
+<div class="img-wrap" role="img" aria-label="เส้นเวลาสุริยุปราคา ตั้งแต่ 2569 ถึง 2613"><svg viewBox="0 0 1000 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg7" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1229"/>
+      <stop offset="100%" stop-color="#161f3d"/>
+    </linearGradient>
+    <radialGradient id="sunG2" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#fff4c2"/>
+      <stop offset="100%" stop-color="#ff9d2f"/>
+    </radialGradient>
+    <radialGradient id="sunG3" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#fff9e0"/>
+      <stop offset="100%" stop-color="#ffdb7a"/>
+    </radialGradient>
+  </defs>
+  <rect width="1000" height="320" fill="url(#bg7)"/>
+  <text x="500" y="38" text-anchor="middle" font-family="Georgia, serif" font-size="18" fill="#f4ead0">เส้นเวลาสุริยุปราคา จากการเดินทางไปต่างประเทศ สู่ปี 2613 ที่ไทย</text>
+
+  <line x1="90" y1="165" x2="910" y2="165" stroke="#3a4a72" stroke-width="2"/>
+
+  <g transform="translate(160,165)">
+    <circle r="11" fill="url(#sunG2)"/>
+    <text y="-26" text-anchor="middle" font-family="Arial" font-size="12" fill="#e5eaf7">12 ส.ค. 2569</text>
+    <text y="-10" text-anchor="middle" font-family="Arial" font-size="10" fill="#8fa0c9">ไอซ์แลนด์ - สเปน</text>
+    <text y="38" text-anchor="middle" font-family="Arial" font-size="10" fill="#8fa0c9">ยุโรปครั้งแรกตั้งแต่ปี 1999</text>
+  </g>
+
+  <g transform="translate(380,165)">
+    <circle r="11" fill="url(#sunG2)"/>
+    <text y="-26" text-anchor="middle" font-family="Arial" font-size="12" fill="#e5eaf7">2 ส.ค. 2570</text>
+    <text y="-10" text-anchor="middle" font-family="Arial" font-size="10" fill="#8fa0c9">แอฟริกาเหนือ - ตะวันออกกลาง</text>
+    <text y="38" text-anchor="middle" font-family="Arial" font-size="10" fill="#8fa0c9">ลักซอร์ นานกว่า 6 นาที</text>
+  </g>
+
+  <g transform="translate(600,165)">
+    <circle r="11" fill="url(#sunG2)"/>
+    <text y="-26" text-anchor="middle" font-family="Arial" font-size="12" fill="#e5eaf7">22 ก.ค. 2571</text>
+    <text y="-10" text-anchor="middle" font-family="Arial" font-size="10" fill="#8fa0c9">ออสเตรเลีย</text>
+    <text y="38" text-anchor="middle" font-family="Arial" font-size="10" fill="#8fa0c9">ซิดนีย์ครั้งแรกตั้งแต่ปี 1857</text>
+  </g>
+
+  <g transform="translate(840,165)">
+    <circle r="20" fill="url(#sunG3)" stroke="#fff4c2" stroke-width="2"/>
+    <text y="-38" text-anchor="middle" font-family="Georgia, serif" font-size="15" fill="#ffdb7a" font-weight="bold">11 เม.ย. 2613</text>
+    <text y="-20" text-anchor="middle" font-family="Arial" font-size="11" fill="#f4ead0" font-weight="bold">คราสเต็มดวงกลับสู่ไทย</text>
+    <text y="48" text-anchor="middle" font-family="Arial" font-size="10" fill="#8fa0c9">ครั้งแรกนับตั้งแต่ปี 2538</text>
+  </g>
+
+  <text x="500" y="288" text-anchor="middle" font-family="Arial" font-size="12" fill="#ffdb7a">สะสมประสบการณ์จากต่างแดน ระหว่างรอวันที่คราสเต็มดวงกลับมาเยือนไทยอีกครั้ง</text>
+</svg></div>
+<figcaption aria-hidden="true">เส้นเวลาสุริยุปราคา ตั้งแต่ 2569 ถึง 2613</figcaption>
+</figure>
+<p>หากท่านอยู่ในประเทศไทยและอยากเห็นสุริยุปราคาเต็มดวงด้วยตาตัวเองในบ้านเกิด ต้องยอมรับตามตรงว่าคงต้องรออีกนาน เพราะอย่างที่กล่าวไปแล้วในตอนต้น ครั้งต่อไปที่คราสเต็มดวงจะพาดผ่านแผ่นดินไทยคือวันที่ 11 เมษายน 2613 (ค.ศ. 2070) แต่ประเทศไทยก็มีประวัติศาสตร์ที่ผูกพันกับสุริยุปราคาอย่างลึกซึ้งไม่แพ้ชาติใด</p>
+<p>เหตุการณ์ที่คนไทยภาคภูมิใจที่สุดคือการคำนวณสุริยุปราคาเต็มดวงล่วงหน้าอย่างแม่นยำของพระบาทสมเด็จพระจอมเกล้าเจ้าอยู่หัว (รัชกาลที่ 4) ที่ตำบลหว้ากอ จังหวัดประจวบคีรีขันธ์ เมื่อวันที่ 18 สิงหาคม พ.ศ. 2411 ซึ่งกลายเป็นที่มาของ “วันวิทยาศาสตร์แห่งชาติ” ในปัจจุบัน ต่อมาในปี 2418 สมัยรัชกาลที่ 5 ก็เกิดสุริยุปราคาเต็มดวงอีกครั้งที่แหลมเจ้าลาย จังหวัดเพชรบุรี และในปี 2498 สมัยรัชกาลที่ 9 ก็มีคราสเต็มดวงเกิดขึ้นในประเทศไทยอีกครั้ง</p>
+<p>ครั้งล่าสุดที่คนไทยหลายล้านคนได้สัมผัสความมืดมิดกลางวันคือวันที่ 24 ตุลาคม 2538 เงามืดของดวงจันทร์แตะแผ่นดินไทยครั้งแรกที่อำเภอแม่ระมาด จังหวัดตาก แล้วเคลื่อนผ่านกำแพงเพชร นครสวรรค์ ลพบุรี นครราชสีมา และบุรีรัมย์ ก่อนสิ้นสุดที่จังหวัดสระแก้ว รวม 11 จังหวัด สมเด็จพระกนิษฐาธิราชเจ้า กรมสมเด็จพระเทพรัตนราชสุดาฯ เสด็จฯ ทอดพระเนตรคราสเต็มดวงครั้งนั้นที่จังหวัดนครราชสีมาด้วย</p>
+<p>แม้จะต้องรอถึงปี 2613 กว่าจะได้เห็นคราสเต็มดวงอีกครั้งบนแผ่นดินไทย แต่ในระหว่างนี้ยังมีโอกาสอื่นให้ติดตาม วันที่ 14 ตุลาคม 2585 จะเกิดสุริยุปราคาวงแหวนที่มองเห็นได้จากภาคใต้ตอนล่างของไทย ก่อนแนวคราสจะเคลื่อนต่อไปยังเกาะบอร์เนียว สุลาเวสี ติมอร์ ออสเตรเลีย และนิวซีแลนด์ แม้จะไม่ใช่คราสเต็มดวง แต่ก็เป็นภาพที่งดงามไม่แพ้กัน</p>
+<p>สำหรับผู้ที่ไม่อยากรอนานถึงปี 2613 การเดินทางไปต่างประเทศเพื่อชมสุริยุปราคาเต็มดวงถือเป็นทางเลือกที่คุ้มค่าอย่างยิ่ง วันที่ 12 สิงหาคม 2569 จะเกิดสุริยุปราคาเต็มดวงพาดผ่านไอซ์แลนด์และตอนเหนือของสเปน นับเป็นครั้งแรกที่คราสเต็มดวงเยือนแผ่นดินยุโรปนับตั้งแต่ปี 1999 วันที่ 2 สิงหาคม 2570 จะมีคราสเต็มดวงพาดผ่านตอนใต้ของสเปน แอฟริกาเหนือ และตะวันออกกลาง โดยบางจุดมีระยะเวลาคราสเต็มดวงยาวนานกว่า 6 นาที ถือเป็นหนึ่งในคราสเต็มดวงที่ยาวนานที่สุดแห่งศตวรรษที่ 21 พื้นที่รอบเมืองลักซอร์ในอียิปต์ได้รับการยกย่องว่าเป็นจุดชมที่ดีที่สุดแห่งหนึ่งเพราะท้องฟ้าแจ่มใสตลอดปี ส่วนวันที่ 22 กรกฎาคม 2571 คราสเต็มดวงจะพาดผ่านออสเตรเลียและนิวซีแลนด์ โดยนครซิดนีย์จะได้สัมผัสคราสเต็มดวงเป็นครั้งแรกนับตั้งแต่ปี 1857</p>
+<p>เทคนิคการวางแผนทั้งหมดในคู่มือนี้ ตั้งแต่การเลือกการผูกมัดกับพื้นที่ การขึ้นบัญชีจุดชมจากปัจจัยด้านภูมิประเทศและการเข้าถึง ไปจนถึงการจำลองภาพล่วงหน้าด้วย Street View และ Stellarium สามารถนำไปใช้ได้กับการเดินทางไปชมสุริยุปราคาต่างประเทศทุกครั้ง ไม่ว่าท่านจะออกเดินทางจากสนามบินสุวรรณภูมิหรือดอนเมืองก็ตาม</p>
+<hr />
+<h2 id="ภาคผนวก-1-แหลงขอมลสำหรบการถายภาพสรยปราคา">ภาคผนวก 1: แหล่งข้อมูลสำหรับการถ่ายภาพสุริยุปราคา</h2>
+<p>บทความนี้เน้นเรื่องการเลือกจุดชมเป็นหลัก มากกว่าเทคนิคการถ่ายภาพสุริยุปราคา เนื่องจากมีแหล่งข้อมูลคุณภาพสูงที่เจาะลึกเรื่องอุปกรณ์ การตั้งค่ากล้อง และเทคนิคต่าง ๆ อยู่แล้วมากมาย หากท่านสนใจการถ่ายภาพสุริยุปราคา โดยเฉพาะช่วงคราสเต็มดวง เว็บไซต์ภาษาอังกฤษต่อไปนี้มีคำแนะนำที่ละเอียดและน่าเชื่อถือ</p>
+<p><a href="https://www.mreclipse.com/SEphoto/SEphoto.html">Mr. Eclipse “How to Photograph a Total Solar Eclipse”</a></p>
+<p><a href="https://eclipse.aas.org/imaging-video/images-videos">American Astronomical Society “Imaging and Video”</a></p>
+<p><a href="https://www.space.com/how-to-photograph-a-solar-eclipse">Space.com “How to photograph a solar eclipse”</a></p>
+<p><a href="https://www.bhphotovideo.com/explora/photography/tips-and-solutions/how-to-photograph-a-solar-eclipse">B&amp;H Explora “How to Photograph a Solar Eclipse”</a></p>
+<p><a href="https://www.photopills.com/articles/total-solar-eclipse-2024-photography-guide">PhotoPills “Total Solar Eclipse Photography Guide”</a></p>
+<p><a href="https://photographylife.com/how-to-photograph-a-solar-eclipse">PhotographyLife “How to Photograph a Solar Eclipse”</a></p>
+<h2 id="ภาคผนวก-2-รายชอเครองมอทใชในบทความ">ภาคผนวก 2: รายชื่อเครื่องมือที่ใช้ในบทความ</h2>
+<p>รวบรวมเครื่องมือทั้งหมดที่กล่าวถึงตลอดคู่มือนี้ ทั้งหมดใช้งานได้ฟรีหรือมีแพ็กเกจฟรีให้ทดลองใช้</p>
+<p><a href="https://www.timeanddate.com/eclipse/">Timeanddate</a> เครื่องมือหลักสำหรับดูเส้นทางสุริยุปราคา ค่าการบดบัง ระยะเวลาคราสเต็มดวง และข้อมูลเมฆเฉลี่ยตามพื้นที่</p>
+<p><a href="https://eclipsophile.com/">Eclipsophile</a> เว็บไซต์เจาะลึกเรื่องภูมิอากาศและสภาพอากาศเฉพาะสำหรับแต่ละสุริยุปราคา</p>
+<p><a href="https://www.smappen.com">Smappen</a> เครื่องมือแสดงขอบเขตการเดินทางจากจุดศูนย์กลาง พร้อมซ้อนข้อมูลภูมิศาสตร์แบบ KML</p>
+<p><a href="http://xjubier.free.fr/en/site_pages/SolarEclipsesGoogleEarth.html">ชุดข้อมูลรูปทรงเรขาคณิตของสุริยุปราคาโดย Xavier Jubier</a> แหล่งข้อมูล KMZ ที่น่าเชื่อถือที่สุดสำหรับสุริยุปราคาทุกครั้งตั้งแต่ปี 1961 ถึง 2099</p>
+<p><a href="https://mygeodata.cloud/converter/kmz-to-kml">MyGeodata Converter</a> เครื่องมือแปลงไฟล์ KMZ เป็น KML</p>
+<p><a href="https://www.google.com/maps">Google Maps</a> และ <a href="https://www.google.com/earth/about/versions/">Google Earth Pro</a> ใช้ดูภูมิประเทศ สิ่งกีดขวาง และภาพ Street View ควรตรวจสอบเพิ่มเติมกับ <a href="https://www.openstreetmap.org">OpenStreetMap</a></p>
+<p><a href="https://downloadmapimage.com/360-dl/">Street View 360 Downloader</a> ของ DownloadMapImage.com เครื่องมือดาวน์โหลดภาพ Street View 360 องศาแบบออนไลน์ ไม่ต้องติดตั้ง ใช้สร้างทิวทัศน์ใน Stellarium</p>
+<p><a href="https://stellarium.org">Stellarium</a> โปรแกรมจำลองท้องฟ้าฟรีสำหรับจำลองตำแหน่งดวงอาทิตย์และดวงจันทร์ล่วงหน้า ณ จุดและเวลาที่กำหนด</p>
+<p><a href="https://www.fcc.gov/media/radio/dms-decimal">เครื่องมือแปลงพิกัดของ FCC</a> <a href="https://www.freemaptools.com/elevation-finder.htm">เครื่องมือค้นหาระดับความสูง</a> และ<a href="https://www.sunearthtools.com/dp/tools/pos_earth.php">เครื่องมือวัดมุมทิศ</a> ใช้สำหรับป้อนข้อมูลที่แม่นยำลงใน Stellarium</p>
+<p><a href="https://weather.us/model-charts/euro/usa/total-cloud-coverage.html">Weather.us</a> เครื่องมือพยากรณ์เมฆระยะสั้นที่น่าเชื่อถือที่สุดในช่วง 10 วันก่อนเหตุการณ์ ใช้งานได้ทั่วโลก</p>
+<hr />
+<p><em>หวังว่าบทความนี้จะช่วยมอบกระบวนการที่ชัดเจนสำหรับการวางแผนชมสุริยุปราคาเต็มดวงด้วยตัวเอง ตั้งแต่การเลือกพื้นที่ทางภูมิศาสตร์ไปจนถึงการตัดสินใจขั้นสุดท้ายในวันงาน ขอให้ประสบการณ์สุริยุปราคาของท่านเต็มไปด้วยความประทับใจไม่รู้ลืม</em></p>
+
+</article>
+</div>
+
+<section class="final-cta">
+  <div class="container">
+    <h2>อย่าปล่อยให้เมฆพรากช่วงเวลาที่รอคอยมาหลายปีไปจากท่าน</h2>
+    <p>เริ่มจำลองภาพ 360 องศาของจุดชมที่ท่านกำลังพิจารณาได้ตั้งแต่วันนี้ ก่อนที่ตั๋วเครื่องบินและโรงแรมจะเต็ม</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="https://downloadmapimage.com/360-dl/" target="_blank" rel="noopener">ใช้ Street View 360 Downloader</a>
+      <a class="btn btn-ghost" href="https://downloadmapimage.com" target="_blank" rel="noopener">ดูเครื่องมืออื่น ๆ</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <a class="wordmark" href="https://downloadmapimage.com" style="font-size:0.95em;">Download<span style="color:var(--corona);">Map</span>Image</a>
+    <div class="foot-links">
+      <a href="https://downloadmapimage.com/360-dl/" target="_blank" rel="noopener">Street View 360 Downloader</a>
+      <a href="#สวนท-1-สำรวจพนทจากระยะไกล">คู่มือชมสุริยุปราคา</a>
+      <a href="https://downloadmapimage.com" target="_blank" rel="noopener">หน้าแรก</a>
+    </div>
+    <div class="copyright">© 2026 DownloadMapImage.com ・ เนื้อหานี้เป็นข้อมูลอ้างอิงเท่านั้น กรุณาสวมแว่นดูสุริยุปราคาที่ได้มาตรฐานทุกครั้งเมื่อสังเกตดวงอาทิตย์</div>
+  </div>
+</footer>
+
+</body>
+</html>

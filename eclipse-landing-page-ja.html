@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日食観測地の選び方完全ガイド | DownloadMapImage.com</title>
+<meta name="description" content="皆既日食の観測地選びを徹底解説。エリアの下見、Street View 360とStellariumによる事前シミュレーション、当日の最終判断まで、実践的な計画の立て方をまとめました。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #0a0e1a;
+    --void-soft: #10162c;
+    --panel: #151d3b;
+    --panel-hi: #1b2547;
+    --border: #2b3660;
+    --corona: #f2b64c;
+    --corona-soft: #ffd98a;
+    --ember: #e2673a;
+    --silver: #c7cbdb;
+    --parchment: #f6f1e4;
+    --ink: #e7eaf6;
+    --ink-dim: #97a0c2;
+    --max: 1100px;
+    --maxr: 760px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--void);
+    color: var(--ink);
+    font-family: 'Noto Sans JP', -apple-system, sans-serif;
+    font-size: 16.5px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: 0.01em;
+  }
+
+  .field {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background:
+      radial-gradient(1px 1px at 8% 12%, #ffffff66, transparent 60%),
+      radial-gradient(1px 1px at 22% 38%, #ffffff44, transparent 60%),
+      radial-gradient(1.5px 1.5px at 35% 8%, #ffffff55, transparent 60%),
+      radial-gradient(1px 1px at 48% 55%, #ffffff33, transparent 60%),
+      radial-gradient(1.5px 1.5px at 62% 22%, #ffffff55, transparent 60%),
+      radial-gradient(1px 1px at 75% 68%, #ffffff33, transparent 60%),
+      radial-gradient(1px 1px at 88% 15%, #ffffff44, transparent 60%),
+      radial-gradient(1.5px 1.5px at 94% 48%, #ffffff55, transparent 60%),
+      var(--void);
+    background-attachment: fixed;
+  }
+
+  a { color: inherit; }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72em;
+    letter-spacing: 0.1em;
+    color: var(--corona);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 22px;
+    height: 1px;
+    background: var(--corona);
+    opacity: 0.7;
+  }
+
+  h1, h2, h3 { font-family: 'Shippori Mincho', serif; color: var(--parchment); margin: 0; }
+
+  .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+  .container-r { max-width: var(--maxr); margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- NAV ---------- */
+  nav.topbar { position: relative; z-index: 5; padding: 22px 0; }
+  nav.topbar .container { display: flex; align-items: center; justify-content: space-between; }
+  .wordmark {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 600;
+    font-size: 1.05em;
+    color: var(--parchment);
+    text-decoration: none;
+    letter-spacing: 0.2px;
+  }
+  .wordmark span { color: var(--corona); }
+  .nav-cta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75em;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 9px 16px;
+    border-radius: 100px;
+    transition: border-color .18s ease, color .18s ease, background .18s ease;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { border-color: var(--corona); color: var(--corona); background: rgba(242,182,76,0.06); }
+
+  /* ---------- HERO ---------- */
+  .hero { position: relative; padding: 40px 0 30px; text-align: center; overflow: hidden; }
+  .hero .eyebrow { justify-content: center; margin-bottom: 22px; }
+  .hero .eyebrow::before { display: none; }
+  .hero h1 {
+    font-size: clamp(2em, 5vw, 3.1em);
+    font-weight: 600;
+    line-height: 1.5;
+    max-width: 15ch;
+    margin: 0 auto 24px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--corona-soft);
+  }
+  .hero p.lead {
+    max-width: 52ch;
+    margin: 0 auto 36px;
+    color: var(--ink-dim);
+    font-size: 1.05em;
+  }
+  .hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 56px; }
+  .btn {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 600;
+    font-size: 0.92em;
+    padding: 14px 26px;
+    border-radius: 10px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--corona), var(--ember));
+    color: #1a0f04;
+    box-shadow: 0 10px 30px -8px rgba(226,103,58,0.55);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 34px -8px rgba(226,103,58,0.7); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--border); }
+  .btn-ghost:hover { border-color: var(--silver); color: var(--parchment); }
+
+  .corona-dial { position: relative; width: min(340px, 70vw); aspect-ratio: 1; margin: 0 auto; }
+  .corona-dial .rays {
+    position: absolute; inset: -18%; border-radius: 50%;
+    background: conic-gradient(from 0deg,
+      rgba(242,182,76,0.0) 0deg, rgba(242,182,76,0.35) 8deg, rgba(242,182,76,0.0) 16deg,
+      rgba(242,182,76,0.0) 34deg, rgba(242,182,76,0.28) 42deg, rgba(242,182,76,0.0) 50deg,
+      rgba(242,182,76,0.0) 70deg, rgba(242,182,76,0.32) 78deg, rgba(242,182,76,0.0) 86deg,
+      rgba(242,182,76,0.0) 112deg, rgba(242,182,76,0.24) 120deg, rgba(242,182,76,0.0) 128deg,
+      rgba(242,182,76,0.0) 150deg, rgba(242,182,76,0.3) 158deg, rgba(242,182,76,0.0) 166deg,
+      rgba(242,182,76,0.0) 190deg, rgba(242,182,76,0.3) 198deg, rgba(242,182,76,0.0) 206deg,
+      rgba(242,182,76,0.0) 230deg, rgba(242,182,76,0.26) 238deg, rgba(242,182,76,0.0) 246deg,
+      rgba(242,182,76,0.0) 270deg, rgba(242,182,76,0.34) 278deg, rgba(242,182,76,0.0) 286deg,
+      rgba(242,182,76,0.0) 310deg, rgba(242,182,76,0.28) 318deg, rgba(242,182,76,0.0) 326deg,
+      rgba(242,182,76,0.0) 344deg, rgba(242,182,76,0.3) 352deg, rgba(242,182,76,0.0) 360deg);
+    filter: blur(1.5px);
+    animation: spin 90s linear infinite;
+  }
+  .corona-dial .corona-glow {
+    position: absolute; inset: 8%; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,217,138,0.95) 0%, rgba(242,182,76,0.55) 34%, rgba(242,182,76,0.14) 62%, rgba(242,182,76,0) 74%);
+  }
+  .corona-dial .moon {
+    position: absolute; inset: 22%; border-radius: 50%;
+    background: radial-gradient(circle at 38% 34%, #232a44, #0a0e1a 70%);
+    box-shadow: 0 0 0 1px rgba(199,203,219,0.12);
+    animation: drift 14s ease-in-out infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes drift { 0%, 100% { transform: translate(-6%, 0); } 50% { transform: translate(6%, 0); } }
+
+  .hero-caption {
+    margin-top: 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7em;
+    letter-spacing: 0.06em;
+    color: var(--ink-dim);
+  }
+
+  /* ---------- STAT STRIP ---------- */
+  .stats { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 34px 0; }
+  .stats .container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center; }
+  .stat b { display: block; font-family: 'Shippori Mincho', serif; font-size: 1.9em; color: var(--corona-soft); font-weight: 600; }
+  .stat span { font-size: 0.84em; color: var(--ink-dim); }
+
+  /* ---------- SECTION shared ---------- */
+  section { padding: 88px 0; }
+  section.tight { padding: 60px 0; }
+  .section-head { max-width: 640px; margin-bottom: 46px; }
+  .section-head .eyebrow { margin-bottom: 16px; }
+  .section-head h2 { font-size: clamp(1.5em, 3.2vw, 2em); font-weight: 600; line-height: 1.5; }
+  .section-head p { color: var(--ink-dim); margin-top: 14px; }
+
+  /* ---------- TOOL SPOTLIGHT ---------- */
+  .tool-spotlight { background: linear-gradient(180deg, var(--void-soft), var(--void)); }
+  .spotlight-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
+  .spotlight-copy h2 { font-size: clamp(1.5em, 3.4vw, 2.1em); line-height: 1.5; margin-bottom: 18px; font-weight: 600; }
+  .spotlight-copy p { color: var(--ink-dim); margin-bottom: 26px; }
+  .feature-list { list-style: none; padding: 0; margin: 0 0 30px; display: grid; gap: 14px; }
+  .feature-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.94em; color: var(--ink); }
+  .feature-list .tick {
+    flex: none; width: 20px; height: 20px; border-radius: 50%;
+    background: rgba(242,182,76,0.12); border: 1px solid rgba(242,182,76,0.4);
+    color: var(--corona); display: flex; align-items: center; justify-content: center;
+    font-size: 0.7em; margin-top: 2px;
+  }
+
+  .mock { background: var(--panel); border: 1px solid var(--border); border-radius: 18px; padding: 4px; box-shadow: 0 30px 70px -30px rgba(0,0,0,0.6); }
+  .mock-inner { background: var(--void-soft); border-radius: 14px; padding: 22px; }
+  .mock-topbar { display: flex; gap: 6px; margin-bottom: 18px; }
+  .mock-topbar span { width: 9px; height: 9px; border-radius: 50%; background: var(--border); }
+  .mock-url {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.72em; color: var(--ink-dim);
+    background: var(--void); border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 12px; margin-bottom: 18px; overflow-x: auto; white-space: nowrap;
+  }
+  .mock-panorama {
+    position: relative; height: 150px; border-radius: 10px; overflow: hidden;
+    background: radial-gradient(120% 90% at 50% 0%, #2c3a63 0%, #141b34 60%), linear-gradient(180deg, #0e1428, #1a2440);
+    margin-bottom: 16px; border: 1px solid var(--border);
+  }
+  .mock-panorama .sun { position: absolute; top: 22px; left: 65%; width: 34px; height: 34px; border-radius: 50%; background: radial-gradient(circle, var(--corona-soft), var(--corona) 60%, transparent 75%); }
+  .mock-panorama .ground {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 46%;
+    background: linear-gradient(180deg, #1c2544, #0c1122);
+    clip-path: polygon(0 40%, 15% 20%, 32% 45%, 50% 10%, 68% 38%, 84% 15%, 100% 34%, 100% 100%, 0 100%);
+  }
+  .mock-row { display: flex; justify-content: space-between; align-items: center; font-family: 'IBM Plex Mono', monospace; font-size: 0.74em; color: var(--ink-dim); margin-bottom: 10px; }
+  .mock-row b { color: var(--parchment); font-weight: 500; }
+  .mock-btn { margin-top: 14px; width: 100%; text-align: center; padding: 12px; border-radius: 9px; background: linear-gradient(135deg, var(--corona), var(--ember)); color: #1a0f04; font-weight: 600; font-size: 0.85em; }
+
+  /* ---------- PROCESS ---------- */
+  .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+  .process-card { background: var(--void-soft); padding: 32px 26px; position: relative; }
+  .process-num { font-family: 'Shippori Mincho', serif; font-size: 2.2em; -webkit-text-stroke: 1px var(--corona); color: transparent; line-height: 1; margin-bottom: 18px; }
+  .process-card h3 { font-size: 1.02em; margin-bottom: 10px; font-weight: 600; line-height: 1.5; }
+  .process-card p { font-size: 0.9em; color: var(--ink-dim); margin: 0; }
+  .process-card a.jump {
+    display: inline-block; margin-top: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 0.7em;
+    letter-spacing: 0.02em; color: var(--corona); text-decoration: none; border-bottom: 1px solid rgba(242,182,76,0.4);
+  }
+
+  /* ---------- ARTICLE ---------- */
+  .article-wrap { background: var(--void); }
+  article { max-width: var(--maxr); margin: 0 auto; padding: 0 24px; }
+  article h2 {
+    font-size: 1.42em; font-weight: 600; line-height: 1.6; margin-top: 3em; margin-bottom: 0.8em;
+    padding-top: 0.9em; border-top: 1px solid var(--border); scroll-margin-top: 24px;
+  }
+  article h2:first-of-type { border-top: none; padding-top: 0; margin-top: 0.4em; }
+  article h3 { font-size: 1.1em; font-weight: 600; color: var(--silver); line-height: 1.6; margin-top: 2em; margin-bottom: 0.7em; }
+  article p { margin: 0 0 1.3em; color: var(--ink); }
+  article em { color: var(--ink-dim); font-style: normal; }
+  article strong { color: var(--parchment); }
+  article a { color: var(--corona-soft); text-decoration: none; border-bottom: 1px solid rgba(242,182,76,0.35); }
+  article a:hover { border-color: var(--corona-soft); }
+  article hr { border: none; border-top: 1px solid var(--border); margin: 3em 0; }
+  article ul, article ol { padding-left: 1.3em; margin-bottom: 1.15em; }
+  article li { margin-bottom: 0.5em; }
+
+  article figure { margin: 2.2em 0; }
+  article .img-wrap { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 6px; box-shadow: 0 20px 50px -24px rgba(0,0,0,0.6); }
+  article .img-wrap svg { display: block; width: 100%; height: auto; border-radius: 9px; }
+  article figcaption { margin-top: 10px; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 0.7em; letter-spacing: 0.02em; color: var(--ink-dim); }
+
+  /* ---------- FINAL CTA ---------- */
+  .final-cta { text-align: center; padding: 100px 0 110px; position: relative; overflow: hidden; }
+  .final-cta::before {
+    content: ""; position: absolute; top: -20%; left: 50%; width: 700px; height: 700px; transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(242,182,76,0.14), transparent 65%); pointer-events: none;
+  }
+  .final-cta h2 { font-size: clamp(1.5em, 3.8vw, 2.2em); max-width: 18ch; margin: 0 auto 18px; font-weight: 600; line-height: 1.6; position: relative; }
+  .final-cta p { color: var(--ink-dim); max-width: 44ch; margin: 0 auto 34px; position: relative; }
+  .final-cta .hero-ctas { position: relative; }
+
+  /* ---------- FOOTER ---------- */
+  footer { border-top: 1px solid var(--border); padding: 44px 0 60px; }
+  footer .container { display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-between; align-items: center; }
+  footer .foot-links { display: flex; gap: 22px; flex-wrap: wrap; }
+  footer a { color: var(--ink-dim); text-decoration: none; font-size: 0.86em; }
+  footer a:hover { color: var(--corona); }
+  footer .copyright {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.72em; color: var(--ink-dim);
+    width: 100%; margin-top: 20px; border-top: 1px solid var(--border); padding-top: 20px; line-height: 1.8;
+  }
+
+  @media (max-width: 860px) {
+    .spotlight-grid { grid-template-columns: 1fr; gap: 40px; }
+    .process-grid { grid-template-columns: 1fr 1fr; }
+    .stats .container { grid-template-columns: 1fr; gap: 30px; }
+  }
+  @media (max-width: 520px) {
+    body { font-size: 15.5px; }
+    .process-grid { grid-template-columns: 1fr; }
+    section { padding: 64px 0; }
+  }
+</style>
+</head>
+<body>
+<div class="field"></div>
+
+<nav class="topbar">
+  <div class="container">
+    <a class="wordmark" href="https://downloadmapimage.com">Download<span>Map</span>Image</a>
+    <a class="nav-cta" href="https://downloadmapimage.com/360-dl/" target="_blank" rel="noopener">Street View 360 を開く →</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="eyebrow">日食観測ガイド・2026年7月更新</div>
+    <h1>空が見せる、たった<em>数分間</em>のために場所を選ぶ</h1>
+    <p class="lead">エリアの下見から、Street View 360とStellariumによる事前シミュレーション、そして当日の最終判断まで。皆既日食を確実に見るための計画の立て方をひとつにまとめました。</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#パート1遠隔地の下見をする">ガイド全文を読む ↓</a>
+      <a class="btn btn-ghost" href="https://downloadmapimage.com/360-dl/" target="_blank" rel="noopener">Street View 360 Downloaderを使う</a>
+    </div>
+
+    <div class="corona-dial" aria-hidden="true">
+      <div class="rays"></div>
+      <div class="corona-glow"></div>
+      <div class="moon"></div>
+    </div>
+    <div class="hero-caption">皆既の瞬間をシミュレーション</div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="container">
+    <div class="stat"><b>約17回</b><span>2000年以降に起きた「行きやすい」皆既日食の数</span></div>
+    <div class="stat"><b>1時間未満</b><span>過去25年間の皆既継続時間の合計</span></div>
+    <div class="stat"><b>2035年</b><span>日本の陸地で次に皆既日食が見られる年</span></div>
+  </div>
+</div>
+<section class="tool-spotlight">
+  <div class="container">
+    <div class="spotlight-grid">
+      <div class="spotlight-copy">
+        <div class="eyebrow">このガイドで使うツール</div>
+        <h2>Street View 360°画像をダウンロードして、Stellariumで日食を先取りする</h2>
+        <p>実際に現地へ行く前に、観測を考えている場所の360度パノラマをそのまま再現し、皆既の瞬間に太陽と月がどこにあるかを正確にシミュレーションできます。Street View 360 Downloaderは、その最初の一歩です。</p>
+        <ul class="feature-list">
+          <li><span class="tick">✓</span> GoogleマップのURLやパノラマIDを貼り付けるだけで、高解像度のequirectangular画像をすぐダウンロード</li>
+          <li><span class="tick">✓</span> インストール不要、ブラウザだけで完結。WindowsでもmacOSでも利用可能</li>
+          <li><span class="tick">✓</span> 元画像の座標や向きをそのまま保持、Stellariumへの入力もスムーズ</li>
+        </ul>
+        <a class="btn btn-primary" href="https://downloadmapimage.com/360-dl/" target="_blank" rel="noopener">Street View 360 Downloaderを開く →</a>
+      </div>
+
+      <div class="mock" aria-hidden="true">
+        <div class="mock-inner">
+          <div class="mock-topbar"><span></span><span></span><span></span></div>
+          <div class="mock-url">downloadmapimage.com/360-dl/</div>
+          <div class="mock-panorama">
+            <div class="sun"></div>
+            <div class="ground"></div>
+          </div>
+          <div class="mock-row"><span>座標</span><b>36.6513° N, 137.8686° E</b></div>
+          <div class="mock-row"><span>解像度</span><b>16384 × 8192</b></div>
+          <div class="mock-row"><span>形式</span><b>Equirectangular PNG</b></div>
+          <div class="mock-btn">360°画像をダウンロード</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="container">
+    <div class="section-head" style="margin-left:auto;margin-right:auto;text-align:center;">
+      <div class="eyebrow" style="justify-content:center;">4つのステップ</div>
+      <h2>地図の下見から、皆既の瞬間まで</h2>
+    </div>
+    <div class="process-grid">
+      <div class="process-card">
+        <div class="process-num">01</div>
+        <h3>エリアの下見</h3>
+        <p>長期的な雲データと被覆率をもとに、自分の状況に合ったエリアコミットを選びます。</p>
+        <a class="jump" href="#パート1遠隔地の下見をする">詳しく見る ↓</a>
+      </div>
+      <div class="process-card">
+        <div class="process-num">02</div>
+        <h3>候補地のリスト化</h3>
+        <p>移動範囲を把握し、地形の障害物を除外しながら、実際にアクセスできる場所を絞り込みます。</p>
+        <a class="jump" href="#パート2観測候補地のリストを作る">詳しく見る ↓</a>
+      </div>
+      <div class="process-card">
+        <div class="process-num">03</div>
+        <h3>日食のシミュレーション</h3>
+        <p>Street View 360 DownloaderとStellariumで360度の景色を再現し、イベント全体を事前に体験します。</p>
+        <a class="jump" href="#パート3ストリートビューとstellariumで日食をシミュレーションする">詳しく見る ↓</a>
+      </div>
+      <div class="process-card">
+        <div class="process-num">04</div>
+        <h3>当日の最終決定</h3>
+        <p>直前72時間の雲予報を追いかけ、最後の瞬間まで柔軟に判断します。</p>
+        <a class="jump" href="#パート4当日最終的な観測地を決める">詳しく見る ↓</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="article-wrap">
+<article>
+<figure>
+<div class="img-wrap" role="img" aria-label="皆既日食の各段階"><svg viewBox="0 0 1000 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a1128"/>
+      <stop offset="100%" stop-color="#1b2a4a"/>
+    </linearGradient>
+    <radialGradient id="corona" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff7d6" stop-opacity="0.95"/>
+      <stop offset="35%" stop-color="#ffe9a8" stop-opacity="0.55"/>
+      <stop offset="70%" stop-color="#ffdb7a" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#ffdb7a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff4c2"/>
+      <stop offset="60%" stop-color="#ffcf4d"/>
+      <stop offset="100%" stop-color="#ff9d2f"/>
+    </radialGradient>
+  </defs>
+  <rect width="1000" height="320" fill="url(#sky)"/>
+  <text x="500" y="40" text-anchor="middle" font-family="Georgia, serif" font-size="24" fill="#f4ead0">皆既日食の各段階</text>
+
+  <g transform="translate(100,170)">
+    <circle r="42" fill="url(#sunGlow)"/>
+    <text y="80" text-anchor="middle" font-family="Arial" font-size="16" fill="#cfd6e8">日食前</text>
+  </g>
+
+  <g transform="translate(300,170)">
+    <circle r="42" fill="url(#sunGlow)"/>
+    <circle cx="18" cy="-14" r="42" fill="#0a1128"/>
+    <text y="80" text-anchor="middle" font-family="Arial" font-size="16" fill="#cfd6e8">部分食</text>
+  </g>
+
+  <g transform="translate(500,170)">
+    <circle r="40" fill="#0a1128" stroke="#ffdb7a" stroke-width="3"/>
+    <circle cx="34" cy="-18" r="7" fill="#fff7d6"/>
+    <text y="80" text-anchor="middle" font-family="Arial" font-size="16" fill="#cfd6e8">ベイリーズ・ビーズ / ダイヤモンドリング</text>
+  </g>
+
+  <g transform="translate(700,170)">
+    <circle r="70" fill="url(#corona)"/>
+    <circle r="38" fill="#05070f"/>
+    <text y="95" text-anchor="middle" font-family="Arial" font-size="16" fill="#cfd6e8">皆既、コロナが見える</text>
+  </g>
+
+  <g transform="translate(900,170)">
+    <circle r="42" fill="url(#sunGlow)"/>
+    <circle cx="-18" cy="14" r="42" fill="#0a1128"/>
+    <text y="80" text-anchor="middle" font-family="Arial" font-size="16" fill="#cfd6e8">皆既後</text>
+  </g>
+
+  <line x1="60" y1="250" x2="940" y2="250" stroke="#3a4a72" stroke-width="1" stroke-dasharray="4 4"/>
+</svg></div>
+<figcaption aria-hidden="true">皆既日食の各段階</figcaption>
+</figure>
+<h2 id="始める前に安全に関する注意">始める前に、安全に関する注意</h2>
+<p>皆既日食を自分の目で見ることは、人生でも指折りの記憶に残る体験になるはずです。ただしそれと引き換えに、目には本当のリスクが伴います。太陽を観察したり撮影したりする際は、くれぐれも慎重に行動してください。</p>
+<p>このガイドはあくまで参考情報であり、通常の注意深さに代わるものではありません。太陽が99.9%欠けていたとしても、日食専用の遮光フィルターなしで太陽を直接見てはいけません。皆既中、つまり太陽が完全に月に隠れているごく短い時間だけが、肉眼で安全に眺められる瞬間です。</p>
+<p>もう一つ覚えておきたいのは、部分日食の段階で望遠レンズや天体望遠鏡を通して太陽を見る場合、たとえ正しい太陽フィルターを装着していても、ちょっとした操作ミスが目の永久的な損傷につながりかねないということです。この体験を、正しい理由だけで思い出深いものにしましょう。</p>
+<p>このガイドは主に皆既日食を対象にしていますが、内容の大部分は金環日食（月が太陽を完全には隠しきれず、指輪のような光の輪が残る現象）や、場所によって皆既にも金環にもなるハイブリッド日食、さらにある程度は部分日食にも応用できます。月食については扱っていません。</p>
+<hr />
+<h2 id="なぜ下見がこれほど重要なのか">なぜ下見がこれほど重要なのか</h2>
+<p>地上の一点に立つ観測者にとって、皆既日食は驚くほど稀な現象です。2000年以降、世界では17回ほどの皆既日食が起きましたが、そのうち3回は南極や北極に近く事実上アクセス不可能な場所で起こり、1回は2020年末、パンデミックの真っ只中にチリやアルゼンチンにすでにいた人しかほぼ見られませんでした。さらに2回は中央アフリカの奥地で起きています。つまり本当に「行きやすい」皆既日食は20年余りで12回ほどしかなく、お金と気力を尽くしてそのすべてに足を運んだとしても、皆既の合計時間はわずか1時間にも満たないのです。</p>
+<p>日本にとって、この数字はさらに厳しいものになります。本州で最後に皆既日食が観測されたのは1887年8月19日、実に148年も前のことです。北海道でも1963年7月21日が最後で、こちらも70年以上前の出来事になります。2009年7月22日には屋久島やトカラ列島、奄美大島北部などで46年ぶりの皆既日食が観測されましたが、あいにく梅雨明け前で多くの地点が雲に阻まれてしまいました。次に日本の陸地で皆既日食が見られるのは2035年9月2日、北陸から北関東にかけての帯状の地域に限られます。つまり日本に暮らす私たちの多くにとって、皆既日食は「海外に出かけて初めて見られるもの」というのが現実です。</p>
+<p>皆既という瞬間があまりにも短く、あまりにも貴重だからこそ、最悪の失敗は分厚い雲の下に立ってしまうこと、山や建物に視界を遮られること、あるいは当日になって右往左往した挙句、人生最大級の瞬間を逃してしまうことです。このガイドの目的は、地理的なエリアの選び方から、具体的な観測地点のリストアップ、事前のシミュレーション、そして当日の最終判断まで、一貫した計画の立て方を提供することにあります。</p>
+<p>すでにツアーで観測地が決まっていて、そこがどんな景色になるかだけを事前に知りたいという方は、最初の2つのパートを飛ばして、シミュレーションについて解説するパート3から読んでいただいて構いません。</p>
+<figure>
+<div class="img-wrap" role="img" aria-label="日食観測地選びの4つのステップ"><svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0b1229"/>
+      <stop offset="100%" stop-color="#1a2547"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="300" fill="url(#bg3)"/>
+  <text x="500" y="40" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#f4ead0">日食観測地選びの4つのステップ</text>
+
+  <line x1="110" y1="150" x2="890" y2="150" stroke="#3a4a72" stroke-width="2" stroke-dasharray="6 6"/>
+
+  <g transform="translate(140,150)">
+    <circle r="46" fill="#20305c" stroke="#ffdb7a" stroke-width="2"/>
+    <text y="7" text-anchor="middle" font-family="Arial" font-size="26" fill="#ffdb7a">1</text>
+    <text y="80" text-anchor="middle" font-family="Arial" font-size="15" fill="#e5eaf7">エリアの下見</text>
+    <text y="100" text-anchor="middle" font-family="Arial" font-size="12" fill="#8fa0c9">雲量、被覆率、エリアコミット</text>
+  </g>
+
+  <g transform="translate(380,150)">
+    <circle r="46" fill="#20305c" stroke="#ffdb7a" stroke-width="2"/>
+    <text y="7" text-anchor="middle" font-family="Arial" font-size="26" fill="#ffdb7a">2</text>
+    <text y="80" text-anchor="middle" font-family="Arial" font-size="15" fill="#e5eaf7">候補地のリスト化</text>
+    <text y="100" text-anchor="middle" font-family="Arial" font-size="12" fill="#8fa0c9">地形、アクセス性</text>
+  </g>
+
+  <g transform="translate(620,150)">
+    <circle r="46" fill="#20305c" stroke="#ffdb7a" stroke-width="2"/>
+    <text y="7" text-anchor="middle" font-family="Arial" font-size="26" fill="#ffdb7a">3</text>
+    <text y="80" text-anchor="middle" font-family="Arial" font-size="15" fill="#e5eaf7">日食のシミュレーション</text>
+    <text y="100" text-anchor="middle" font-family="Arial" font-size="12" fill="#8fa0c9">Street View 360 + Stellarium</text>
+  </g>
+
+  <g transform="translate(860,150)">
+    <circle r="46" fill="#20305c" stroke="#ffdb7a" stroke-width="2"/>
+    <text y="7" text-anchor="middle" font-family="Arial" font-size="26" fill="#ffdb7a">4</text>
+    <text y="80" text-anchor="middle" font-family="Arial" font-size="15" fill="#e5eaf7">当日の最終決定</text>
+    <text y="100" text-anchor="middle" font-family="Arial" font-size="12" fill="#8fa0c9">短期的な雲予報</text>
+  </g>
+</svg></div>
+<figcaption aria-hidden="true">日食観測地選びの4つのステップ</figcaption>
+</figure>
+<hr />
+<h2 id="パート1遠隔地の下見をする">パート1：遠隔地の下見をする</h2>
+<figure>
+<div class="img-wrap" role="img" aria-label="なぜ皆既日食は地球上のごく一部でしか見えないのか"><svg viewBox="0 0 1000 420" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sunG" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#fff4c2"/>
+      <stop offset="100%" stop-color="#ff9d2f"/>
+    </radialGradient>
+    <radialGradient id="earthG" cx="35%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#7fb8e0"/>
+      <stop offset="100%" stop-color="#2c5f8a"/>
+    </radialGradient>
+    <radialGradient id="moonG" cx="35%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#e6e6ec"/>
+      <stop offset="100%" stop-color="#9a9aa8"/>
+    </radialGradient>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1229"/>
+      <stop offset="100%" stop-color="#141c3a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="420" fill="url(#bg2)"/>
+  <text x="500" y="42" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#f4ead0">なぜ皆既日食は地球上のごく一部でしか見えないのか</text>
+
+  <circle cx="140" cy="220" r="90" fill="url(#sunG)"/>
+  <text x="140" y="330" text-anchor="middle" font-family="Arial" font-size="16" fill="#cfd6e8">太陽</text>
+
+  <circle cx="560" cy="220" r="22" fill="url(#moonG)"/>
+  <text x="560" y="260" text-anchor="middle" font-family="Arial" font-size="16" fill="#cfd6e8">月</text>
+
+  <circle cx="850" cy="220" r="55" fill="url(#earthG)"/>
+  <text x="850" y="292" text-anchor="middle" font-family="Arial" font-size="16" fill="#cfd6e8">地球</text>
+
+  <path d="M 230 190 L 560 210 L 640 220 L 560 230 L 230 250 Z" fill="#05070f" opacity="0.85"/>
+  <path d="M 210 130 L 560 205 L 900 218 L 560 235 L 210 310 Z" fill="#ffdb7a" opacity="0.12"/>
+
+  <text x="700" y="150" text-anchor="middle" font-family="Arial" font-size="14" fill="#a9b3cf">半影（部分日食が見える範囲）</text>
+  <line x1="800" y1="200" x2="825" y2="212" stroke="#a9b3cf" stroke-width="1"/>
+
+  <text x="640" y="270" text-anchor="middle" font-family="Arial" font-size="14" fill="#ffdb7a">本影の細い帯（皆既日食が見える範囲）</text>
+  <line x1="700" y1="230" x2="660" y2="222" stroke="#ffdb7a" stroke-width="1"/>
+
+  <text x="500" y="380" text-anchor="middle" font-family="Arial" font-size="15" fill="#8fa0c9">月の影が通過するのはごく細い帯だけ、だからこそ観測地点の選択がすべてを左右する</text>
+</svg></div>
+<figcaption aria-hidden="true">なぜ皆既日食は地球上のごく一部でしか見えないのか</figcaption>
+</figure>
+<p>月は地球よりもはるかに小さいため、太陽と地球の間を通過するとき、その濃い本影はごく細い帯、多くの場合は幅数十kmから100km程度しか地表を通過しません。その帯からわずか数kmでも外れると、コロナや真っ暗になった空を見ることは決してできず、部分日食しか見えなくなってしまいます。だからこそ、観測地点の選択は、ほかの天文現象と比べても格段に重要なのです。</p>
+<p>皆既日食を見る、あるいは撮影するための計画を立てるとき、最初のステップはどのエリアに向かうかを決めることです。自分で計画を立てるのはツアーに参加するよりも手間がかかりますが、その分、柔軟性と成功確率の高さで報われます。この手間をかける価値は十分にあると思います。</p>
+<p>観測地選びのプロセスは、大きく3段階に分けられます。まずは遠隔地からの下見（ニーズに合った地理的エリアを絞り込む段階）、次に具体的な観測地点のリストアップ、そして最後に当日直前の最新データに基づく最終決定です。まずは、皆既日食の観測において最も重要な要素、天候から見ていきましょう。</p>
+<h3 id="長期的な雲量予測">長期的な雲量予測</h3>
+<p>雲が皆既日食観測の最大の敵であることは、あらためて説明するまでもないでしょう。幸い、この厄介な敵に対抗するためのツールはいくつも存在します。</p>
+<p>私が最もよく使う視覚的なツールは、<a href="https://www.timeanddate.com/eclipse/">timeanddate.comの日食専用ページ</a>です。このサイトには今後起こるすべての日食が一覧になっており、太陽の部を選べば良いだけです。たとえば<a href="https://www.timeanddate.com/eclipse/solar/2026-august-12">2026年8月12日、アイスランドとスペインを横断する皆既日食の専用ページ</a>を開くと、日食の経路と太陽の欠け具合が地図上に視覚的に表示され、皆既帯も確認できます。</p>
+<p>このページは金環日食、ハイブリッド日食、部分日食についても同じように機能し、場所と時刻ごとの太陽の被覆率を教えてくれます。</p>
+<p>地図をクリックすると表示されるウィンドウには、日食の種類（皆既か部分か）、被覆率（obscuration、太陽の面積のうち隠れる割合）、食分（magnitude、月の直径が太陽をどれだけ覆うかの比率で、皆既日食では常に1.0以上）、日食全体および皆既の継続時間、開始・終了時刻、そして過去の統計に基づく平均雲量が表示されます。特定の地点名で検索することもできます。</p>
+<p>一つ覚えておきたいのは、皆既帯の端に近づくほど皆既の継続時間が急激に短くなるということです。そのため、できる限り皆既帯の中心線（センターライン）に近い場所を選ぶのが望ましく、そこが最も長く皆既が続く場所になります。</p>
+<p>注目すべき3つの数字は、被覆率（または食分）、雲量、そして皆既の継続時間です。皆既を見る確率を最大化するには、被覆率100%または食分1.0以上であること、平均雲量ができるだけ低いこと、そして可能であれば皆既帯の中心線に近いことの3つが重要になります。</p>
+<p>どのサイトの長期的な雲データも、あくまで数年分の統計的な平均値にすぎず、実際にあなたが観測する日の天候を正確に反映しているわけではないという点には注意が必要です。本当に信頼できる雲予報が出るのは、イベント直前の数日間だけです。これについてはパート4で詳しく扱います。</p>
+<p>timeanddate以外では、日食に特化した気象解説サイト<a href="https://eclipsophile.com/">Eclipsophile</a>も非常に参考になります。地域ごとの気候分析に加え、その季節特有の雷雨や竜巻といったリスクについても解説されていることが多いです。</p>
+<h3 id="つのタイプのエリアへのコミット">3つのタイプの「エリアへのコミット」</h3>
+<p>飛行機のチケットや車のレンタル、ホテルの予約を、直前まで待ってから決めるのは現実的ではありません。そこで、自分の状況と長期的な雲データをもとに、少なくとも皆既が見込める大まかな地理エリアを事前に決めておく必要があります。これを「エリアへのコミット」と呼んでいます。大きく分けて3つのパターンがあります。</p>
+<p>1つ目は「観測条件が最も良い場所」を優先するコミットで、皆既帯の中で継続時間の長さと平均雲量の低さのバランスが最も良い区間へ向かうパターンです。2つ目は「目的地」を優先するコミットで、利便性や安全性、知人がいる、観光と組み合わせたいといった理由で特定の地点を選ぶパターンです。3つ目は「地元」を優先するコミットで、自宅の近くで日食を見ると決めるパターンです。これはもちろん自宅が皆既帯の中か近くにある場合にしか成立しません。</p>
+<p>日本の場合、2035年9月2日の皆既日食では、能登半島付近から日本海側に入り、富山市や長野市周辺を通過し、前橋市・宇都宮市・水戸市周辺へ抜けていく帯状のルートになります。長野市周辺は皆既継続時間がおよそ2分12秒、太陽高度は約53度と好条件で、多くの人にとって「観測条件が最も良い場所」と「日帰りしやすい目的地」がちょうど重なる、恵まれたケースになりそうです。一方で東京23区、横浜、名古屋、大阪、福岡といった大都市はいずれも皆既帯から外れ、部分日食にとどまります。</p>
+<p>海外の日食では、皆既帯が非常に細く、選択肢が「目的地」型にならざるを得ないケースもあります。たとえば2023年の日食は、オーストラリアやディリ（東ティモール）、インドネシアのごく一部の陸地しか通過しませんでした。逆に、雲がほとんど問題にならないほど好条件が広がる日食もあります。2027年8月2日の日食は、南スペインから北アフリカ、中東を横断しますが、この経路の大部分は年間を通じて晴天率が非常に高いことで知られています。</p>
+<p>結局のところ、どのタイプのコミットが自分の状況や予算に合っているかを決められるのは、あなた自身だけです。</p>
+<h3 id="パート1のまとめ">パート1のまとめ</h3>
+<p>ここまでで、timeanddateでの日食情報の見方、地図クリックによる地理データの確認方法、被覆率・雲量・皆既継続時間という3つの重要要素、そして3種類のエリアコミットについて理解できたはずです。</p>
+<hr />
+<h2 id="パート2観測候補地のリストを作る">パート2：観測候補地のリストを作る</h2>
+<p>日食当日の朝、ホテルや自宅で目を覚ましたとき、手元にはすでに下見済みの観測候補地リストがある、そんな状況を想像してみてください。それぞれの場所について、どんな景色が広がっているか、日食が何時に始まり何時に終わるか、皆既の瞬間に太陽が空のどこにあるかまで分かっている。しかも、そのどの場所にもまだ実際には行ったことがない、という状態です。</p>
+<p>パート1を読んだ方なら、なぜ最初にエリアへのコミットを決める必要があるのか、もうお分かりでしょう。このパートでは、そのエリアコミットを具体的な観測候補地へと絞り込み、当日を迎える前に必要なデータを揃えていきます。</p>
+<p>このプロセスは金環日食の計画にも同じように役立ち、特に風景と絡めた構図づくりが重要になる金環日食の撮影では非常に有効です。</p>
+<p>具体的なツールの説明に入る前に一つだけ強調させてください。自然界に皆既日食に匹敵するものはほかにありません。太陽が99%欠けた状態と100%欠けた状態の差は、天と地ほど違います。条件が許すなら、可能な限りの努力を注いで皆既帯にたどり着くべきです。それは一生忘れられない瞬間になります。</p>
+<h3 id="当日の柔軟性の重要性">当日の柔軟性の重要性</h3>
+<p>自分の状況とどこまで雲のリスクを受け入れられるかに基づいてエリアコミットを決めたあと、そこから先で最も重要になるのは、日食当日の柔軟性です。前述の通り、本当に信頼できる雲予報はイベント直前の数日間にしか出ません。おそらく直前24時間のうちに、優先する観測地点を変更する必要が出てくるでしょう。</p>
+<h3 id="中心地点をもとに観測候補地を作る">中心地点をもとに観測候補地を作る</h3>
+<p>このパートは少し手間がかかりますが、難しいことはなく、一つずつ説明していきます。</p>
+<p>まずは<a href="https://www.smappen.com">Smappen</a>というツールに慣れましょう。これは出発地点から最大3時間まで、車で到達可能な範囲を可視化してくれるツールです。無料アカウントを登録し、地図画面で「Add an area」ボタンから移動範囲の描画を始めます。</p>
+<p>Smappenの便利な機能の一つが、KML形式の地理データを地図に重ねられることです。日食計画のためには、関心のある日食の皆既帯の地図を重ねます。私が知る限り最も充実した<a href="http://xjubier.free.fr/en/site_pages/SolarEclipsesGoogleEarth.html">日食形状データのコレクション</a>は、Xavier Jubierによるもので、1961年から2099年までのデータが網羅されています。該当する日食のKMZファイルをダウンロードし、SmappenはKMZを読み込めないため、<a href="https://mygeodata.cloud/converter/kmz-to-kml">MyGeodata Converter</a>のような無料の変換ツールでKML形式に変換します。</p>
+<p>KMLファイルができたら、Smappenに戻ってそのファイルを地図にドラッグ&amp;ドロップすれば、すぐに皆既帯が表示されます。皆既帯の中の都市を一つ選び、希望する移動時間を設定すれば、その時間内に到達できる範囲が、実際に皆既帯の中に収まっているかどうかが一目で分かります。</p>
+<p>同じ方法で、日食当日に自宅から出発した場合に3時間以内でたどり着ける範囲を確認することもできます。</p>
+<p>このレイヤーをtimeanddateの雲データと重ね合わせれば、直前になって計画を変更する必要が出た場合に、近くでより晴れる確率の高いエリアがあるかどうかも把握できます。</p>
+<p>理想を言えば、誰もが皆既帯の中心線にできるだけ近く、かつ雲の少ないエリアのホテルに泊まりたいものです。しかし現実には、日食観測に理想的な場所ほどホテルの数が少なく、結局は皆既帯の端にある、より大きな都市の手頃なホテルに泊まらざるを得ないことがよくあります。2035年の日本の皆既日食でも、長野市や前橋市、宇都宮市、水戸市周辺は宿泊施設に限りがあるため、直前になるほど予約が取りにくくなることが予想されます。</p>
+<p>皆既帯の端に泊まるという選択は、当然ながらアクセスできる候補地の数を狭めます。これは受け入れられる妥協でしょうか、それとも経済的な理由やホテルの空室状況によって、やむを得ず受け入れざるを得ないものでしょうか。Smappenのレイヤーは、この trade-off をより明確に見せてくれます。ただし、まだ触れていないもう一つの重要な要素があります。それが地形です。</p>
+<h3 id="日食当日の太陽の方位と高度">日食当日の太陽の方位と高度</h3>
+<p>パート1で、timeanddateの緑色の再生ボタンについて触れ、後で使うので覚えておいてくださいとお伝えしました。いよいよそれを使う番です。日食地図上で皆既帯内の任意の地点をクリックし、緑色の再生ボタンを押すと、詳細データのページに移動します。ここで最も重要な情報が、皆既の瞬間における太陽の方位と高度です。</p>
+<p>選ぶ場所によって、太陽の方位はおおよそ南東（135度）から南西（225度）の間で変化し、高度は地理的な位置とイベントの起こる季節によって、約24度から70度近くまで幅があります。これは実務上、非常に大きな意味を持ちます。皆既を見るためには、太陽の方向を向いていて、その高度より上に遮るものが何もない場所が必要だからです。太陽が地平線に近い低い位置にある場合、太陽が高い位置にあるときよりもずっと広い開けた空間が必要になり、高度が低いほど雲や大気中の霞の影響も受けやすくなります。</p>
+<p>Smappenのレイヤー上でアクセスできる候補地の多くは、何かしらの障害物によって不適格になってしまいます。この問題は、観測候補地リストアップの最後のステップである次の項目で解決していきます。</p>
+<h3 id="地形とその他の障害物">地形とその他の障害物</h3>
+<p>観測候補地のリストアップは、足し算というより引き算のプロセスだと私は考えています。つまり、最初はできるだけ広い網（この場合は皆既帯全体）を張り、管理しやすい数の地点になるまで、条件に合わない場所を少しずつ取り除いていくのです。</p>
+<p>地形はまず検討すべき要素です。ありがたいことに、雲と違って地形はほぼ固定されているため、分析しやすいという利点があります。不便な点は、Smappenの無料版には地形レイヤーがないことです。そのため、<a href="https://www.google.com/maps">Googleマップ</a>の地形フィルターを別タブで開き、山や丘といった自然の障害物を確認する必要があります。</p>
+<p>これは計画プロセスの中でも特に骨が折れる作業になり得ます。典型的な例が2019年に南米で起きた皆既日食で、アンデス山脈が巨大な障害物であると同時に、太平洋側の斜面にほぼ常に雲の壁を作り出す原因にもなっていました。しかも皆既の瞬間は日没の少し前で、太陽はまさにアンデス山脈がそびえる西の方角、低い位置にありました。最終的な解決策は、塩湖を見渡せる丘を見つけることでしたが、山脈から十分な距離を取れたのは、ぎりぎりのラインでした。</p>
+<p>観測地選びが常にこれほど大変なわけではありません。障害物がほとんど、あるいはまったくない地形の種類はいくつもあり、探す価値が十分にあります。高い照明塔のない大きなスタジアム、湖畔や海岸線、塩湖や乾いた盆地（プラヤ）、耕作地、木のない山頂や平坦な高原などが良い候補になります。</p>
+<p>自然地形に加えて、樹木や建物、電線、街灯といった人工の障害物にも注意が必要です。特に市街地で観測地を選ぶ場合は重要です。</p>
+<p>この作業に役立つのが<a href="https://www.google.com/earth/about/versions/">パソコン版のGoogle Earth Pro</a>で、多くの地域で地形や建物などの障害物を確認できます。ただし地上からの視点がないため完璧ではないので、Googleストリートビューと組み合わせて、地上からの実際の見え方を確認することをお勧めします。ストリートビューにも、あくまで過去のある瞬間を切り取ったものであり、特定の日に太陽がどこにあるかまでは教えてくれないという弱点がありますが、心配は要りません。次のパートでストリートビューの可能性を最大限に引き出します。</p>
+<h3 id="アクセスのしやすさ">アクセスのしやすさ</h3>
+<p>エリアコミットをいくつかの具体的なエリアまで絞り込んだら、次に検討すべきはアクセスのしやすさです。これには2つの側面があります。一つはその場所が公に開放されているかという法的なアクセス性、もう一つは実際にそこへたどり着けるかというロジスティクス面でのアクセス性です。</p>
+<p>法的な問題は比較的シンプルに解決できることが多く、公共の公園や誰もが利用できる道路はほとんどの場所に存在するからです。Smappenには「Points of interest」という機能もあり、公園を検索するレイヤーを追加して地図上にマークできますが、公園名の表示が制限されることもあるため、Googleマップや<a href="https://www.openstreetmap.org">OpenStreetMap</a>と照らし合わせるとよいでしょう。</p>
+<p>ロジスティクス面でのアクセス性は、より厄介になりがちです。公園や道路沿いの場所では、駐車スペースが大きな問題になります。こうした場所は普段、日食当日ほどの来訪者急増を想定して設計されていないからです。日本国内でも、2035年の日食では長野や前橋周辺の駐車場やパーキングエリアが早い段階で満車になることが予想されます。</p>
+<p>物理的なアクセスのしやすさも見逃せません。山頂や高原、塩湖の真ん中で日食を見ようと考えている場合、必要な機材をすべて自力で運べるでしょうか。</p>
+<p>交通渋滞も軽視できない問題です。駐車場への入場待ちだけで30分かかることも珍しくなく、この30分が大きな差を生むことがあります。常に余裕を持ったスケジュールを組んでおきましょう。</p>
+<p>私からのアドバイスは、エリアコミット全体に広く散らばる形で、10か所ほどの候補地リストを作ることです。中心地点から車で3時間以内で到達できる範囲はかなり広く、当日にはそのエリアの端と端で局地的な天候の違いが必ず生まれます。できる限り皆既帯の中心線に近い場所を選びつつ、より良い観測地のためなら数秒の皆既時間を犠牲にすることもためらわないようにしましょう。</p>
+<h3 id="パート2のまとめ">パート2のまとめ</h3>
+<p>ここまでで、当日の柔軟性の重要性、皆既帯のレイヤーと中心地点からの移動範囲をSmappenで重ねる方法、特定の観測地点における太陽の方位と高度をtimeanddateで調べる方法、そして地形とアクセス性に基づいた候補地の短いリストが手に入ったはずです。</p>
+<p>おめでとうございます、皆既日食観測のための候補地リストが完成しました。ここからは、その候補地それぞれについて、実際にどんな景色が広がるのかを事前にシミュレーションしていきます。</p>
+<hr />
+<h2 id="パート3ストリートビューとstellariumで日食をシミュレーションする">パート3：ストリートビューとStellariumで日食をシミュレーションする</h2>
+<p>ここから先はガイド全体の中でも最も技術的な内容になるため、あらかじめお断りしておきます。パソコン操作にある程度慣れている必要があります。必要なツールは4つ、Googleマップ、ストリートビュー360度画像のダウンロードツール、天体シミュレーションソフトのStellarium、そしてAdobe Photoshopなどの画像編集ソフトです。パソコン操作に慣れていない、あるいは画像編集ソフトを持っていない場合、このパートはあまり向いていないかもしれません。</p>
+<p>ここでの核心は、選んだ観測地点の実際の360度パノラマをStellarium上に再現し、そのリアルな風景の上に、日食当日の太陽と月の正確な位置をシミュレーションさせることです。最終的には、実際に現地へ足を運ぶ前に、パソコンの画面上でイベント全体を「先取り」して見られるようになります。太陽が欠け始める瞬間から皆既の瞬間まで、すべてです。</p>
+<h3 id="ストリートビュー360度画像のダウンロードツール">ストリートビュー360度画像のダウンロードツール</h3>
+<p>このステップでは、ネット上のほかのガイドにあるようなサードパーティ製ツールの代わりに、DownloadMapImage.comの<a href="https://downloadmapimage.com/360-dl/">Street View 360 Downloader</a>を使うことをお勧めします。このツールを使えば、Googleマップ上の360度パノラマ写真のURLやパノラマIDを直接貼り付けるだけで、equirectangular形式（球体を長方形に展開した画像）の画像を、可能な限り最高解像度でダウンロードできます。ちょうどStellariumが風景を再現するために必要とする形式です。</p>
+<p>このツールの良いところは、パソコンに何かをインストールする必要がなく、ブラウザさえあればよいことです。すべての処理がオンラインで完結するため、WindowsでもmacOSでも問題なく動作します。さらに、元画像の座標やカメラの向きといったメタデータもそのまま保持してくれるため、あとの計算ステップで必要になる緯度・経度の情報を簡単に取得できます。</p>
+<h3 id="具体的な手順">具体的な手順</h3>
+<p>まず最初のステップは、シミュレーションしたい観測地点を決めることです。パート1とパート2をすでに終えている方は、候補地リストが手元にあるはずですし、あるいは以前から決めていた場所があるかもしれません。この記事の例では、元の英語版ガイドと同じく、ナイアガラの滝を望むレインボーブリッジを参考地点として使います。</p>
+<p>2つ目のステップは、その場所に合ったストリートビュー画像を選ぶことです。Googleマップを開き、目的の場所までズームし、右下のオレンジ色の人型アイコンをドラッグして、できるだけ立ちたい場所に近い青い丸（フォトスフィア）を選びます。複数のフォトスフィアがある場合は、雲が少なく、人や車といった障害物が少なく、継ぎ目が目立たない、きれいに合成されたものを優先しましょう。選んだフォトスフィアのURLをコピーし、一時的なメモファイルに保存しておきます。</p>
+<p>3つ目のステップは、新しいタブでtimeanddateの該当する日食イベントのページを開き、「Detailed eclipse path map」というリンクを探し、2つ目のステップで選んだ場所までズームし、地図をクリックして被覆率を確認します（皆既日食なら100%と表示されているはずです）。そのあと緑色の再生ボタンを押して、その地点の詳細データページを開きます。</p>
+<p>4つ目のステップは、ストリートビューの360度画像をダウンロードすることです。新しいタブを開き（この時点でタブが3つ並行して開いているはずです）、<a href="https://downloadmapimage.com/360-dl/">Street View 360 Downloader</a>にアクセスして、ステップ2で保存したフォトスフィアのURLを入力欄に貼り付け、利用可能な最高解像度を選んでダウンロードします。他のタブは閉じないでください。あとのステップで、ダウンロードした画像の座標やメタデータを再度使用します。</p>
+<p>5つ目のステップは、Photoshopで背景の空を消去することです。ダウンロードした画像ファイルを開き、Layerメニュー、Sky、Layer Maskの順に選択し、マスクを反転させます。その後、File、Export、Quick Export as PNGでPNG形式に書き出します。Photoshopを持っていない場合は、Microsoft Paintのような基本的な画像編集ソフトでブラシツールを使い、空の部分を白く塗りつぶすだけでも同じ結果が得られます。時間はかかりますが十分実用的です。あるいは無料のGimpを使えば、Paintより速く空を消去できます（Photoshopほどではありませんが）。</p>
+<p>6つ目のステップは、Stellarium内に新しい風景（Landscape）フォルダを作ることです。<a href="https://stellarium.org">Stellarium</a>をまだインストールしていない場合は、公式サイトからダウンロードします。インストール後、「Landscapes」フォルダを探します（Macの場合はApplicationsフォルダでStellariumを右クリックし、Show Package Contentsを選択、続けてContents、Resources、Landscapesの順に進みます。Windowsの場合は通常C:Files）。既存のフォルダを一つコピーし（grossmuglフォルダが良い雛形になります）、プロジェクト名にリネームし、landscape.iniファイル以外のすべてのファイルを削除し、先ほど書き出したPNG画像をそのフォルダに入れます。</p>
+<p>7つ目のステップは、landscape.iniファイルを編集することです。テキストエディタでこのファイルを開き、不要な行をすべて削除し、基本的な項目だけを残します。特に重要なのは、「type = spherical」という行を絶対に削除しないことです。この行を消してしまうと、現行バージョンのStellariumでは風景が正しく表示されません。</p>
+<p>「name」の項目は観測地点の名前に、「author」はGoogleマップの出典を記載し、「description」は簡単な説明を書き、「type」はsphericalのまま残し、「maptex」は先ほど保存したPNGファイル名を指定します。</p>
+<p>緯度・経度については、ダウンロードしたストリートビュー画像のメタデータから取得します（Street View 360 Downloaderは元画像の10進法での座標を表示してくれます）。それを<a href="https://www.fcc.gov/media/radio/dms-decimal">FCCのオンライン変換ツール</a>を使って度分秒（DMS）形式に変換し、landscape.iniに反映します。西半球や南半球の座標の場合は、プラスをマイナスに置き換えるのを忘れないでください。</p>
+<p>標高については、<a href="https://www.freemaptools.com/elevation-finder.htm">オンラインの標高検索ツール</a>に先ほど取得した座標を入力し、海抜高度をメートル単位で調べます（Stellariumはメートルを単位として使用します）。<a href="https://www.dcode.fr/earth-elevation">別の標高検索ツール</a>でも数値を照合しておくと確実です。橋の上に立つ場合など、構造物によって高さが加わる場所であれば、その分の高さも加算しましょう。</p>
+<p>最も難しく、同時に最も重要な項目が、回転角度Angle_Rotatezです。これは360度画像内の南の方向を、実際の南の方向と一致させるために使います。この角度の計算には、画像内にはっきり写っている目印（建物などの分かりやすい構造物）の位置、立っている場所からその目印までの方位角の差（<a href="https://www.sunearthtools.com/dp/tools/pos_earth.php">オンラインの方位角測定ツール</a>で調べられます）、そして画像の横幅に対するその目印のピクセル位置が関係します。この工程の精度は非常に重要なので、慎重に、何度も測り直しましょう。</p>
+<figure>
+<div class="img-wrap" role="img" aria-label="Stellariumで360度画像の向きを合わせる"><svg viewBox="0 0 1000 380" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1229"/>
+      <stop offset="100%" stop-color="#161f3d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="380" fill="url(#bg5)"/>
+  <text x="500" y="40" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#f4ead0">Stellariumで360度画像の向きを合わせる</text>
+
+  <circle cx="500" cy="220" r="8" fill="#ffdb7a"/>
+  <text x="500" y="250" text-anchor="middle" font-family="Arial" font-size="14" fill="#e5eaf7">撮影地点</text>
+
+  <line x1="500" y1="220" x2="500" y2="90" stroke="#7fd3ff" stroke-width="2"/>
+  <polygon points="500,80 494,96 506,96" fill="#7fd3ff"/>
+  <text x="500" y="68" text-anchor="middle" font-family="Arial" font-size="14" fill="#7fd3ff">北（Stellariumの0度）</text>
+
+  <line x1="500" y1="220" x2="700" y2="130" stroke="#ffdb7a" stroke-width="2"/>
+  <polygon points="705,124 692,132 698,142" fill="#ffdb7a"/>
+  <text x="740" y="120" text-anchor="middle" font-family="Arial" font-size="14" fill="#ffdb7a">目印となる建造物</text>
+  <text x="740" y="138" text-anchor="middle" font-family="Arial" font-size="12" fill="#c9b06a">（建物、山頂など）</text>
+
+  <line x1="500" y1="220" x2="880" y2="220" stroke="#8fa0c9" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="880" y="240" text-anchor="end" font-family="Arial" font-size="12" fill="#8fa0c9">360度画像上のピクセル位置x</text>
+
+  <path d="M 540 220 A 40 40 0 0 0 528 187" fill="none" stroke="#e5eaf7" stroke-width="2"/>
+  <text x="560" y="195" font-family="Arial" font-size="13" fill="#e5eaf7">回転角</text>
+
+  <rect x="120" y="290" width="760" height="60" rx="10" fill="#141c3a" stroke="#3a4a72"/>
+  <text x="500" y="315" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#ffdb7a">angle_rotatez = 目印の方位角 + 219 − (360 × pixel_x ÷ 画像全体の横幅)</text>
+  <text x="500" y="336" text-anchor="middle" font-family="Arial" font-size="12" fill="#8fa0c9">正確に測るほど、Stellarium上のシミュレーションが実際の景色に近づく</text>
+</svg></div>
+<figcaption aria-hidden="true">Stellariumで360度画像の向きを合わせる</figcaption>
+</figure>
+<p>landscape.iniの編集が終わったら保存し、Stellariumを開きます。「Sky and viewing options」ウィンドウの「Landscape」タブから、作成した風景を選び、観察しやすいように最低輝度を1まで上げてからウィンドウを閉じます。すると、先ほどの360度画像がそのまま空間に表示されます。ここで一度ぐるりと視点を回し、Stellarium上の南の方向が画像内の見慣れた目印と一致しているか確認しましょう。一致していない場合は、前のステップの回転角度を調整し直す必要があります。</p>
+<p>最後のステップが、いよいよ日食のシミュレーションです。「Location」ウィンドウを開き、これまでに計算した度分秒の座標と標高を入力し、地点に名前を付けてリストに追加しておけば、後で再利用できます。「Date and time」ウィンドウを開き、イベント当日の正確な日時を入力します。注意点として、Stellariumは観測地の時刻ではなく、あなたが使っているデバイスのタイムゾーンを基準にするため、時差を自分で計算して調整する必要があります。</p>
+<p>ここまで正しく設定できていれば、画面上にはこれから欠けようとする太陽が、実際の観測地点の景色に重なった形でリアルに表示されているはずです。これはなかなか面白い体験で、これから目にすることになる光景を、完全に事前に思い描くことができます。</p>
+<p>風景と組み合わせた日食写真を撮りたい写真愛好家には、Stellariumの方位グリッド（Azimuthal grid）機能もおすすめです。地平線から太陽までの正確な角度が分かるため、適切な広角レンズを選ぶ助けになります（<a href="http://www.acapixus.dk/photography/angle_of_view.htm">焦点距離ごとの画角早見表</a>を参考にレンズを選ぶのもよいでしょう）。実際に使っているカメラのセンサーやレンズの情報をStellariumに登録すれば、<a href="http://astroescape.com/software-guides/stellarium-for-beginners-how-to-add-your-gear/">登録方法のガイド</a>を参考に、実際の撮影範囲をより正確にイメージできます。</p>
+<p>このテクニックは金環日食にも非常に有効で、特定の建造物や印象的な風景の上に、黄金のリング状の太陽が浮かぶ様子を事前にイメージするのに役立ちます。</p>
+<p>途中でつまずいた場合は、慣れ親しんだ場所、たとえば自分が住んでいる東京や大阪の街並みなどで何度か練習してから、実際の観測地に取り組んでみることをお勧めします。</p>
+<h3 id="パート3のまとめ">パート3のまとめ</h3>
+<p>ここまでで、Street View 360 Downloaderを使って観測候補地の360度画像を探してダウンロードする方法、画像編集ソフトと簡単なファイル編集を組み合わせてその360度画像をStellariumに取り込む方法、そしてStellarium上で、まるで実際にその場所に立っているかのように日食をシミュレーションする方法が分かったはずです。</p>
+<p>よくできました。特定の場所、特定の日の日食シミュレーションに成功しました。残るは、ここまでの準備を当日にどう活かすかです。</p>
+<hr />
+<h2 id="パート4当日最終的な観測地を決める">パート4：当日、最終的な観測地を決める</h2>
+<p>日食当日が近づいてきました。すでに丹念に下見とシミュレーションを済ませた候補地リストが手元にあります。あとやるべきことは一つ、最終的な観測地点を確定することです。ここから先、本当に重要な要素は雲だけです。</p>
+<h3 id="短期的な雲予報">短期的な雲予報</h3>
+<p>これまでのパートでは、統計的に晴天率の高いエリアを選ぶことに力を注いできました。しかし絶対確実なものはなく、常に柔軟性を持っておく必要があります。長年日食を追いかけている人々の経験によれば、雲予報が信頼できるようになるのはイベントの72時間前あたりからです。そのためイベントの3日ほど前から、雲予報のモデルを注意深くチェックし始め、観測地点へ向かう車に乗り込む直前まで更新を確認し続けるべきです。</p>
+<p>信頼性が高く、世界中どこでも使える短期的な雲予報ツールが<a href="https://weather.us/model-charts/euro/usa/total-cloud-coverage.html">weather.us</a>です。このサイトを使ううえで絶対に覚えておくべき重要なポイントがあります。それは、黄色が明るいほど雲が少ないという点で、多くの人が直感的に思い浮かべる「暗い部分こそ晴れている」というイメージとは正反対だということです。</p>
+<figure>
+<div class="img-wrap" role="img" aria-label="weather.usの雲予報の読み方"><svg viewBox="0 0 1000 260" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cloudScale" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#141a2e"/>
+      <stop offset="40%" stop-color="#3d3a55"/>
+      <stop offset="70%" stop-color="#c98f3a"/>
+      <stop offset="100%" stop-color="#ffe98a"/>
+    </linearGradient>
+    <linearGradient id="bg4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1229"/>
+      <stop offset="100%" stop-color="#161f3d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="260" fill="url(#bg4)"/>
+  <text x="500" y="42" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#f4ead0">weather.usの雲予報の読み方</text>
+
+  <rect x="120" y="90" width="760" height="40" rx="8" fill="url(#cloudScale)"/>
+  <text x="140" y="80" font-family="Arial" font-size="14" fill="#cfd6e8">雲が多い</text>
+  <text x="820" y="80" text-anchor="end" font-family="Arial" font-size="14" fill="#ffe98a">雲が少ない、晴天</text>
+
+  <circle cx="180" cy="180" r="18" fill="#2a2f45"/>
+  <text x="180" y="215" text-anchor="middle" font-family="Arial" font-size="13" fill="#8fa0c9">暗い部分</text>
+  <text x="180" y="232" text-anchor="middle" font-family="Arial" font-size="13" fill="#8fa0c9">＝雲が厚い</text>
+
+  <circle cx="820" cy="180" r="18" fill="#ffe98a"/>
+  <text x="820" y="215" text-anchor="middle" font-family="Arial" font-size="13" fill="#8fa0c9">明るい黄色</text>
+  <text x="820" y="232" text-anchor="middle" font-family="Arial" font-size="13" fill="#8fa0c9">＝晴天</text>
+
+  <text x="500" y="180" text-anchor="middle" font-family="Arial" font-size="15" fill="#e5eaf7">直感とは逆に、黄色が明るいほど</text>
+  <text x="500" y="200" text-anchor="middle" font-family="Arial" font-size="15" fill="#e5eaf7">雲は少ないという意味になる</text>
+</svg></div>
+<figcaption aria-hidden="true">weather.usの雲予報の読み方</figcaption>
+</figure>
+<p>weather.usのページでは、「Change map selection」と「Change date」という2つの選択肢が特に重要です。皆既の時刻にできるだけ近い時間帯を選ぶことが何より大切です。標準のモデルでは最大10日先まで見られ、地図上部のツールバーで他のモデルに切り替えると、解像度や予報期間が異なることが分かります。中でもGFSモデルは予報期間が最も長く、約16日先まで確認できます。イベントが近づいてきたら、複数のモデルを比較し、共通点と相違点を見極めることを強くお勧めします。</p>
+<h3 id="当日の観測地点を選ぶ">当日の観測地点を選ぶ</h3>
+<p>ここまでの準備がすべて実を結ぶ瞬間です。候補地リストと、最新の短期雲予報を照らし合わせましょう。</p>
+<p>イベントの12時間から24時間前にweather.usを開き、あなたのエリアで利用可能なすべての雲モデルに目を通します。皆既の時間帯にほとんどのモデルではっきりと明るい黄色のエリアが現れていれば、候補地リストの中にそのエリアに入る場所がないか確認します。もしあれば、それがおそらく最適な観測地です。念のため、いくつか予備の候補も用意しておきましょう。</p>
+<p>同じ作業を日食当日、目が覚めた直後にも繰り返してください。これが観測地を最終決定する前の、事実上最後のチャンスになります。決定した後も、状況が変わった場合に備えて、頭の中に代替案をいくつか残しておきましょう。</p>
+<p>多くの予報モデルは1時間ごとに更新されるため、可能であれば移動中にも雲予報を再確認する価値があります。ある年のアメリカでの日食では、観測グループが当初、古い車を積み上げて作られたストーンヘンジのレプリカ「カーヘンジ」で観測する予定でした。しかし移動の途中、雲が予想より東へ広がっていることに気づき、そこから車で1時間もかからない北西の別の史跡へ行き先を変更しました。カーヘンジに残ったグループも皆既は見られましたが、空はかなり雲が多い状態でした。</p>
+<h3 id="最悪のケース当日の天候が悪かった場合">最悪のケース、当日の天候が悪かった場合</h3>
+<p>日食当日に目を覚まし、手の届く範囲に良い天候の場所が一つも残っていなかったとしても、あなたはできる限りのことをして最良の判断を下したはずだということを忘れないでください。またコンピューターモデルが雲を予測していたからといって、その数分間だけ太陽が皆既の瞬間に確実に隠されるとは限りません。とにかく外に出て、体験を楽しんでください。運が味方してくれるかもしれません。</p>
+<p>天候だけは、どうにもコントロールできないものだと心得ておきましょう。</p>
+<h3 id="そのほかの実用的なコツ">そのほかの実用的なコツ</h3>
+<figure>
+<div class="img-wrap" role="img" aria-label="日食当日の持ち物チェックリスト"><svg viewBox="0 0 1000 340" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1229"/>
+      <stop offset="100%" stop-color="#161f3d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="340" fill="url(#bg6)"/>
+  <text x="500" y="42" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#f4ead0">日食当日の持ち物チェックリスト</text>
+
+  <g font-family="Arial" font-size="16" fill="#e5eaf7">
+    <g transform="translate(100,90)">
+      <rect width="22" height="22" rx="5" fill="none" stroke="#ffdb7a" stroke-width="2"/>
+      <path d="M4 12 L9 17 L18 5" stroke="#ffdb7a" stroke-width="2" fill="none"/>
+      <text x="36" y="17">認証済みの日食観測用メガネ</text>
+    </g>
+    <g transform="translate(100,140)">
+      <rect width="22" height="22" rx="5" fill="none" stroke="#ffdb7a" stroke-width="2"/>
+      <path d="M4 12 L9 17 L18 5" stroke="#ffdb7a" stroke-width="2" fill="none"/>
+      <text x="36" y="17">レンズ・望遠鏡用の太陽フィルター</text>
+    </g>
+    <g transform="translate(100,190)">
+      <rect width="22" height="22" rx="5" fill="none" stroke="#ffdb7a" stroke-width="2"/>
+      <path d="M4 12 L9 17 L18 5" stroke="#ffdb7a" stroke-width="2" fill="none"/>
+      <text x="36" y="17">正確な時計、フル充電のバッテリー</text>
+    </g>
+    <g transform="translate(100,240)">
+      <rect width="22" height="22" rx="5" fill="none" stroke="#ffdb7a" stroke-width="2"/>
+      <path d="M4 12 L9 17 L18 5" stroke="#ffdb7a" stroke-width="2" fill="none"/>
+      <text x="36" y="17">満タンの燃料、予備の食料と飲み物</text>
+    </g>
+
+    <g transform="translate(560,90)">
+      <rect width="22" height="22" rx="5" fill="none" stroke="#ffdb7a" stroke-width="2"/>
+      <path d="M4 12 L9 17 L18 5" stroke="#ffdb7a" stroke-width="2" fill="none"/>
+      <text x="36" y="17">保存済みの予備候補地リスト</text>
+    </g>
+    <g transform="translate(560,140)">
+      <rect width="22" height="22" rx="5" fill="none" stroke="#ffdb7a" stroke-width="2"/>
+      <path d="M4 12 L9 17 L18 5" stroke="#ffdb7a" stroke-width="2" fill="none"/>
+      <text x="36" y="17">撮影用に2台のカメラ</text>
+    </g>
+    <g transform="translate(560,190)">
+      <rect width="22" height="22" rx="5" fill="none" stroke="#ffdb7a" stroke-width="2"/>
+      <path d="M4 12 L9 17 L18 5" stroke="#ffdb7a" stroke-width="2" fill="none"/>
+      <text x="36" y="17">椅子、レジャーシート、クーラーボックス</text>
+    </g>
+    <g transform="translate(560,240)">
+      <rect width="22" height="22" rx="5" fill="none" stroke="#ffdb7a" stroke-width="2"/>
+      <path d="M4 12 L9 17 L18 5" stroke="#ffdb7a" stroke-width="2" fill="none"/>
+      <text x="36" y="17">直前まで柔軟に動く心構え</text>
+    </g>
+  </g>
+</svg></div>
+<figcaption aria-hidden="true">日食当日の持ち物チェックリスト</figcaption>
+</figure>
+<p>装備は当日の1〜2日前までにすべて準備しておくのが理想です。日食観測用のフィルターに加え、クーラーボックスや折りたたみ椅子、テーブル、モバイルバッテリーといったカメラ以外の道具もチェックしておきましょう。もちろん、専用の日食観測用メガネも忘れずに。</p>
+<p>出発前にガソリンを満タンにしておくことも重要です。皆既帯に入る多くの地域は、こうしたイベントで訪れる人の多さに普段慣れておらず、ガソリンスタンドも品切れになったり、長い行列ができたりすることがあります。</p>
+<p>すべての予備候補地は事前にスマートフォンへ保存しておき、直前になって手入力する時間を無駄にしないようにしましょう。優先する観測地点までのルートは早めに確認しておくのが得策です。Smappenのようなツールはリアルタイムの交通状況までは考慮していないため、こまめにチェックしておくことで、肝心なときの渋滞を避けられます。</p>
+<p>観測地が決まったらすぐに出発しましょう。何時間も余裕があると思っていても、道中で何が起こるか分かりません。駐車場がすでに満車で、その場で計画変更を迫られることもあり得ます。</p>
+<p>食べ物や飲み物も持参することを忘れずに。訪れる地域の飲食サービスは、その日に限ってかなり限られていることがあります。</p>
+<p>正確な時計を持っていきましょう。皆既の開始と終了の瞬間を正確に把握しておくことは、いつメガネを外して安全か分かるだけでなく、皆既の直前直後に月の谷間から漏れる光が作り出す、あの有名な「ベイリーズ・ビーズ」を見逃さないためにも役立ちます。ベイリーズ・ビーズを観察する際は、一眼レフの光学ファインダーや天体望遠鏡の接眼レンズを絶対に使わず、カメラのLCD画面で確認するようにしてください。</p>
+<p>撮影をする方は、2台のカメラを同時に使うことも検討する価値があります。部分食から皆既への切り替わりはあっという間に起こるため、その貴重な瞬間に太陽フィルターを外す作業に時間を取られたくないはずです。</p>
+<p>そして最後に、たとえ撮影に集中していても、特に皆既の瞬間だけは1分でいいので自分の目で空を見上げてください。カメラは映像を記録してくれますが、その体験を本当に感じ取れるのはあなた自身だけです。</p>
+<h3 id="パート4のまとめ">パート4のまとめ</h3>
+<p>ここまでで、weather.usを使った最適な観測地の見極め方、当日中に最終的な観測地点を選ぶ方法、そして天候が思わしくない場合の心構えが身についたはずです。</p>
+<p>よくできました。これで、自然界でも屈指の神秘的な光景を迎える準備が整いました。</p>
+<hr />
+<h2 id="日本から見たこれからの日食チャンス">日本から見た、これからの日食チャンス</h2>
+<figure>
+<div class="img-wrap" role="img" aria-label="2026年から2035年、日食を追いかけるタイムライン"><svg viewBox="0 0 1000 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg7" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1229"/>
+      <stop offset="100%" stop-color="#161f3d"/>
+    </linearGradient>
+    <radialGradient id="sunG2" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#fff4c2"/>
+      <stop offset="100%" stop-color="#ff9d2f"/>
+    </radialGradient>
+    <radialGradient id="sunG3" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#fff9e0"/>
+      <stop offset="100%" stop-color="#ffdb7a"/>
+    </radialGradient>
+  </defs>
+  <rect width="1000" height="320" fill="url(#bg7)"/>
+  <text x="500" y="40" text-anchor="middle" font-family="Georgia, serif" font-size="21" fill="#f4ead0">2026年から2035年、日食を追いかけるタイムライン</text>
+
+  <line x1="90" y1="165" x2="910" y2="165" stroke="#3a4a72" stroke-width="2"/>
+
+  <g transform="translate(160,165)">
+    <circle r="11" fill="url(#sunG2)"/>
+    <text y="-26" text-anchor="middle" font-family="Arial" font-size="13" fill="#e5eaf7">2026/8/12</text>
+    <text y="-10" text-anchor="middle" font-family="Arial" font-size="11" fill="#8fa0c9">アイスランド・スペイン</text>
+    <text y="38" text-anchor="middle" font-family="Arial" font-size="11" fill="#8fa0c9">欧州本土で1999年以来</text>
+  </g>
+
+  <g transform="translate(380,165)">
+    <circle r="11" fill="url(#sunG2)"/>
+    <text y="-26" text-anchor="middle" font-family="Arial" font-size="13" fill="#e5eaf7">2027/8/2</text>
+    <text y="-10" text-anchor="middle" font-family="Arial" font-size="11" fill="#8fa0c9">北アフリカ・中東</text>
+    <text y="38" text-anchor="middle" font-family="Arial" font-size="11" fill="#8fa0c9">ルクソールで6分超</text>
+  </g>
+
+  <g transform="translate(600,165)">
+    <circle r="11" fill="url(#sunG2)"/>
+    <text y="-26" text-anchor="middle" font-family="Arial" font-size="13" fill="#e5eaf7">2028/7/22</text>
+    <text y="-10" text-anchor="middle" font-family="Arial" font-size="11" fill="#8fa0c9">オーストラリア</text>
+    <text y="38" text-anchor="middle" font-family="Arial" font-size="11" fill="#8fa0c9">シドニーは1857年以来</text>
+  </g>
+
+  <g transform="translate(840,165)">
+    <circle r="20" fill="url(#sunG3)" stroke="#fff4c2" stroke-width="2"/>
+    <text y="-38" text-anchor="middle" font-family="Georgia, serif" font-size="16" fill="#ffdb7a" font-weight="bold">2035/9/2</text>
+    <text y="-20" text-anchor="middle" font-family="Arial" font-size="12" fill="#f4ead0" font-weight="bold">日本本土で皆既日食</text>
+    <text y="48" text-anchor="middle" font-family="Arial" font-size="11" fill="#8fa0c9">北陸〜北関東、本州は148年ぶり</text>
+  </g>
+
+  <text x="500" y="290" text-anchor="middle" font-family="Arial" font-size="13" fill="#ffdb7a">海外遠征で経験を積みながら、2035年の自国開催に備える</text>
+</svg></div>
+<figcaption aria-hidden="true">2026年から2035年、日食を追いかけるタイムライン</figcaption>
+</figure>
+<p>日本国内で皆既日食をこの目で見たいと考えているなら、正直に言って、次のチャンスまでにはまだ少し時間がかかります。本州で最後に皆既日食が起きたのは1887年、北海道でも1963年が最後で、2009年にトカラ列島や屋久島など離島の一部でようやく46年ぶりの皆既が観測されたものの、多くの地点はあいにくの梅雨空に阻まれてしまいました。</p>
+<p>しかし朗報もあります。<a href="https://ja.wikipedia.org/wiki/2035%E5%B9%B49%E6%9C%882%E6%97%A5%E3%81%AE%E6%97%A5%E9%A3%9F">次に日本で皆既日食が起こるのは2035年9月2日</a>で、これはそう遠い未来の話ではありません。能登半島付近から日本海側へ入り、富山市や長野市周辺を通過して、前橋市・宇都宮市・水戸市周辺まで抜けていく、北陸から北関東にかけての帯状のルートです。皆既帯の幅はおよそ100kmとされており、長野市周辺では皆既の継続時間が約2分12秒、しかも太陽高度は53度前後という好条件が重なります。皆既中は暗くなった太陽の左下に金星が輝いて見える可能性もあり、これも大きな見どころの一つです。</p>
+<p>一方で、東京23区や横浜市、名古屋市、大阪市、福岡市といった主要都市はいずれも皆既帯からわずかに外れており、部分日食にとどまります。皆既を見るには、能登から北関東にかけての帯の中に入る必要があるという点は、早いうちから意識しておく価値があります。2035年の皆既日食は、本州では実に148年ぶり、日本の陸地全体で見ても72年ぶりという、まさに一生に一度級のイベントです。</p>
+<p>2035年の後も、日食のチャンスは続きます。2030年6月1日には北海道を中心に金環日食が観測できる見込みで、本州北部でも部分日食として楽しめそうです。2035年のさらに先では、2042年4月20日に伊豆諸島の鳥島付近で、2063年8月24日には北海道南部から青森県周辺で、それぞれ皆既日食が起こる可能性があります。</p>
+<p>もちろん、2035年を待たずに海外へ出かけて皆既日食を体験するという選択肢も十分に現実的です。2026年8月12日には、アイスランドから北スペインにかけて、1999年以来となる欧州本土での皆既日食が起こります。2027年8月2日には、南スペインから北アフリカ、中東を横断する日食があり、場所によっては継続時間が6分を超える、21世紀でも屈指の長さの皆既となります。中でもエジプトのルクソール周辺は、晴天率の高さから理想的な観測地として注目されています。2028年7月22日には、オーストラリアとニュージーランドを日食が横断し、シドニーでは1857年以来はじめて皆既日食を体験することになります。</p>
+<p>このガイドで紹介した計画の立て方、エリアコミットの選び方、地形とアクセス性に基づく候補地の絞り込み、ストリートビューとStellariumによる事前シミュレーションは、どれも国際的な日食遠征にそのまま応用できます。羽田や関西空港からどこへ飛ぶにせよ、準備の進め方は変わりません。</p>
+<hr />
+<h2 id="付録1日食撮影のための参考資料">付録1：日食撮影のための参考資料</h2>
+<p>このガイドは観測地選びに主眼を置いており、機材やカメラ設定、撮影テクニックについては、すでに質の高い専門的な情報源が数多く存在します。皆既の瞬間を含めた日食撮影に関心がある方は、以下の海外サイトが詳しく信頼できる情報を提供しています。</p>
+<p><a href="https://www.mreclipse.com/SEphoto/SEphoto.html">Mr. Eclipse「How to Photograph a Total Solar Eclipse」</a></p>
+<p><a href="https://eclipse.aas.org/imaging-video/images-videos">American Astronomical Society「Imaging and Video」</a></p>
+<p><a href="https://www.space.com/how-to-photograph-a-solar-eclipse">Space.com「How to photograph a solar eclipse」</a></p>
+<p><a href="https://www.bhphotovideo.com/explora/photography/tips-and-solutions/how-to-photograph-a-solar-eclipse">B&amp;H Explora「How to Photograph a Solar Eclipse」</a></p>
+<p><a href="https://www.photopills.com/articles/total-solar-eclipse-2024-photography-guide">PhotoPills「Total Solar Eclipse Photography Guide」</a></p>
+<p><a href="https://photographylife.com/how-to-photograph-a-solar-eclipse">PhotographyLife「How to Photograph a Solar Eclipse」</a></p>
+<h2 id="付録2参考ツール一覧">付録2：参考ツール一覧</h2>
+<p>ここまでのガイドで紹介したツールをまとめました。いずれも無料、または無料プランのあるサービスです。</p>
+<p><a href="https://www.timeanddate.com/eclipse/">Timeanddate</a>、日食の経路、被覆率、皆既継続時間、地域ごとの平均雲量を確認できる中心的なツール。</p>
+<p><a href="https://eclipsophile.com/">Eclipsophile</a>、個々の日食に特化した気候・気象の専門解説サイト。</p>
+<p><a href="https://www.smappen.com">Smappen</a>、中心地点からの移動範囲を可視化し、KML形式の地理データを重ねられるツール。</p>
+<p><a href="http://xjubier.free.fr/en/site_pages/SolarEclipsesGoogleEarth.html">Xavier Jubierによる日食形状データ集</a>、1961年から2099年までのあらゆる日食に対応した、最も信頼できるKMZデータの提供元。</p>
+<p><a href="https://mygeodata.cloud/converter/kmz-to-kml">MyGeodata Converter</a>、KMZファイルをKML形式に変換するツール。</p>
+<p><a href="https://www.google.com/maps">Googleマップ</a>と<a href="https://www.google.com/earth/about/versions/">Google Earth Pro</a>、地形や障害物、ストリートビューの確認に使用。<a href="https://www.openstreetmap.org">OpenStreetMap</a>と照らし合わせるのもおすすめ。</p>
+<p><a href="https://downloadmapimage.com/360-dl/">Street View 360 Downloader</a>（DownloadMapImage.com）、インストール不要でストリートビューの360度画像をダウンロードできるオンラインツール。Stellariumでの風景再現に使用。</p>
+<p><a href="https://stellarium.org">Stellarium</a>、特定の地点・時刻における太陽と月の位置を事前にシミュレーションできる無料の天体シミュレーションソフト。</p>
+<p><a href="https://www.fcc.gov/media/radio/dms-decimal">FCCの座標変換ツール</a>、<a href="https://www.freemaptools.com/elevation-finder.htm">標高検索ツール</a>、<a href="https://www.sunearthtools.com/dp/tools/pos_earth.php">方位角測定ツール</a>、Stellariumに正確なデータを入力するために使用。</p>
+<p><a href="https://weather.us/model-charts/euro/usa/total-cloud-coverage.html">Weather.us</a>、イベント直前10日間で最も信頼できる短期雲予報ツール。世界中で利用可能。</p>
+<hr />
+<p><em>このガイドが、皆既日食観測地を自分で計画するための、明確なプロセスを提供できていれば幸いです。地理的なエリア選びから当日の最終判断まで、あなたの日食体験が忘れられないものになりますように。</em></p>
+
+</article>
+</div>
+
+<section class="final-cta">
+  <div class="container">
+    <h2>何年も待ち続けたその瞬間を、雲に奪われないために</h2>
+    <p>気になっている観測地の360度シミュレーションを、飛行機やホテルが埋まってしまう前に、今日から始めてみませんか。</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="https://downloadmapimage.com/360-dl/" target="_blank" rel="noopener">Street View 360 Downloaderを使う</a>
+      <a class="btn btn-ghost" href="https://downloadmapimage.com" target="_blank" rel="noopener">ほかのツールも見る</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <a class="wordmark" href="https://downloadmapimage.com" style="font-size:0.95em;">Download<span style="color:var(--corona);">Map</span>Image</a>
+    <div class="foot-links">
+      <a href="https://downloadmapimage.com/360-dl/" target="_blank" rel="noopener">Street View 360 Downloader</a>
+      <a href="#パート1遠隔地の下見をする">日食観測ガイド</a>
+      <a href="https://downloadmapimage.com" target="_blank" rel="noopener">トップページ</a>
+    </div>
+    <div class="copyright">© 2026 DownloadMapImage.com ・ 本記事は参考情報です。太陽を観察する際は必ず認証済みの日食観測用メガネをご使用ください。</div>
+  </div>
+</footer>
+
+</body>
+</html>

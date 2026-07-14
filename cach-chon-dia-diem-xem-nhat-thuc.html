@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cách Chọn Địa Điểm Xem Nhật Thực: Hướng Dẫn Toàn Diện</title>
+<meta name="description" content="Hướng dẫn toàn diện cách chọn địa điểm xem nhật thực toàn phần, từ trinh sát khu vực, mô phỏng bằng Street View và Stellarium, đến chốt địa điểm ngày sự kiện.">
+<style>
+  :root {
+    --bg: #0b1229;
+    --bg-soft: #10182f;
+    --panel: #141c3a;
+    --border: #2a355c;
+    --text: #e7ecf7;
+    --text-dim: #a9b3cf;
+    --gold: #ffdb7a;
+    --gold-soft: #f4ead0;
+    --link: #7fd3ff;
+    --link-hover: #ffdb7a;
+    --max-width: 800px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(180deg, #070b1a 0%, #0b1229 400px, #0d1430 100%);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.75;
+    font-size: 17px;
+  }
+
+  .stars {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      radial-gradient(1px 1px at 20px 30px, #ffffff55, transparent),
+      radial-gradient(1px 1px at 120px 80px, #ffffff33, transparent),
+      radial-gradient(1.5px 1.5px at 220px 40px, #ffffff44, transparent),
+      radial-gradient(1px 1px at 320px 120px, #ffffff33, transparent),
+      radial-gradient(1.5px 1.5px at 400px 60px, #ffffff55, transparent),
+      radial-gradient(1px 1px at 500px 160px, #ffffff33, transparent),
+      radial-gradient(1px 1px at 600px 90px, #ffffff44, transparent),
+      radial-gradient(1.5px 1.5px at 700px 30px, #ffffff33, transparent);
+    background-repeat: repeat;
+    background-size: 800px 300px;
+    opacity: 0.6;
+  }
+
+  .wrap {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 56px 20px 100px;
+  }
+
+  header.hero {
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 2.1em;
+    line-height: 1.3;
+    color: var(--gold-soft);
+    margin: 0 0 6px;
+    letter-spacing: 0.2px;
+  }
+
+  h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.5em;
+    color: var(--gold-soft);
+    margin-top: 2.4em;
+    margin-bottom: 0.6em;
+    padding-top: 0.4em;
+    border-top: 1px solid var(--border);
+  }
+
+  h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.2em;
+    color: #cdd8f5;
+    margin-top: 1.8em;
+    margin-bottom: 0.5em;
+  }
+
+  p {
+    margin: 0 0 1.1em;
+    color: var(--text);
+  }
+
+  em {
+    color: var(--text-dim);
+  }
+
+  a {
+    color: var(--link);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(127, 211, 255, 0.35);
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  a:hover {
+    color: var(--link-hover);
+    border-color: rgba(255, 219, 122, 0.6);
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.6em 0;
+  }
+
+  .img-wrap {
+    margin: 1.8em 0;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 6px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+  }
+
+  .img-wrap svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+
+  strong {
+    color: #fff3d6;
+  }
+
+  ul, ol {
+    padding-left: 1.4em;
+    margin-bottom: 1.1em;
+  }
+
+  li {
+    margin-bottom: 0.4em;
+  }
+
+  .updated-badge {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 5px 14px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.8em;
+    color: var(--text-dim);
+    letter-spacing: 0.3px;
+  }
+
+  .safety-box {
+    background: rgba(255, 219, 122, 0.06);
+    border-left: 3px solid var(--gold);
+    padding: 1px 22px;
+    border-radius: 4px;
+  }
+
+  .top-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 44px 0 0;
+  }
+
+  footer.site-footer {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.9em;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  footer.site-footer a {
+    color: var(--gold);
+  }
+
+  ::selection {
+    background: rgba(255, 219, 122, 0.3);
+  }
+
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    h1 { font-size: 1.6em; }
+    h2 { font-size: 1.3em; }
+    .wrap { padding: 36px 16px 70px; }
+  }
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<div class="wrap">
+<article>
+<h1 id="cách-chọn-địa-điểm-xem-nhật-thực-hướng-dẫn-toàn-diện-từ-trinh-sát-ảo-đến-ngày-diễn-ra-sự-kiện">Cách Chọn Địa Điểm Xem Nhật Thực: Hướng Dẫn Toàn Diện Từ Trinh Sát Ảo Đến Ngày Diễn Ra Sự Kiện</h1>
+<p><em>Cập nhật: tháng 7 năm 2026</em></p>
+<figure>
+<div class="img-wrap" role="img" aria-label="Các pha của một lần nhật thực toàn phần"><svg viewBox="0 0 1000 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a1128"/>
+      <stop offset="100%" stop-color="#1b2a4a"/>
+    </linearGradient>
+    <radialGradient id="corona" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff7d6" stop-opacity="0.95"/>
+      <stop offset="35%" stop-color="#ffe9a8" stop-opacity="0.55"/>
+      <stop offset="70%" stop-color="#ffdb7a" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#ffdb7a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff4c2"/>
+      <stop offset="60%" stop-color="#ffcf4d"/>
+      <stop offset="100%" stop-color="#ff9d2f"/>
+    </radialGradient>
+  </defs>
+  <rect width="1000" height="320" fill="url(#sky)"/>
+  <text x="500" y="40" text-anchor="middle" font-family="Georgia, serif" font-size="24" fill="#f4ead0">Các pha của một lần nhật thực toàn phần</text>
+
+  <!-- Phase 1: full sun -->
+  <g transform="translate(100,170)">
+    <circle r="42" fill="url(#sunGlow)"/>
+    <text y="80" text-anchor="middle" font-family="Arial" font-size="16" fill="#cfd6e8">Trước nhật thực</text>
+  </g>
+
+  <!-- Phase 2: partial -->
+  <g transform="translate(300,170)">
+    <circle r="42" fill="url(#sunGlow)"/>
+    <circle cx="18" cy="-14" r="42" fill="#0a1128"/>
+    <text y="80" text-anchor="middle" font-family="Arial" font-size="16" fill="#cfd6e8">Pha một phần</text>
+  </g>
+
+  <!-- Phase 3: diamond ring -->
+  <g transform="translate(500,170)">
+    <circle r="40" fill="#0a1128" stroke="#ffdb7a" stroke-width="3"/>
+    <circle cx="34" cy="-18" r="7" fill="#fff7d6"/>
+    <text y="80" text-anchor="middle" font-family="Arial" font-size="16" fill="#cfd6e8">Hạt Baily / nhẫn kim cương</text>
+  </g>
+
+  <!-- Phase 4: totality -->
+  <g transform="translate(700,170)">
+    <circle r="70" fill="url(#corona)"/>
+    <circle r="38" fill="#05070f"/>
+    <text y="95" text-anchor="middle" font-family="Arial" font-size="16" fill="#cfd6e8">Toàn phần, thấy vành nhật hoa</text>
+  </g>
+
+  <!-- Phase 5: partial again -->
+  <g transform="translate(900,170)">
+    <circle r="42" fill="url(#sunGlow)"/>
+    <circle cx="-18" cy="14" r="42" fill="#0a1128"/>
+    <text y="80" text-anchor="middle" font-family="Arial" font-size="16" fill="#cfd6e8">Sau toàn phần</text>
+  </g>
+
+  <line x1="60" y1="250" x2="940" y2="250" stroke="#3a4a72" stroke-width="1" stroke-dasharray="4 4"/>
+</svg></div>
+<figcaption aria-hidden="true">Các pha của một lần nhật thực toàn phần</figcaption>
+</figure>
+<h2 id="lưu-ý-an-toàn-trước-khi-bắt-đầu">Lưu ý an toàn trước khi bắt đầu</h2>
+<p>Được tận mắt chứng kiến một lần nhật thực toàn phần chắc chắn là một trong những trải nghiệm đáng nhớ nhất đời người, nhưng đi kèm với nó là rủi ro thật sự cho đôi mắt của bạn. Xin hãy hết sức cẩn trọng khi quan sát và chụp ảnh mặt trời.</p>
+<p>Bài viết này chỉ là một cẩm nang tham khảo, không thể thay thế cho sự thận trọng thông thường. Dù mặt trời đã bị che khuất tới 99,9%, bạn vẫn tuyệt đối không được nhìn thẳng vào nó nếu không có kính bảo hộ chuyên dụng. Chỉ duy nhất trong khoảnh khắc ngắn ngủi của pha toàn phần, khi mặt trời bị che kín hoàn toàn, bạn mới được phép bỏ kính ra nhìn bằng mắt thường.</p>
+<p>Một điều cũng cần nhớ là việc quan sát mặt trời (kể cả khi đã bị che khuất một phần) qua ống kính tele hoặc kính thiên văn, kể cả khi đã lắp kính lọc mặt trời đúng chuẩn, sẽ làm tăng đáng kể nguy cơ tổn thương mắt vĩnh viễn nếu có bất kỳ sơ suất nào. Hãy để trải nghiệm này trở thành kỷ niệm đẹp vì những lý do đúng đắn.</p>
+<p>Hướng dẫn này chủ yếu viết cho nhật thực toàn phần, nhưng phần lớn nội dung cũng áp dụng được cho nhật thực hình khuyên (khi mặt trăng không che kín hoàn toàn mặt trời, để lại một vành sáng hình chiếc nhẫn), nhật thực lai (một sự kiện có thể là toàn phần hoặc hình khuyên tùy vị trí quan sát) và, ở mức độ thấp hơn, nhật thực một phần. Bài viết không dành cho nguyệt thực.</p>
+<hr />
+<h2 id="vì-sao-việc-lập-kế-hoạch-lại-quan-trọng-đến-vậy">Vì sao việc lập kế hoạch lại quan trọng đến vậy</h2>
+<p>Nhật thực toàn phần là hiện tượng cực kỳ hiếm gặp nếu nhìn từ góc độ của một người quan sát cố định trên mặt đất. Kể từ đầu năm 2000 đến nay, thế giới chỉ chứng kiến khoảng mười bảy lần nhật thực toàn phần. Trong số đó có ba lần rơi vào những vùng cực Bắc hoặc Nam gần như không thể tiếp cận, một lần diễn ra cuối năm 2020 giữa lúc đại dịch Covid hoành hành khiến gần như chỉ những ai đang ở sẵn Chile hoặc Argentina mới xem được, và hai lần khác nằm sâu trong những vùng hẻo lánh của Trung Phi. Như vậy chỉ còn lại khoảng mười hai lần nhật thực toàn phần thực sự “dễ tiếp cận” trong hơn hai thập kỷ qua, và ngay cả khi có đủ tiền bạc lẫn quyết tâm để bay đến tất cả những nơi đó, tổng thời gian bạn được đắm mình trong bóng tối của mặt trăng cũng chỉ vỏn vẹn chưa đầy một giờ đồng hồ cộng dồn lại.</p>
+<p>Với người Việt Nam, con số này còn khắc nghiệt hơn nhiều. Lần cuối cùng cả nước được chứng kiến nhật thực toàn phần là vào năm 1995, khi bầu trời giữa trưa bỗng âm u lạ thường dù không tối sầm hẳn. Theo các nhà thiên văn nghiệp dư trong nước, phải đến tận ngày 11 tháng 4 năm 2070 người dân sống ở Việt Nam mới có cơ hội chứng kiến lại một lần nhật thực toàn phần ngay trên quê hương mình. Nói cách khác, nếu muốn tận mắt xem một lần toàn phần trong đời, phần lớn chúng ta buộc phải xách vali ra nước ngoài.</p>
+<p>Chính vì totality (khoảnh khắc toàn phần) quá ngắn ngủi và quá hiếm, sai lầm tệ nhất bạn có thể mắc phải là đứng ở một nơi có mây dày đặc, bị núi đồi hay nhà cửa che khuất tầm nhìn, hoặc lúng túng lái xe vòng vòng vào phút chót rồi lỡ mất khoảnh khắc quan trọng nhất. Mục tiêu của bài viết này là trang bị cho bạn một quy trình lập kế hoạch rõ ràng, từ việc chọn vùng địa lý phù hợp, xây dựng danh sách các điểm quan sát tiềm năng, mô phỏng trước cảnh tượng sẽ nhìn thấy, cho đến việc chốt địa điểm cuối cùng ngay trong ngày diễn ra sự kiện.</p>
+<p>Nếu bạn đi theo một tour du lịch đã sắp sẵn địa điểm và chỉ muốn hình dung trước quang cảnh sẽ trông ra sao, bạn có thể bỏ qua hai phần đầu và nhảy thẳng đến Phần Ba, phần nói về mô phỏng nhật thực.</p>
+<figure>
+<div class="img-wrap" role="img" aria-label="Bốn bước lập kế hoạch xem nhật thực"><svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0b1229"/>
+      <stop offset="100%" stop-color="#1a2547"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="300" fill="url(#bg3)"/>
+  <text x="500" y="40" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#f4ead0">Bốn bước lập kế hoạch xem nhật thực</text>
+
+  <line x1="110" y1="150" x2="890" y2="150" stroke="#3a4a72" stroke-width="2" stroke-dasharray="6 6"/>
+
+  <!-- step 1 -->
+  <g transform="translate(140,150)">
+    <circle r="46" fill="#20305c" stroke="#ffdb7a" stroke-width="2"/>
+    <text y="7" text-anchor="middle" font-family="Arial" font-size="26" fill="#ffdb7a">1</text>
+    <text y="80" text-anchor="middle" font-family="Arial" font-size="15" fill="#e5eaf7">Trinh sát khu vực</text>
+    <text y="100" text-anchor="middle" font-family="Arial" font-size="12" fill="#8fa0c9">Mây, độ che phủ, cam kết khu vực</text>
+  </g>
+
+  <!-- step 2 -->
+  <g transform="translate(380,150)">
+    <circle r="46" fill="#20305c" stroke="#ffdb7a" stroke-width="2"/>
+    <text y="7" text-anchor="middle" font-family="Arial" font-size="26" fill="#ffdb7a">2</text>
+    <text y="80" text-anchor="middle" font-family="Arial" font-size="15" fill="#e5eaf7">Lập danh sách điểm</text>
+    <text y="100" text-anchor="middle" font-family="Arial" font-size="12" fill="#8fa0c9">Địa hình, khả năng tiếp cận</text>
+  </g>
+
+  <!-- step 3 -->
+  <g transform="translate(620,150)">
+    <circle r="46" fill="#20305c" stroke="#ffdb7a" stroke-width="2"/>
+    <text y="7" text-anchor="middle" font-family="Arial" font-size="26" fill="#ffdb7a">3</text>
+    <text y="80" text-anchor="middle" font-family="Arial" font-size="15" fill="#e5eaf7">Mô phỏng nhật thực</text>
+    <text y="100" text-anchor="middle" font-family="Arial" font-size="12" fill="#8fa0c9">Street View 360 + Stellarium</text>
+  </g>
+
+  <!-- step 4 -->
+  <g transform="translate(860,150)">
+    <circle r="46" fill="#20305c" stroke="#ffdb7a" stroke-width="2"/>
+    <text y="7" text-anchor="middle" font-family="Arial" font-size="26" fill="#ffdb7a">4</text>
+    <text y="80" text-anchor="middle" font-family="Arial" font-size="15" fill="#e5eaf7">Chốt địa điểm</text>
+    <text y="100" text-anchor="middle" font-family="Arial" font-size="12" fill="#8fa0c9">Dự báo mây ngắn hạn</text>
+  </g>
+</svg></div>
+<figcaption aria-hidden="true">Bốn bước lập kế hoạch xem nhật thực</figcaption>
+</figure>
+<hr />
+<h2 id="phần-một-trinh-sát-khu-vực-từ-xa">Phần Một: Trinh Sát Khu Vực Từ Xa</h2>
+<figure>
+<div class="img-wrap" role="img" aria-label="Vì sao chỉ một dải hẹp trên Trái Đất thấy được toàn phần"><svg viewBox="0 0 1000 420" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sunG" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#fff4c2"/>
+      <stop offset="100%" stop-color="#ff9d2f"/>
+    </radialGradient>
+    <radialGradient id="earthG" cx="35%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#7fb8e0"/>
+      <stop offset="100%" stop-color="#2c5f8a"/>
+    </radialGradient>
+    <radialGradient id="moonG" cx="35%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#e6e6ec"/>
+      <stop offset="100%" stop-color="#9a9aa8"/>
+    </radialGradient>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1229"/>
+      <stop offset="100%" stop-color="#141c3a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="420" fill="url(#bg2)"/>
+  <text x="500" y="42" text-anchor="middle" font-family="Georgia, serif" font-size="24" fill="#f4ead0">Vì sao chỉ một dải hẹp trên Trái Đất thấy được toàn phần</text>
+
+  <circle cx="140" cy="220" r="90" fill="url(#sunG)"/>
+  <text x="140" y="330" text-anchor="middle" font-family="Arial" font-size="16" fill="#cfd6e8">Mặt Trời</text>
+
+  <circle cx="560" cy="220" r="22" fill="url(#moonG)"/>
+  <text x="560" y="260" text-anchor="middle" font-family="Arial" font-size="16" fill="#cfd6e8">Mặt Trăng</text>
+
+  <circle cx="850" cy="220" r="55" fill="url(#earthG)"/>
+  <text x="850" y="292" text-anchor="middle" font-family="Arial" font-size="16" fill="#cfd6e8">Trái Đất</text>
+
+  <!-- umbra cone -->
+  <path d="M 230 190 L 560 210 L 640 220 L 560 230 L 230 250 Z" fill="#05070f" opacity="0.85"/>
+  <!-- penumbra -->
+  <path d="M 210 130 L 560 205 L 900 218 L 560 235 L 210 310 Z" fill="#ffdb7a" opacity="0.12"/>
+
+  <text x="700" y="150" text-anchor="middle" font-family="Arial" font-size="14" fill="#a9b3cf">Vùng nửa tối (nhật thực một phần)</text>
+  <line x1="800" y1="200" x2="825" y2="212" stroke="#a9b3cf" stroke-width="1"/>
+
+  <text x="640" y="270" text-anchor="middle" font-family="Arial" font-size="14" fill="#ffdb7a">Dải bóng tối hẹp (nhật thực toàn phần)</text>
+  <line x1="700" y1="230" x2="660" y2="222" stroke="#ffdb7a" stroke-width="1"/>
+
+  <text x="500" y="380" text-anchor="middle" font-family="Arial" font-size="15" fill="#8fa0c9">Bóng của Mặt Trăng chỉ quét qua một dải đất hẹp, đó là lý do vị trí quan sát quyết định tất cả</text>
+</svg></div>
+<figcaption aria-hidden="true">Vì sao chỉ một dải hẹp trên Trái Đất thấy được toàn phần</figcaption>
+</figure>
+<p>Trước khi bàn đến công cụ, cần hiểu vì sao vị trí đứng lại quan trọng đến vậy. Mặt trăng nhỏ hơn Trái Đất rất nhiều, nên khi nó lướt qua giữa Trái Đất và Mặt Trời, bóng tối đặc (umbra) của nó chỉ quét qua một dải đất hẹp, thường chỉ rộng vài chục đến hơn một trăm ki lô mét. Đứng ngoài dải đó dù chỉ vài ki lô mét, bạn cũng sẽ chỉ thấy nhật thực một phần chứ không bao giờ thấy được vành nhật hoa và bầu trời tối sầm giữa ban ngày. Đây chính là lý do vì sao việc chọn đúng địa điểm quan trọng hơn nhiều so với hầu hết các hiện tượng thiên văn khác.</p>
+<p>Bước đầu tiên khi lên kế hoạch xem hoặc chụp ảnh nhật thực toàn phần là xác định nên đi đến vùng nào trên bản đồ. Việc tự lên kế hoạch đòi hỏi nhiều công sức hơn so với đi tour, nhưng đổi lại bạn có sự linh hoạt cao nhất và xác suất thành công lớn nhất. Theo tôi, công sức đó hoàn toàn xứng đáng.</p>
+<p>Quy trình chọn địa điểm có thể chia thành ba giai đoạn: trinh sát khu vực từ xa (giúp bạn khoanh vùng địa lý phù hợp với nhu cầu), lập danh sách điểm quan sát cụ thể trong vùng đó, và cuối cùng là chốt địa điểm dựa trên dữ liệu cập nhật ngay sát ngày diễn ra sự kiện. Hãy bắt đầu với yếu tố quan trọng số một trong việc xem và chụp ảnh nhật thực toàn phần, đó là thời tiết.</p>
+<h3 id="dự-báo-mây-dài-hạn">Dự báo mây dài hạn</h3>
+<p>Có lẽ không cần giải thích nhiều về việc mây gây phiền toái như thế nào cho những ai muốn xem hoặc chụp ảnh nhật thực toàn phần. May mắn là có khá nhiều công cụ giúp chúng ta đối phó với kẻ thù mây mù này.</p>
+<p>Công cụ trực quan tốt nhất mà tôi từng dùng là <a href="https://www.timeanddate.com/eclipse/">cổng thông tin nhật thực của timeanddate.com</a>. Trang này liệt kê tất cả các lần nhật thực sắp tới, và bạn chỉ cần quan tâm đến phần nhật thực mặt trời. Chọn một sự kiện cụ thể, ví dụ như <a href="https://www.timeanddate.com/eclipse/solar/2026-august-12">trang dành riêng cho lần nhật thực toàn phần ngày 12 tháng 8 năm 2026</a> sẽ diễn ra qua Iceland và Tây Ban Nha, bạn sẽ thấy đường đi của nhật thực cùng phần trăm mặt trời bị che khuất được thể hiện trực quan trên bản đồ, bao gồm cả dải toàn phần.</p>
+<p>Trang này hoạt động tương tự với nhật thực hình khuyên, nhật thực lai và nhật thực một phần, cho bạn biết mức độ che phủ mặt trời theo từng vị trí và thời điểm.</p>
+<p>Khi bạn nhấp vào bản đồ, cửa sổ thông tin hiện lên sẽ cho bạn biết loại nhật thực (toàn phần hay một phần), độ che khuất (obscuration, tức phần trăm diện tích mặt trời bị che), cấp độ (magnitude, tỷ lệ đường kính mặt trăng che phủ mặt trời, luôn từ 1,0 trở lên với nhật thực toàn phần), thời lượng của nhật thực nói chung và thời lượng riêng của pha toàn phần, thời điểm bắt đầu và kết thúc, cùng dữ liệu mây trung bình theo lịch sử. Bạn cũng có thể gõ tìm một địa điểm cụ thể nếu muốn.</p>
+<p>Một điều đáng lưu ý là càng đi ra gần rìa dải toàn phần, thời lượng toàn phần càng giảm rất nhanh. Vì vậy nên ưu tiên những vị trí càng gần đường trung tâm (centerline) của dải toàn phần càng tốt, vì đó là nơi thời gian toàn phần kéo dài lâu nhất.</p>
+<p>Ba con số quan trọng nhất bạn cần quan tâm là độ che khuất hoặc cấp độ, tỷ lệ mây, và thời lượng toàn phần. Muốn có cơ hội tốt nhất để chứng kiến pha toàn phần, bạn cần ba điều: thứ nhất là độ che khuất đạt 100% hoặc cấp độ từ 1,0 trở lên, thứ hai là tỷ lệ mây trung bình càng thấp càng tốt, và thứ ba, nếu có thể, hãy chọn nơi càng gần đường trung tâm của dải toàn phần để có thời lượng dài nhất.</p>
+<p>Cần lưu ý rằng dữ liệu mây dài hạn trên bất kỳ trang web nào, kể cả timeanddate, đều chỉ là số liệu thống kê trung bình nhiều năm, không phản ánh chính xác thời tiết thực tế của đúng ngày bạn định đi xem. Những dự báo mây thực sự đáng tin cậy chỉ xuất hiện trong vài ngày sát sự kiện, điều chúng ta sẽ bàn kỹ hơn ở Phần Bốn.</p>
+<p>Ngoài timeanddate, một trang chuyên sâu về thời tiết cho nhật thực rất đáng tham khảo là <a href="https://eclipsophile.com/">Eclipsophile</a>, nơi thường phân tích khí hậu theo từng khu vực cụ thể lẫn những rủi ro như dông bão hay lốc xoáy vào đúng mùa diễn ra sự kiện.</p>
+<h3 id="ba-kiểu-cam-kết-khu-vực">Ba kiểu cam kết khu vực</h3>
+<p>Rất khó để chờ đến sát ngày mới đặt vé máy bay, thuê xe hay đặt khách sạn, nên dựa trên hoàn cảnh cá nhân và dữ liệu mây dài hạn, bạn cần chốt trước ít nhất một vùng địa lý có khả năng nhìn thấy toàn phần. Tôi gọi đây là “cam kết khu vực”. Nhìn chung có ba kiểu cam kết khu vực phổ biến.</p>
+<p>Kiểu thứ nhất là cam kết theo “điều kiện quan sát tốt nhất”, tức bạn di chuyển đến đoạn nào trên dải toàn phần có sự cân bằng tốt nhất giữa thời lượng toàn phần và tỷ lệ mây trung bình thấp. Kiểu thứ hai là cam kết theo “điểm đến”, nghĩa là bạn chọn một địa điểm cụ thể vì nhiều lý do khác như sự thuận tiện, an toàn, có người quen ở đó, hoặc muốn kết hợp du lịch tham quan. Kiểu thứ ba là cam kết “gần nhà”, tức bạn quyết định xem nhật thực trong phạm vi gần nơi mình đang sinh sống, dĩ nhiên chỉ áp dụng được nếu nhà bạn nằm trong hoặc gần dải toàn phần.</p>
+<p>Mỗi lựa chọn đều có lý do riêng. Ví dụ, với lần nhật thực năm 2024 ở Bắc Mỹ, một trong những nơi có điều kiện quan sát tốt nhất là bang Sinaloa của Mexico, nơi bạn có thể bay xuống Mazatlan để xem từ bãi biển với xác suất mây chỉ khoảng 28%, nhưng cũng có người ngần ngại vì khu vực này gắn liền với hoạt động của các băng nhóm tội phạm nên chọn nơi khác dù xác suất trời quang thấp hơn. Có những lần nhật thực buộc bạn phải chọn theo kiểu “điểm đến” vì dải toàn phần quá hẹp, chẳng hạn lần nhật thực năm 2023 chỉ chạy qua những vùng đất rất nhỏ ở Australia, Đông Timor và Indonesia. Cũng có trường hợp bạn sống ngay trong dải toàn phần nhưng khu vực đó lại có tỷ lệ mây rất cao, buộc bạn phải cân nhắc rời khỏi nhà để đi tìm vùng trời quang hơn, hoặc chấp nhận ở lại và đánh cược.</p>
+<p>Cũng cần biết rằng đôi khi yếu tố mây gần như không còn là vấn đề đáng lo, chẳng hạn phần lớn dải toàn phần của lần nhật thực năm 2027 (đi qua khu vực nam Tây Ban Nha, Bắc Phi và Trung Đông) thường có xác suất trời quang rất cao.</p>
+<p>Suy cho cùng, chỉ có bạn mới có thể quyết định kiểu cam kết khu vực nào phù hợp nhất với hoàn cảnh và ngân sách của mình.</p>
+<h3 id="tổng-kết-phần-một">Tổng kết Phần Một</h3>
+<p>Đến đây, bạn nên đã biết cách xem thông tin nhật thực trên timeanddate và tìm dữ liệu địa lý bằng cách nhấp vào bản đồ sự kiện, hiểu được ba yếu tố quan trọng nhất khi chọn địa điểm xem nhật thực gồm độ che khuất, mây và thời lượng toàn phần, đồng thời nắm được ba kiểu cam kết khu vực để chọn ra hướng đi phù hợp với nhu cầu của mình.</p>
+<hr />
+<h2 id="phần-hai-lập-danh-sách-các-điểm-quan-sát-tiềm-năng">Phần Hai: Lập Danh Sách Các Điểm Quan Sát Tiềm Năng</h2>
+<p>Hãy tưởng tượng vào đúng ngày nhật thực, bạn thức dậy trong khách sạn hoặc ở nhà, trong tay đã có sẵn danh sách những địa điểm xem nhật thực tiềm năng. Với mỗi nơi, bạn đã biết trước nó trông như thế nào, nhật thực sẽ bắt đầu và kết thúc lúc mấy giờ, mặt trời sẽ nằm ở đâu trên bầu trời lúc toàn phần, thậm chí đã lường trước những trở ngại như vật cản tầm nhìn hay chỗ đậu xe. Điều đặc biệt là bạn chưa từng đặt chân thực tế đến bất kỳ nơi nào trong số đó.</p>
+<p>Nếu bạn đã đọc qua Phần Một, hẳn bạn đã hiểu vì sao cần chọn một cam kết khu vực trước tiên. Trong phần này, chúng ta sẽ thu hẹp cam kết khu vực đó xuống thành một số địa điểm quan sát cụ thể, sau đó xây dựng hồ sơ chi tiết cho từng nơi để bạn có đầy đủ dữ liệu cần thiết trước khi ngày trọng đại đến.</p>
+<p>Quy trình này cũng áp dụng tốt cho các loại nhật thực khác, đặc biệt hữu ích khi lên kế hoạch cho nhật thực hình khuyên, loại sự kiện thường được kết hợp với bố cục phong cảnh trong nhiếp ảnh.</p>
+<p>Trước khi đi vào chi tiết công cụ, tôi muốn nhấn mạnh một điều: không có gì trong tự nhiên có thể so sánh được với một lần nhật thực toàn phần, và khoảng cách giữa mặt trời bị che 99% với mặt trời bị che 100% là một trời một vực. Nếu có điều kiện, hãy dồn hết công sức để đến được vùng toàn phần, vì đó là khoảnh khắc bạn sẽ nhớ mãi.</p>
+<h3 id="tầm-quan-trọng-của-sự-linh-hoạt-trong-ngày-diễn-ra-sự-kiện">Tầm quan trọng của sự linh hoạt trong ngày diễn ra sự kiện</h3>
+<p>Sau khi đã chọn cam kết khu vực dựa trên hoàn cảnh và mức độ chấp nhận rủi ro mây của mình, yếu tố quan trọng nhất từ đây trở đi chính là sự linh hoạt vào chính ngày nhật thực. Như đã nói ở trên, chỉ những dự báo mây được cập nhật trong vài ngày sát sự kiện mới thực sự đáng tin. Rất có thể trong 24 giờ cuối cùng bạn sẽ phải điều chỉnh lại điểm quan sát ưu tiên của mình.</p>
+<h3 id="xây-dựng-danh-sách-điểm-quan-sát-dựa-trên-một-vị-trí-trung-tâm">Xây dựng danh sách điểm quan sát dựa trên một vị trí trung tâm</h3>
+<p>Phần này đòi hỏi bạn bỏ ra thêm chút công sức, nhưng không có gì quá khó và tôi sẽ hướng dẫn từng bước.</p>
+<p>Trước tiên, hãy làm quen với <a href="https://www.smappen.com">Smappen</a>, một công cụ giúp trực quan hóa những khu vực bạn có thể lái xe đến được từ một điểm xuất phát trong khoảng thời gian nhất định, tối đa ba giờ đồng hồ. Đăng ký một tài khoản miễn phí, vào phần bản đồ, và tìm nút “Add an area” để bắt đầu vẽ vùng di chuyển.</p>
+<p>Một trong những tính năng hay ho của Smappen là khả năng chồng lớp dữ liệu địa lý dạng KML lên bản đồ. Với mục đích lập kế hoạch nhật thực, chúng ta sẽ chồng lớp bản đồ dải toàn phần của sự kiện mà mình quan tâm. <a href="http://xjubier.free.fr/en/site_pages/SolarEclipsesGoogleEarth.html">Bộ sưu tập file hình học nhật thực</a> đầy đủ nhất mà tôi biết đến hiện nay là của Xavier Jubier, người đã tổng hợp dữ liệu từ năm 1961 cho đến tận năm 2099. Tải file KMZ tương ứng với sự kiện bạn cần, sau đó vì Smappen không đọc được định dạng KMZ, bạn cần chuyển đổi nó sang KML bằng công cụ chuyển đổi trực tuyến miễn phí như <a href="https://mygeodata.cloud/converter/kmz-to-kml">MyGeodata Converter</a>.</p>
+<p>Sau khi có file KML, quay lại Smappen và kéo thả file này lên bản đồ, dải toàn phần sẽ hiện ra ngay lập tức. Chọn một thành phố nằm trong dải toàn phần, thiết lập khoảng thời gian lái xe mong muốn, và bạn sẽ thấy rõ những khu vực mình có thể tiếp cận trong khung giờ đó vẫn nằm trong dải toàn phần hay không.</p>
+<p>Bạn cũng có thể dùng công cụ này để xác định phạm vi có thể di chuyển đến trong ba giờ nếu xuất phát ngay từ nhà vào chính ngày diễn ra sự kiện.</p>
+<p>So sánh lớp phủ này với dữ liệu mây trên timeanddate để xem có khu vực nào gần đó có xác suất mây thấp hơn mà bạn có thể tiếp cận được nếu cần đổi kế hoạch vào phút chót hay không.</p>
+<p>Trong một thế giới lý tưởng, tất cả chúng ta đều muốn ở khách sạn càng gần đường trung tâm toàn phần càng tốt và ở vùng ít mây. Nhưng thực tế, nơi lý tưởng để xem nhật thực lại thường là vùng có mật độ khách sạn thấp, buộc bạn phải ở rìa dải toàn phần trong một thành phố lớn hơn với giá phòng dễ chịu hơn. Đây cũng là kinh nghiệm thực tế của nhiều người xem nhật thực năm 2017 ở Mỹ, khi khách sạn tại vùng nông thôn Nebraska gần như hết sạch và giá tăng vọt, khiến nhiều người phải ở tận Rapid City, bang South Dakota, cách đó khá xa.</p>
+<p>Việc ở rìa dải toàn phần sẽ tất nhiên thu hẹp số lượng địa điểm tiềm năng trong tầm với của bạn. Đây có phải là sự đánh đổi bạn sẵn lòng chấp nhận, hay bạn buộc phải chấp nhận nó vì lý do kinh tế hoặc vì khách sạn không còn phòng? Lớp phủ trên Smappen sẽ giúp bạn nhìn rõ hơn sự đánh đổi này. Nhưng còn một yếu tố quan trọng khác chưa nhắc đến, đó là địa hình.</p>
+<h3 id="hướng-và-độ-cao-của-mặt-trời-khi-diễn-ra-nhật-thực">Hướng và độ cao của mặt trời khi diễn ra nhật thực</h3>
+<p>Ở Phần Một, tôi có nhắc đến nút phát màu xanh trên trang timeanddate và bảo bạn hãy nhớ lấy để dùng sau. Giờ chính là lúc dùng đến nó. Nhấp vào bất kỳ vị trí nào trong dải toàn phần trên bản đồ sự kiện, sau đó nhấn nút phát màu xanh, bạn sẽ được đưa đến một trang dữ liệu chi tiết. Thông tin quan trọng nhất ở đây là hướng và độ cao của mặt trời tại thời điểm toàn phần.</p>
+<p>Tùy vào vị trí bạn chọn, hướng mặt trời thường dao động đâu đó giữa đông nam (135 độ) và tây nam (225 độ), còn độ cao có thể trải dài từ khoảng 24 độ đến gần 70 độ tùy khu vực địa lý và mùa xảy ra sự kiện. Điều này có ý nghĩa thực tiễn rất lớn, vì để nhìn thấy toàn phần bạn cần một vị trí hướng về phía có mặt trời và không bị vật cản nào che khuất phía trên độ cao đó. Nếu mặt trời ở vị trí thấp gần đường chân trời, bạn sẽ cần một khoảng không thoáng đãng rộng hơn nhiều so với khi mặt trời ở trên cao, và độ cao càng thấp thì mây cùng sương mù khí quyển càng dễ ảnh hưởng đến tầm nhìn của bạn.</p>
+<p>Rất nhiều địa điểm bạn có thể tiếp cận trên lớp phủ Smappen sẽ có một vật cản nào đó khiến nơi ấy không còn phù hợp nữa. Chúng ta sẽ giải quyết vấn đề này ở bước tiếp theo, bước cuối cùng trong việc lập danh sách điểm quan sát tiềm năng.</p>
+<h3 id="địa-hình-và-các-vật-cản-khác">Địa hình và các vật cản khác</h3>
+<p>Tôi xem việc lập danh sách địa điểm tiềm năng là một quá trình loại trừ hơn là bổ sung, tức bạn nên bắt đầu với một mạng lưới thật rộng (trong trường hợp này là toàn bộ dải toàn phần) rồi dần loại bỏ những khu vực không phù hợp cho đến khi còn lại một số lượng địa điểm vừa đủ để quản lý.</p>
+<p>Địa hình là yếu tố đầu tiên cần xét đến, và may mắn là nó khá thuận tiện để phân tích vì không giống mây, địa hình gần như cố định không thay đổi. Điều bất tiện là bản đồ Smappen phiên bản miễn phí không có lớp địa hình, nên bạn cần mở song song một tab <a href="https://www.google.com/maps">Google Maps</a> với bộ lọc địa hình bật lên để nhận diện những vật cản tự nhiên như núi hay đồi.</p>
+<p>Đây có thể là một trong những khâu gây nản lòng nhất của quá trình lập kế hoạch. Một ví dụ điển hình là lần nhật thực toàn phần năm 2019 ở Nam Mỹ, khi dãy núi Andes vừa là một vật cản khổng lồ vừa là nguyên nhân tạo ra một bức tường mây gần như thường trực ở phía sườn hướng ra Thái Bình Dương. Đã vậy thời điểm toàn phần lại xảy ra không lâu trước khi mặt trời lặn, khiến mặt trời rất thấp ở phía tây, đúng ngay hướng có dãy Andes sừng sững. Cách giải quyết cuối cùng là tìm một quả đồi nhìn ra một cánh đồng muối nằm đủ xa dãy núi để tránh bị che khuất, tuy chỉ vừa đủ.</p>
+<p>Không phải lúc nào việc chọn địa điểm cũng khó khăn như vậy. Có khá nhiều loại địa hình thường ít hoặc không có vật cản, rất đáng để bạn tìm kiếm. Những sân vận động lớn không có cột đèn cao, bờ hồ và bờ biển, cánh đồng muối hay đồng bằng khô cằn (playa), ruộng đồng canh tác, hay những đỉnh núi trọc hoặc cao nguyên bằng phẳng thường là những lựa chọn tốt.</p>
+<p>Ngoài địa hình tự nhiên, bạn cũng cần để ý những vật cản nhân tạo như cây cối, tòa nhà, đường dây điện và cột đèn, đặc biệt khi chọn địa điểm trong thành phố.</p>
+<p>Một công cụ hữu ích cho việc này là <a href="https://www.google.com/earth/about/versions/">Google Earth Pro cho máy tính</a>, cho phép xem địa hình lẫn một số vật cản như tòa nhà ở nhiều khu vực. Nó không hoàn hảo vì không có góc nhìn ngang mặt đất, nên tôi khuyên bạn nên kết hợp thêm với Google Street View để có cái nhìn thực tế hơn từ mặt đất, dù Street View cũng có nhược điểm là chỉ ghi lại một khoảnh khắc cố định trong quá khứ và không cho bạn biết mặt trời sẽ nằm ở đâu vào ngày cụ thể. Đừng lo, chúng ta sẽ khai thác trọn vẹn tiềm năng của Street View trong phần tiếp theo.</p>
+<h3 id="khả-năng-tiếp-cận">Khả năng tiếp cận</h3>
+<p>Sau khi đã thu hẹp cam kết khu vực xuống còn một vài vùng cụ thể, bước tiếp theo là xét đến khả năng tiếp cận thực tế, gồm hai khía cạnh. Một là khả năng tiếp cận hợp pháp, tức khu vực đó có mở cửa cho công chúng hay không, hai là khả năng tiếp cận về mặt hậu cần, tức bạn có thực sự đến được nơi đó hay không.</p>
+<p>Vấn đề pháp lý thường khá đơn giản để giải quyết vì công viên công cộng và đường sá thuộc quyền sử dụng chung khá phổ biến ở hầu hết mọi nơi trên thế giới. Smappen cũng có tính năng “Points of interest” cho phép bạn thêm lớp dữ liệu tìm kiếm công viên hoặc công viên cấp bang để đánh dấu trên bản đồ, dù tên công viên đôi khi bị giới hạn xem nên bạn có thể đối chiếu thêm với Google Maps hoặc <a href="https://www.openstreetmap.org">OpenStreetMap</a>.</p>
+<p>Khả năng tiếp cận về hậu cần thường khó khăn hơn. Với công viên hay khu vực ven đường, chỗ đậu xe có thể là vấn đề lớn, vì những nơi này thường không được thiết kế để đón lượng khách đột biến vào ngày nhật thực. Một câu chuyện thực tế là lần nhật thực năm 2017 tại khu di tích Agate Fossil Beds ở Nebraska, nơi đã đón hơn 11.000 lượt khách trong một ngày, trong khi cả năm 2016 địa điểm này chỉ đón chưa đến 16.000 lượt khách. Ban quản lý đã xử lý rất tốt, nhưng chắc chắn đến một lúc nào đó họ buộc phải từ chối bớt xe vào vì bãi đỗ có hạn.</p>
+<p>Khả năng tiếp cận về mặt thể chất cũng cần lưu tâm. Nếu bạn định xem nhật thực từ đỉnh núi, cao nguyên hay giữa cánh đồng muối, liệu bạn có thể tự mình mang vác toàn bộ thiết bị cần thiết đến đó hay không?</p>
+<p>Giao thông cũng là vấn đề không thể xem nhẹ. Kinh nghiệm cho thấy đôi khi việc xếp hàng vào bãi đỗ có thể mất đến ba mươi phút, một khoảng thời gian đủ để tạo ra khác biệt lớn. Hãy luôn chừa cho mình một khoảng thời gian dự phòng.</p>
+<p>Lời khuyên của tôi là hãy lập một danh sách khoảng mười địa điểm tiềm năng trải rộng khắp cam kết khu vực của bạn. Phạm vi bạn có thể tiếp cận trong ba giờ lái xe từ nơi đóng quân sẽ khá rộng lớn, và chắc chắn sẽ có sự khác biệt thời tiết cục bộ giữa các đầu của vùng đó vào đúng ngày sự kiện. Hãy cố gắng chọn những nơi càng gần đường trung tâm toàn phần càng tốt, nhưng đừng ngại hy sinh vài giây toàn phần để đổi lấy một địa điểm quan sát tốt hơn.</p>
+<h3 id="tổng-kết-phần-hai">Tổng kết Phần Hai</h3>
+<p>Đến đây, bạn nên đã hiểu được tầm quan trọng của sự linh hoạt vào ngày diễn ra sự kiện, biết cách tạo bản đồ trên Smappen với lớp phủ dải toàn phần và phạm vi di chuyển từ một điểm trung tâm, biết dùng timeanddate để tìm hướng và độ cao mặt trời tại một điểm quan sát cụ thể, và có được một danh sách ngắn các địa điểm tiềm năng dựa trên yếu tố địa hình và khả năng tiếp cận.</p>
+<p>Xin chúc mừng, bạn đã có trong tay danh sách các địa điểm để xem nhật thực toàn phần. Giờ đây chúng ta sẽ đưa những địa điểm này lên một tầm cao mới, đó là mô phỏng chính xác cảnh nhật thực sẽ trông ra sao từ đúng vị trí ấy vào đúng thời điểm ấy.</p>
+<hr />
+<h2 id="phần-ba-mô-phỏng-nhật-thực-bằng-street-view-và-stellarium">Phần Ba: Mô Phỏng Nhật Thực Bằng Street View Và Stellarium</h2>
+<p>Xin cảnh báo trước, đây là phần kỹ thuật nhất của toàn bộ hướng dẫn, đòi hỏi một chút khả năng thao tác máy tính. Bạn sẽ cần bốn công cụ: Google Maps, một công cụ tải ảnh Street View 360 độ, phần mềm mô phỏng bầu trời Stellarium, và một phần mềm chỉnh sửa ảnh như Adobe Photoshop hoặc phần mềm tương đương. Nếu bạn không quen thao tác máy tính hoặc không có phần mềm chỉnh ảnh, phần này có thể không thực sự phù hợp với bạn.</p>
+<p>Ý tưởng cốt lõi ở đây là dựng lại một khung cảnh 360 độ thật của địa điểm bạn chọn ngay trong Stellarium, để phần mềm có thể mô phỏng chính xác vị trí mặt trời và mặt trăng trên nền cảnh quan thực tế đó vào đúng ngày giờ diễn ra nhật thực. Kết quả cuối cùng là bạn có thể “xem trước” toàn bộ sự kiện ngay trên màn hình máy tính, từ lúc mặt trời bắt đầu bị che khuất cho đến pha toàn phần, trước khi thực sự đặt chân đến nơi.</p>
+<h3 id="công-cụ-tải-ảnh-street-view-360">Công cụ tải ảnh Street View 360</h3>
+<p>Ở bước này, thay vì dùng công cụ tải ảnh của bên thứ ba như trong các hướng dẫn khác trên mạng, tôi khuyên bạn nên dùng công cụ <a href="https://downloadmapimage.com/360-dl/">Street View 360 Downloader</a> của DownloadMapImage.com. Công cụ này cho phép bạn dán trực tiếp đường dẫn (URL) hoặc mã panorama của một điểm ảnh cầu 360 độ trên Google Maps, sau đó tải về file ảnh dạng equirectangular (ảnh chiếu hình chữ nhật trải phẳng từ khối cầu) ở độ phân giải cao nhất có thể, đúng định dạng mà Stellarium cần để dựng lại cảnh quan.</p>
+<p>Điểm thuận lợi của công cụ này so với một số phần mềm tải Street View khác là bạn không cần cài đặt gì trên máy tính, chỉ cần trình duyệt web, và công cụ hoạt động tốt trên cả Windows lẫn macOS vì mọi thứ đều xử lý trực tuyến. Ngoài ra công cụ còn giữ nguyên siêu dữ liệu tọa độ và hướng chụp của bức ảnh gốc, giúp bạn dễ dàng lấy lại thông tin vĩ độ, kinh độ chính xác cho các bước tính toán phía sau.</p>
+<h3 id="các-bước-thực-hiện">Các bước thực hiện</h3>
+<p>Bước đầu tiên là xác định địa điểm bạn muốn mô phỏng. Nếu đã hoàn thành hai phần trước của hướng dẫn, bạn hẳn đã có sẵn danh sách địa điểm tiềm năng, hoặc có thể bạn đã có sẵn một nơi mong muốn từ trước. Trong ví dụ minh họa của bài viết này, chúng ta sẽ dùng cây cầu quốc tế Rainbow nhìn ra thác Niagara làm điểm tham chiếu, giống như bài hướng dẫn gốc mà tôi tham khảo.</p>
+<p>Bước thứ hai là chọn một ảnh Street View phù hợp với địa điểm đó. Mở Google Maps, tìm và phóng to đến vị trí mong muốn, kéo biểu tượng người màu cam ở góc dưới bên phải, rồi chọn một chấm tròn màu xanh (photosphere) gần nhất với nơi bạn dự định đứng. Nếu có nhiều photosphere để chọn, hãy ưu tiên ảnh ít mây, ít vật cản như người hoặc xe cộ, và được ghép nối liền mạch không bị lỗi đường nối rõ rệt. Sao chép đường dẫn của photosphere đó và lưu vào một file ghi chú tạm.</p>
+<p>Bước thứ ba là mở một tab trình duyệt mới, vào trang eclipse của timeanddate ứng với sự kiện bạn quan tâm, tìm liên kết “Detailed eclipse path map”, phóng to đến đúng vị trí bạn đã chọn ở bước hai, nhấp vào bản đồ để kiểm tra lại độ che khuất (đảm bảo hiển thị 100% nếu là nhật thực toàn phần), rồi nhấn nút phát màu xanh để mở trang dữ liệu chi tiết cho vị trí đó.</p>
+<p>Bước thứ tư là tải ảnh Street View 360 độ. Mở một tab trình duyệt mới (lúc này bạn nên có ba tab đang mở song song), truy cập <a href="https://downloadmapimage.com/360-dl/">Street View 360 Downloader</a>, dán đường dẫn photosphere đã lưu ở bước hai vào ô nhập liệu, chọn độ phân giải cao nhất có sẵn, rồi tải ảnh về máy. Đừng đóng các tab khác, vì bạn sẽ còn quay lại lấy thông tin tọa độ và metadata từ ảnh vừa tải trong các bước sau.</p>
+<p>Bước thứ năm là xóa nền trời trong ảnh bằng Photoshop. Mở file ảnh vừa tải, vào Layer, chọn Sky, thêm Layer Mask rồi đảo ngược mặt nạ. Sau đó xuất ảnh dưới dạng PNG qua File, Export, Quick Export as PNG. Nếu không có Photoshop, bạn hoàn toàn có thể dùng một công cụ chỉnh ảnh cơ bản như Microsoft Paint và tô trắng phần bầu trời bằng cọ vẽ, cách này chậm hơn nhưng cho kết quả tương đương, hoặc dùng công cụ miễn phí như Gimp để xóa nền trời nhanh hơn Paint dù vẫn chậm hơn Photoshop.</p>
+<p>Bước thứ sáu là tạo thư mục cảnh quan mới trong Stellarium. Nếu chưa cài <a href="https://stellarium.org">Stellarium</a>, hãy tải về từ trang chủ. Sau khi cài đặt, tìm đến thư mục “Landscapes” (trên Mac vào Applications, nhấp chuột phải vào Stellarium, chọn Show Package Contents, rồi vào Contents, Resources, Landscapes; trên Windows thư mục này thường nằm ở C:Files). Sao chép một thư mục có sẵn (thư mục grossmugl là một lựa chọn tốt để làm mẫu), đổi tên theo dự án của bạn, xóa hết mọi file bên trong ngoại trừ file landscape.ini, rồi dán ảnh PNG đã xuất vào thư mục đó.</p>
+<p>Bước thứ bảy là chỉnh sửa file landscape.ini. Mở file này bằng trình soạn thảo văn bản, xóa hết các dòng không cần thiết, chỉ giữ lại những trường thông tin cơ bản. Đặc biệt quan trọng, bạn phải giữ nguyên dòng “type = spherical”, tuyệt đối không được xóa dòng này, nếu không cảnh quan sẽ không hiển thị đúng trong phiên bản Stellarium hiện tại.</p>
+<p>Bạn có thể đổi trường “name” thành tên địa điểm, “author” ghi nguồn ảnh Google Maps, “description” ghi mô tả ngắn gọn, giữ nguyên “type” là spherical, và “maptex” trỏ đến tên file PNG bạn vừa lưu.</p>
+<p>Về tọa độ vĩ độ và kinh độ, bạn cần lấy từ metadata của ảnh Street View đã tải (công cụ Street View 360 Downloader sẽ hiển thị kèm theo tọa độ decimal degrees của bức ảnh gốc), sau đó chuyển đổi sang định dạng Độ Phút Giây bằng <a href="https://www.fcc.gov/media/radio/dms-decimal">công cụ chuyển đổi trực tuyến của FCC</a>, rồi thay vào file landscape.ini. Nhớ đổi dấu cộng thành dấu trừ nếu tọa độ nằm ở bán cầu tây hoặc nam.</p>
+<p>Về độ cao, bạn dùng <a href="https://www.freemaptools.com/elevation-finder.htm">công cụ tra cứu độ cao trực tuyến</a>, nhập đúng tọa độ vừa lấy để tìm độ cao so với mực nước biển, tính bằng mét vì Stellarium sử dụng đơn vị mét. Có thể đối chiếu thêm với <a href="https://www.dcode.fr/earth-elevation">một công cụ tra độ cao khác</a> để chắc chắn số liệu khớp nhau. Nếu địa điểm của bạn có công trình cao thêm, chẳng hạn đứng trên một cây cầu, hãy cộng thêm chiều cao đó vào.</p>
+<p>Trường khó nhất và cũng quan trọng nhất là góc xoay Angle_Rotatez, dùng để căn chỉnh cho hướng nam trong ảnh 360 độ khớp đúng với hướng nam thực tế ngoài đời. Công thức tính góc này liên quan đến vị trí một mốc tham chiếu rõ ràng trong ảnh (như một tòa nhà hay công trình dễ nhận diện), khoảng cách góc phương vị từ vị trí đứng đến mốc đó (có thể tra bằng <a href="https://www.sunearthtools.com/dp/tools/pos_earth.php">công cụ đo góc phương vị trực tuyến</a>), và vị trí pixel của mốc đó trên chiều ngang bức ảnh so với tổng chiều rộng ảnh. Độ chính xác ở bước này cực kỳ quan trọng nên hãy làm thật cẩn thận và đo đi đo lại nhiều lần.</p>
+<figure>
+<div class="img-wrap" role="img" aria-label="Sơ đồ căn chỉnh hướng ảnh 360 độ trong Stellarium"><svg viewBox="0 0 1000 380" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1229"/>
+      <stop offset="100%" stop-color="#161f3d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="380" fill="url(#bg5)"/>
+  <text x="500" y="40" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#f4ead0">Căn chỉnh hướng ảnh 360 độ trong Stellarium</text>
+
+  <circle cx="500" cy="220" r="8" fill="#ffdb7a"/>
+  <text x="500" y="250" text-anchor="middle" font-family="Arial" font-size="14" fill="#e5eaf7">Vị trí đứng chụp</text>
+
+  <!-- north arrow -->
+  <line x1="500" y1="220" x2="500" y2="90" stroke="#7fd3ff" stroke-width="2"/>
+  <polygon points="500,80 494,96 506,96" fill="#7fd3ff"/>
+  <text x="500" y="68" text-anchor="middle" font-family="Arial" font-size="14" fill="#7fd3ff">Bắc (Stellarium 0 độ)</text>
+
+  <!-- landmark direction -->
+  <line x1="500" y1="220" x2="700" y2="130" stroke="#ffdb7a" stroke-width="2"/>
+  <polygon points="705,124 692,132 698,142" fill="#ffdb7a"/>
+  <text x="740" y="120" text-anchor="middle" font-family="Arial" font-size="14" fill="#ffdb7a">Mốc tham chiếu</text>
+  <text x="740" y="138" text-anchor="middle" font-family="Arial" font-size="12" fill="#c9b06a">(tòa nhà, đỉnh núi...)</text>
+
+  <!-- pixel x-axis on photo -->
+  <line x1="500" y1="220" x2="880" y2="220" stroke="#8fa0c9" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="880" y="240" text-anchor="end" font-family="Arial" font-size="12" fill="#8fa0c9">Vị trí pixel x trên ảnh 360 độ</text>
+
+  <!-- angle arc -->
+  <path d="M 540 220 A 40 40 0 0 0 528 187" fill="none" stroke="#e5eaf7" stroke-width="2"/>
+  <text x="560" y="195" font-family="Arial" font-size="13" fill="#e5eaf7">góc lệch</text>
+
+  <rect x="150" y="290" width="700" height="60" rx="10" fill="#141c3a" stroke="#3a4a72"/>
+  <text x="500" y="315" text-anchor="middle" font-family="Consolas, monospace" font-size="15" fill="#ffdb7a">angle_rotatez = góc phương vị mốc + 219 - (360 x pixel_x / tổng bề rộng ảnh)</text>
+  <text x="500" y="336" text-anchor="middle" font-family="Arial" font-size="12" fill="#8fa0c9">Đo càng chính xác, mô phỏng trong Stellarium càng khớp với thực tế</text>
+</svg></div>
+<figcaption aria-hidden="true">Sơ đồ căn chỉnh hướng ảnh 360 độ trong Stellarium</figcaption>
+</figure>
+<p>Sau khi hoàn tất file landscape.ini, lưu lại và mở Stellarium. Vào cửa sổ “Sky and viewing options”, chọn mục “Landscape”, tìm cảnh quan bạn vừa tạo, tăng độ sáng tối thiểu lên 1 để dễ quan sát, rồi đóng cửa sổ lại. Ảnh 360 độ của bạn sẽ hiện lên ngay trong không gian mô phỏng. Đây là lúc bạn nên xoay quanh để kiểm tra xem hướng nam trong Stellarium có khớp với một mốc quen thuộc trong ảnh hay không, nếu chưa khớp nghĩa là góc xoay ở bước trước cần điều chỉnh lại.</p>
+<p>Bước cuối cùng là mô phỏng nhật thực. Mở cửa sổ “Location” và nhập tọa độ độ phút giây cùng độ cao đã tính ở các bước trước, đặt tên cho địa điểm và thêm vào danh sách để dùng lại sau này. Mở cửa sổ “Date and time” và nhập đúng ngày giờ diễn ra sự kiện. Lưu ý rằng Stellarium dùng múi giờ của chính thiết bị bạn đang dùng chứ không tự động theo múi giờ của địa điểm mô phỏng, nên bạn cần tự cộng trừ giờ cho khớp.</p>
+<p>Nếu làm đúng các bước, bạn sẽ thấy trên màn hình một mô phỏng gần như thật của mặt trời sắp bị che khuất, chồng lên đúng khung cảnh thực tế của địa điểm bạn định đứng. Đây là một trải nghiệm khá thú vị, cho phép bạn hình dung trước hoàn toàn những gì mình sắp chứng kiến.</p>
+<p>Với những ai đam mê nhiếp ảnh muốn kết hợp cảnh quan vào bức ảnh nhật thực, Stellarium còn có tính năng lưới phương vị (Azimuthal grid) giúp bạn biết chính xác mặt trời sẽ cao bao nhiêu độ so với đường chân trời, từ đó chọn ống kính góc rộng phù hợp (bạn có thể tham khảo <a href="http://www.acapixus.dk/photography/angle_of_view.htm">bảng góc nhìn theo tiêu cự ống kính</a> để chọn lens đúng ý). Bạn cũng có thể thêm thông số cảm biến và ống kính máy ảnh thực tế của mình vào Stellarium để hình dung chính xác khung hình sẽ trông ra sao, theo <a href="http://astroescape.com/software-guides/stellarium-for-beginners-how-to-add-your-gear/">hướng dẫn thêm thiết bị vào Stellarium này</a>.</p>
+<p>Kỹ thuật này cũng áp dụng rất tốt cho nhật thực hình khuyên, giúp bạn hình dung trước cảnh vành khuyên vàng lơ lửng phía trên một công trình kiến trúc hay cảnh quan đặc biệt nào đó.</p>
+<p>Nếu gặp khó khăn ở bất kỳ bước nào, đừng ngại thử lại vài lần với một địa điểm quen thuộc trước, ví dụ ngay khu vực bạn đang sống ở Bắc Ninh hay Hà Nội, để làm quen với quy trình trước khi áp dụng cho địa điểm xem nhật thực thực sự.</p>
+<h3 id="tổng-kết-phần-ba">Tổng kết Phần Ba</h3>
+<p>Đến đây bạn nên đã biết cách tìm và tải một ảnh Street View 360 độ cho địa điểm quan sát tiềm năng bằng công cụ Street View 360 Downloader, biết dùng phần mềm chỉnh ảnh kết hợp một chút thao tác chỉnh file để đưa cảnh 360 độ đó vào Stellarium, và biết cách mô phỏng nhật thực trong Stellarium như thể bạn đang đứng ngay tại địa điểm ấy vào đúng thời khắc sự kiện diễn ra.</p>
+<p>Làm tốt lắm. Bạn đã mô phỏng thành công một lần nhật thực từ một địa điểm cụ thể vào một ngày cụ thể. Việc còn lại là biết cách vận dụng toàn bộ công sức chuẩn bị này vào đúng ngày diễn ra sự kiện.</p>
+<hr />
+<h2 id="phần-bốn-chốt-địa-điểm-cuối-cùng-vào-ngày-diễn-ra-sự-kiện">Phần Bốn: Chốt Địa Điểm Cuối Cùng Vào Ngày Diễn Ra Sự Kiện</h2>
+<p>Ngày nhật thực đã cận kề. Bạn đã có sẵn danh sách các địa điểm được trinh sát và mô phỏng kỹ càng. Chỉ còn một việc cuối cùng cần làm, đó là chốt địa điểm quan sát chính thức. Từ thời điểm này trở đi, chỉ còn một thứ thực sự quan trọng, đó là mây.</p>
+<h3 id="dự-báo-mây-ngắn-hạn">Dự báo mây ngắn hạn</h3>
+<p>Ở các phần trước, chúng ta đã cố gắng chọn ra một vùng địa lý có xác suất trời quang cao theo thống kê lịch sử. Nhưng không có gì là chắc chắn, và bạn luôn cần giữ sự linh hoạt. Theo kinh nghiệm của nhiều người theo dõi nhật thực lâu năm, dự báo mây thường đáng tin cậy trong khoảng 72 giờ trước sự kiện, nên khoảng ba ngày trước ngày trọng đại, bạn nên bắt đầu theo dõi sát sao các mô hình dự báo mây và tiếp tục cập nhật cho đến tận lúc lên xe di chuyển đến điểm quan sát.</p>
+<p>Một công cụ dự báo mây ngắn hạn rất đáng tin cậy và hoạt động trên toàn cầu là <a href="https://weather.us/model-charts/euro/usa/total-cloud-coverage.html">weather.us</a>. Có một điều cực kỳ quan trọng cần nhớ khi dùng trang này: màu vàng càng sáng nghĩa là càng ít mây, ngược lại với trực giác của nhiều người vốn quen nghĩ vùng tối trên bản đồ mới là trời quang.</p>
+<figure>
+<div class="img-wrap" role="img" aria-label="Cách đọc bản đồ mây trên weather.us"><svg viewBox="0 0 1000 260" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cloudScale" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#141a2e"/>
+      <stop offset="40%" stop-color="#3d3a55"/>
+      <stop offset="70%" stop-color="#c98f3a"/>
+      <stop offset="100%" stop-color="#ffe98a"/>
+    </linearGradient>
+    <linearGradient id="bg4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1229"/>
+      <stop offset="100%" stop-color="#161f3d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="260" fill="url(#bg4)"/>
+  <text x="500" y="42" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#f4ead0">Cách đọc bản đồ mây trên weather.us</text>
+
+  <rect x="120" y="90" width="760" height="40" rx="8" fill="url(#cloudScale)"/>
+  <text x="140" y="80" font-family="Arial" font-size="14" fill="#cfd6e8">Nhiều mây</text>
+  <text x="820" y="80" text-anchor="end" font-family="Arial" font-size="14" fill="#ffe98a">Ít mây, trời quang</text>
+
+  <circle cx="180" cy="180" r="18" fill="#2a2f45"/>
+  <text x="180" y="215" text-anchor="middle" font-family="Arial" font-size="13" fill="#8fa0c9">Vùng tối</text>
+  <text x="180" y="232" text-anchor="middle" font-family="Arial" font-size="13" fill="#8fa0c9">= mây dày</text>
+
+  <circle cx="820" cy="180" r="18" fill="#ffe98a"/>
+  <text x="820" y="215" text-anchor="middle" font-family="Arial" font-size="13" fill="#8fa0c9">Vàng sáng</text>
+  <text x="820" y="232" text-anchor="middle" font-family="Arial" font-size="13" fill="#8fa0c9">= bầu trời quang</text>
+
+  <text x="500" y="180" text-anchor="middle" font-family="Arial" font-size="15" fill="#e5eaf7">Ngược với trực giác thông thường,</text>
+  <text x="500" y="200" text-anchor="middle" font-family="Arial" font-size="15" fill="#e5eaf7">vàng càng sáng nghĩa là càng ít mây</text>
+</svg></div>
+<figcaption aria-hidden="true">Cách đọc bản đồ mây trên weather.us</figcaption>
+</figure>
+<p>Trên trang weather.us, hai tùy chọn quan trọng nhất là “Change map selection” và “Change date”. Việc chọn khung giờ càng sát thời điểm toàn phần càng quan trọng. Với mô hình dự báo mặc định, bạn có thể xem trước tối đa khoảng mười ngày, và nếu chuyển sang các loại mô hình khác trên thanh công cụ phía trên bản đồ, bạn sẽ thấy độ phân giải và khung thời gian dự báo khác nhau, trong đó mô hình GFS thường có khung dự báo dài nhất, lên đến khoảng mười sáu ngày. Rất đáng để bạn so sánh nhiều mô hình khác nhau khi ngày sự kiện đến gần, tìm ra những điểm chung và khác biệt giữa chúng.</p>
+<h3 id="chọn-điểm-quan-sát-trong-ngày-diễn-ra-sự-kiện">Chọn điểm quan sát trong ngày diễn ra sự kiện</h3>
+<p>Đây là lúc mọi công sức chuẩn bị được đền đáp. Bạn giờ có thể lấy danh sách các địa điểm tiềm năng và đối chiếu với dự báo mây ngắn hạn mới nhất.</p>
+<p>Truy cập weather.us khoảng 12 đến 24 giờ trước sự kiện, xem qua tất cả các mô hình mây có sẵn cho khu vực của bạn. Nếu có một vùng vàng sáng rõ rệt xuất hiện trên hầu hết các mô hình vào đúng khung giờ toàn phần, hãy đối chiếu xem có địa điểm nào trong danh sách của bạn rơi vào vùng đó hay không. Nếu có, rất có thể đó chính là địa điểm tốt nhất dành cho bạn. Đừng quên chuẩn bị thêm vài phương án dự phòng.</p>
+<p>Hãy lặp lại quy trình này ngay khi bạn thức dậy vào chính ngày nhật thực, đây có thể là cơ hội cuối cùng để kiểm tra mô hình dự báo mây trước khi phải chốt địa điểm. Khi đã chốt, hãy vẫn giữ trong đầu một vài phương án thay thế phòng khi tình hình thay đổi.</p>
+<p>Cần nhớ rằng nhiều mô hình dự báo được cập nhật theo từng giờ, nên nếu có thể, hãy tranh thủ kiểm tra lại dự báo mây ngay cả khi đang trên đường di chuyển. Có một câu chuyện thực tế rất đáng suy ngẫm: trong lần nhật thực năm 2017 ở Mỹ, có nhóm quan sát viên ban đầu định xem tại Carhenge, một công trình mô phỏng Stonehenge làm từ những chiếc ô tô cổ xếp chồng lên nhau. Nhưng khi đi được nửa đường, mây bắt đầu dịch chuyển xa hơn về phía đông so với dự đoán, nên họ đổi hướng đến một khu di tích khác cách đó không xa về phía tây bắc, nơi có bầu trời quang đãng hơn hẳn dù chỉ cách nhau chưa đầy một giờ lái xe. Nhóm ở lại Carhenge vẫn xem được toàn phần, chỉ là bầu trời của họ nhiều mây hơn đáng kể.</p>
+<h3 id="trường-hợp-xấu-nhất-thời-tiết-xấu-vào-ngày-nhật-thực">Trường hợp xấu nhất, thời tiết xấu vào ngày nhật thực</h3>
+<p>Nếu bạn thức dậy vào ngày nhật thực và không còn địa điểm nào trong tầm với có thời tiết tốt, hãy nhớ rằng bạn đã làm mọi thứ trong khả năng của mình để đưa ra quyết định tốt nhất có thể. Cũng cần biết rằng dù mô hình máy tính dự báo có mây, không có nghĩa là đúng khoảnh khắc mặt trời ở đúng vị trí toàn phần sẽ chắc chắn bị che khuất trong vài phút ngắn ngủi đó. Hãy cứ ra ngoài và tận hưởng trải nghiệm, biết đâu bạn vẫn còn may mắn.</p>
+<p>Hãy nhớ, bạn không thể điều khiển được thời tiết.</p>
+<h3 id="một-vài-mẹo-thực-tế-khác">Một vài mẹo thực tế khác</h3>
+<figure>
+<div class="img-wrap" role="img" aria-label="Danh sách nhanh cho ngày nhật thực"><svg viewBox="0 0 1000 340" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1229"/>
+      <stop offset="100%" stop-color="#161f3d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="340" fill="url(#bg6)"/>
+  <text x="500" y="42" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#f4ead0">Danh sách nhanh cho ngày nhật thực</text>
+
+  <g font-family="Arial" font-size="16" fill="#e5eaf7">
+    <g transform="translate(100,90)">
+      <rect width="22" height="22" rx="5" fill="none" stroke="#ffdb7a" stroke-width="2"/>
+      <path d="M4 12 L9 17 L18 5" stroke="#ffdb7a" stroke-width="2" fill="none"/>
+      <text x="36" y="17">Kính xem nhật thực đạt chuẩn</text>
+    </g>
+    <g transform="translate(100,140)">
+      <rect width="22" height="22" rx="5" fill="none" stroke="#ffdb7a" stroke-width="2"/>
+      <path d="M4 12 L9 17 L18 5" stroke="#ffdb7a" stroke-width="2" fill="none"/>
+      <text x="36" y="17">Kính lọc mặt trời cho ống kính / kính thiên văn</text>
+    </g>
+    <g transform="translate(100,190)">
+      <rect width="22" height="22" rx="5" fill="none" stroke="#ffdb7a" stroke-width="2"/>
+      <path d="M4 12 L9 17 L18 5" stroke="#ffdb7a" stroke-width="2" fill="none"/>
+      <text x="36" y="17">Đồng hồ chính xác, sạc pin đầy đủ</text>
+    </g>
+    <g transform="translate(100,240)">
+      <rect width="22" height="22" rx="5" fill="none" stroke="#ffdb7a" stroke-width="2"/>
+      <path d="M4 12 L9 17 L18 5" stroke="#ffdb7a" stroke-width="2" fill="none"/>
+      <text x="36" y="17">Bình xăng đầy, đồ ăn thức uống dự phòng</text>
+    </g>
+
+    <g transform="translate(560,90)">
+      <rect width="22" height="22" rx="5" fill="none" stroke="#ffdb7a" stroke-width="2"/>
+      <path d="M4 12 L9 17 L18 5" stroke="#ffdb7a" stroke-width="2" fill="none"/>
+      <text x="36" y="17">Danh sách địa điểm dự phòng đã lưu sẵn</text>
+    </g>
+    <g transform="translate(560,140)">
+      <rect width="22" height="22" rx="5" fill="none" stroke="#ffdb7a" stroke-width="2"/>
+      <path d="M4 12 L9 17 L18 5" stroke="#ffdb7a" stroke-width="2" fill="none"/>
+      <text x="36" y="17">Hai máy ảnh nếu muốn chụp trọn vẹn</text>
+    </g>
+    <g transform="translate(560,190)">
+      <rect width="22" height="22" rx="5" fill="none" stroke="#ffdb7a" stroke-width="2"/>
+      <path d="M4 12 L9 17 L18 5" stroke="#ffdb7a" stroke-width="2" fill="none"/>
+      <text x="36" y="17">Ghế, bạt, thùng đá cho thời gian chờ</text>
+    </g>
+    <g transform="translate(560,240)">
+      <rect width="22" height="22" rx="5" fill="none" stroke="#ffdb7a" stroke-width="2"/>
+      <path d="M4 12 L9 17 L18 5" stroke="#ffdb7a" stroke-width="2" fill="none"/>
+      <text x="36" y="17">Tinh thần linh hoạt đổi điểm vào phút chót</text>
+    </g>
+  </g>
+</svg></div>
+<figcaption aria-hidden="true">Danh sách nhanh cho ngày nhật thực</figcaption>
+</figure>
+<p>Chuẩn bị đầy đủ thiết bị từ một đến hai ngày trước sự kiện là điều nên làm, hãy kiểm tra kỹ kính lọc mặt trời cùng những vật dụng không phải máy ảnh như thùng đá, ghế xếp, bàn gấp và bộ sạc dự phòng, và tất nhiên đừng quên kính xem nhật thực chuyên dụng.</p>
+<p>Đổ đầy bình xăng trước khi khởi hành cũng rất quan trọng, vì nhiều vùng nằm trong dải toàn phần thường không quen với lượng khách đổ về đông đảo trong những sự kiện như thế này, kể cả các trạm xăng cũng có thể hết nhiên liệu hoặc xếp hàng rất dài.</p>
+<p>Hãy lưu sẵn tất cả các địa điểm dự phòng vào điện thoại từ trước, tránh mất thời gian nhập thủ công vào phút chót. Kiểm tra đường đi đến điểm quan sát ưu tiên càng sớm càng tốt, vì công cụ như Smappen không tính được tình trạng giao thông thời gian thực, nên kiểm tra thường xuyên sẽ giúp bạn tránh cảnh kẹt xe đúng lúc quan trọng nhất.</p>
+<p>Hãy rời khỏi nơi ở ngay khi đã chốt được địa điểm, vì bạn không bao giờ biết được sẽ gặp trở ngại gì trên đường, kể cả khi bạn nghĩ mình sẽ đến sớm hàng giờ đồng hồ. Biết đâu bãi đỗ xe đã đầy và bạn cần đổi phương án ngay lập tức.</p>
+<p>Đừng quên chuẩn bị đồ ăn thức uống mang theo, vì các dịch vụ ăn uống ở khu vực bạn đến có thể rất hạn chế trong ngày này.</p>
+<p>Mang theo một chiếc đồng hồ chính xác. Biết chính xác khoảnh khắc bắt đầu và kết thúc pha toàn phần không chỉ giúp bạn biết lúc nào an toàn để tháo kính bảo hộ ra, mà còn giúp bạn không bỏ lỡ hiện tượng hạt Baily nổi tiếng, khoảnh khắc ánh sáng mặt trời lọt qua những khe núi trên bề mặt mặt trăng ngay trước và sau pha toàn phần. Lưu ý tuyệt đối không dùng khung ngắm quang học của máy ảnh DSLR hay thị kính kính thiên văn để quan sát hạt Baily, hãy dùng màn hình LCD của máy ảnh thay vào đó.</p>
+<p>Nếu là người chụp ảnh, nên cân nhắc dùng hai máy ảnh cùng lúc, vì khoảnh khắc chuyển từ pha một phần sang pha toàn phần diễn ra rất nhanh, bạn sẽ không muốn phải mất thời gian quý báu để tháo kính lọc mặt trời ra giữa lúc đó.</p>
+<p>Và cuối cùng, dù là người chụp ảnh, đừng quên dành ra một phút để ngước nhìn bằng chính đôi mắt mình, đặc biệt là trong khoảnh khắc toàn phần. Máy ảnh có thể ghi lại hình ảnh, nhưng chỉ có bạn mới thực sự cảm nhận được trải nghiệm ấy.</p>
+<h3 id="tổng-kết-phần-bốn">Tổng kết Phần Bốn</h3>
+<p>Đến đây bạn nên đã biết cách dùng weather.us để xác định địa điểm quan sát tốt nhất, biết cách chọn điểm quan sát cuối cùng ngay trong ngày sự kiện, và đã chuẩn bị tinh thần cho khả năng thời tiết không thuận lợi.</p>
+<p>Làm tốt lắm, bạn đã sẵn sàng cho một trong những cảnh tượng kỳ diệu nhất của tự nhiên.</p>
+<hr />
+<h2 id="cơ-hội-cho-người-việt-nam-trong-những-năm-tới">Cơ Hội Cho Người Việt Nam Trong Những Năm Tới</h2>
+<figure>
+<div class="img-wrap" role="img" aria-label="Chuỗi vàng nhật thực toàn phần 2026 đến 2028"><svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg7" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1229"/>
+      <stop offset="100%" stop-color="#161f3d"/>
+    </linearGradient>
+    <radialGradient id="sunG2" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#fff4c2"/>
+      <stop offset="100%" stop-color="#ff9d2f"/>
+    </radialGradient>
+  </defs>
+  <rect width="1000" height="300" fill="url(#bg7)"/>
+  <text x="500" y="40" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#f4ead0">Chuỗi vàng nhật thực toàn phần 2026 - 2028</text>
+
+  <line x1="120" y1="150" x2="880" y2="150" stroke="#3a4a72" stroke-width="2"/>
+
+  <g transform="translate(200,150)">
+    <circle r="14" fill="url(#sunG2)"/>
+    <text y="-30" text-anchor="middle" font-family="Arial" font-size="15" fill="#e5eaf7">12/8/2026</text>
+    <text y="-10" text-anchor="middle" font-family="Arial" font-size="12" fill="#8fa0c9">Iceland, Tây Ban Nha</text>
+    <text y="45" text-anchor="middle" font-family="Arial" font-size="12" fill="#8fa0c9">Toàn phần tối đa 2p18s</text>
+  </g>
+
+  <g transform="translate(500,150)">
+    <circle r="14" fill="url(#sunG2)"/>
+    <text y="-30" text-anchor="middle" font-family="Arial" font-size="15" fill="#e5eaf7">2/8/2027</text>
+    <text y="-10" text-anchor="middle" font-family="Arial" font-size="12" fill="#8fa0c9">Bắc Phi, Trung Đông</text>
+    <text y="45" text-anchor="middle" font-family="Arial" font-size="12" fill="#8fa0c9">Toàn phần hơn 6 phút, Luxor</text>
+  </g>
+
+  <g transform="translate(800,150)">
+    <circle r="14" fill="url(#sunG2)"/>
+    <text y="-30" text-anchor="middle" font-family="Arial" font-size="15" fill="#e5eaf7">22/7/2028</text>
+    <text y="-10" text-anchor="middle" font-family="Arial" font-size="12" fill="#8fa0c9">Australia, New Zealand</text>
+    <text y="45" text-anchor="middle" font-family="Arial" font-size="12" fill="#8fa0c9">Sydney lần đầu từ 1857</text>
+  </g>
+
+  <text x="500" y="270" text-anchor="middle" font-family="Arial" font-size="14" fill="#ffdb7a">Việt Nam chỉ quan sát được nhật thực một phần trong cả ba lần này</text>
+</svg></div>
+<figcaption aria-hidden="true">Chuỗi vàng nhật thực toàn phần 2026 đến 2028</figcaption>
+</figure>
+<p>Nếu bạn đang ở Việt Nam và muốn tận mắt xem một lần nhật thực toàn phần, tin không mấy vui là bạn sẽ phải xách vali đi khá xa, vì như đã nói ở đầu bài, phải đến năm 2070 hiện tượng này mới quay lại đúng lãnh thổ nước ta. Tuy nhiên tin vui là thế giới đang bước vào giai đoạn được giới thiên văn học gọi là chuỗi vàng của nhật thực, khi từ năm 2026 đến giữa năm 2028 sẽ có liên tiếp ba lần nhật thực toàn phần và ba lần nhật thực hình khuyên, một mật độ hiếm thấy tương tự như giai đoạn 1990 đến 1992 và 2008 đến 2010.</p>
+<p>Lần nhật thực toàn phần gần nhất là <a href="https://en.wikipedia.org/wiki/Solar_eclipse_of_August_12,_2026">ngày 12 tháng 8 năm 2026</a>, khi dải toàn phần chạy qua một vùng hẻo lánh của Siberia, băng qua Greenland, ghé qua bờ tây Iceland rồi kết thúc ở miền bắc Tây Ban Nha và một góc nhỏ của Bồ Đào Nha. Đây là lần đầu tiên lục địa châu Âu chứng kiến nhật thực toàn phần kể từ năm 1999, và cũng là lần đầu tiên Iceland có cơ hội này kể từ năm 1954. Thời lượng toàn phần tối đa của lần này chỉ khoảng 2 phút 18 giây, ngắn hơn nhiều so với lần nhật thực năm 2024 ở Bắc Mỹ, nhưng bù lại những địa điểm như bán đảo Snæfellsnes ở Iceland hay các thành phố ven biển phía bắc Tây Ban Nha như A Coruña, Bilbao hay Valencia đều nằm trong hoặc rất gần dải toàn phần. Đáng chú ý, thủ đô Reykjavik của Iceland cũng lọt vào dải toàn phần dù chỉ với khoảng một phút toàn phần, một trường hợp khá hiếm khi một thủ đô nằm ngay trong đường đi của nhật thực.</p>
+<p>Kế đó, ngày 2 tháng 8 năm 2027 sẽ diễn ra lần nhật thực được nhiều chuyên gia gọi là “nhật thực của thế kỷ”, với thời lượng toàn phần có thể kéo dài tới hơn sáu phút tại một số điểm, một trong những lần toàn phần dài nhất thế kỷ hai mươi mốt. Dải toàn phần lần này băng qua eo biển Gibraltar, quét qua nam Tây Ban Nha, Bắc Phi rồi tới Trung Đông, với thành phố Luxor của Ai Cập được đánh giá là một trong những điểm quan sát lý tưởng nhất nhờ khí hậu khô ráo gần như không mây quanh năm. Người Việt Nam ở khu vực từ trung du miền núi phía Bắc trở xuống sẽ có cơ hội quan sát một phần của lần nhật thực này, dù không thấy được pha toàn phần.</p>
+<p>Tiếp đến, ngày 22 tháng 7 năm 2028, nhật thực toàn phần sẽ quét qua Australia và New Zealand, trong đó thành phố Sydney sẽ lần đầu tiên chứng kiến hiện tượng này kể từ năm 1857. Người Việt Nam ở hầu hết các tỉnh thành, trừ một số tỉnh miền núi phía Bắc như Lai Châu, Lào Cai, Tuyên Quang và Cao Bằng, cũng sẽ quan sát được một phần của lần nhật thực này.</p>
+<p>Với những ai thực sự muốn trải nghiệm trọn vẹn pha toàn phần, việc lên kế hoạch một chuyến du lịch quốc tế kết hợp xem nhật thực là hoàn toàn khả thi, và mọi kỹ thuật lập kế hoạch đã trình bày trong bài viết này, từ việc chọn cam kết khu vực, lập danh sách địa điểm dựa trên địa hình và khả năng tiếp cận, cho đến mô phỏng trước bằng Street View và Stellarium, đều áp dụng được cho bất kỳ chuyến đi nào, dù bạn xuất phát từ Hà Nội, thành phố Hồ Chí Minh hay bất kỳ tỉnh thành nào khác.</p>
+<hr />
+<h2 id="phụ-lục-một-tài-liệu-chụp-ảnh-nhật-thực">Phụ Lục Một: Tài Liệu Chụp Ảnh Nhật Thực</h2>
+<p>Bài viết này tập trung vào việc chọn địa điểm hơn là kỹ thuật chụp ảnh nhật thực, vì đã có rất nhiều nguồn tài liệu chất lượng chuyên sâu về chủ đề thiết bị, cài đặt máy ảnh và các kỹ thuật liên quan. Nếu bạn quan tâm đến việc chụp ảnh nhật thực, đặc biệt là khoảnh khắc toàn phần, các trang tiếng Anh sau đều có những hướng dẫn rất chi tiết và đáng tin cậy về chủ đề này:</p>
+<p><a href="https://www.mreclipse.com/SEphoto/SEphoto.html">Mr. Eclipse, Cách chụp ảnh nhật thực toàn phần</a></p>
+<p><a href="https://eclipse.aas.org/imaging-video/images-videos">American Astronomical Society, Cách chụp ảnh và quay video nhật thực</a></p>
+<p><a href="https://www.space.com/how-to-photograph-a-solar-eclipse">Space.com, Cách chụp ảnh nhật thực</a></p>
+<p><a href="https://www.bhphotovideo.com/explora/photography/tips-and-solutions/how-to-photograph-a-solar-eclipse">B&amp;H Explora, Cách chụp ảnh nhật thực</a></p>
+<p><a href="https://www.photopills.com/articles/total-solar-eclipse-2024-photography-guide">PhotoPills, Cẩm nang chụp ảnh nhật thực toàn phần</a></p>
+<p><a href="https://photographylife.com/how-to-photograph-a-solar-eclipse">PhotographyLife, Cách chụp ảnh nhật thực</a></p>
+<h2 id="phụ-lục-hai-danh-sách-công-cụ-tham-khảo">Phụ Lục Hai: Danh Sách Công Cụ Tham Khảo</h2>
+<p>Dưới đây là các công cụ được nhắc đến xuyên suốt bài viết, tất cả đều miễn phí hoặc có gói dùng thử miễn phí.</p>
+<p><a href="https://www.timeanddate.com/eclipse/">Timeanddate</a>, công cụ chính để xem đường đi nhật thực, độ che phủ, thời lượng toàn phần và dữ liệu mây trung bình theo khu vực.</p>
+<p><a href="https://eclipsophile.com/">Eclipsophile</a>, trang chuyên sâu về khí hậu và thời tiết cho từng lần nhật thực cụ thể.</p>
+<p><a href="https://www.smappen.com">Smappen</a>, công cụ trực quan hóa phạm vi di chuyển từ một điểm trung tâm và chồng lớp dữ liệu địa lý dạng KML.</p>
+<p><a href="http://xjubier.free.fr/en/site_pages/SolarEclipsesGoogleEarth.html">Bộ sưu tập file hình học nhật thực của Xavier Jubier</a>, nguồn dữ liệu KMZ đáng tin cậy nhất cho mọi lần nhật thực từ 1961 đến 2099.</p>
+<p><a href="https://mygeodata.cloud/converter/kmz-to-kml">MyGeodata Converter</a>, công cụ chuyển đổi file KMZ sang KML.</p>
+<p><a href="https://www.google.com/maps">Google Maps</a> và <a href="https://www.google.com/earth/about/versions/">Google Earth Pro</a>, dùng để xem địa hình, vật cản và ảnh Street View. Có thể đối chiếu thêm với <a href="https://www.openstreetmap.org">OpenStreetMap</a>.</p>
+<p><a href="https://downloadmapimage.com/360-dl/">Street View 360 Downloader</a> của DownloadMapImage.com, công cụ tải ảnh Street View 360 độ trực tuyến không cần cài đặt, phục vụ cho việc dựng cảnh quan trong Stellarium.</p>
+<p><a href="https://stellarium.org">Stellarium</a>, phần mềm mô phỏng bầu trời miễn phí dùng để hình dung trước vị trí mặt trời và mặt trăng tại một địa điểm và thời điểm cụ thể.</p>
+<p><a href="https://www.fcc.gov/media/radio/dms-decimal">Công cụ chuyển đổi tọa độ của FCC</a>, <a href="https://www.freemaptools.com/elevation-finder.htm">công cụ tra cứu độ cao</a> và <a href="https://www.sunearthtools.com/dp/tools/pos_earth.php">công cụ đo góc phương vị</a>, phục vụ cho việc nhập dữ liệu chính xác vào Stellarium.</p>
+<p><a href="https://weather.us/model-charts/euro/usa/total-cloud-coverage.html">Weather.us</a>, công cụ dự báo mây ngắn hạn đáng tin cậy nhất trong vòng mười ngày trước sự kiện, hoạt động trên phạm vi toàn cầu.</p>
+<hr />
+<p><em>Hy vọng bài viết này đã cung cấp cho bạn một quy trình rõ ràng để tự lên kế hoạch xem nhật thực toàn phần, từ việc chọn vùng địa lý phù hợp cho đến chốt địa điểm ngay trong ngày sự kiện. Chúc bạn có một trải nghiệm nhật thực trọn vẹn và đáng nhớ.</em></p>
+
+</article>
+<footer class="site-footer">
+  <p>Bài viết được biên soạn cho <a href="https://downloadmapimage.com" target="_blank" rel="noopener">DownloadMapImage.com</a>. Công cụ Street View 360 Downloader dùng trong bài có tại <a href="https://downloadmapimage.com/360-dl/" target="_blank" rel="noopener">downloadmapimage.com/360-dl/</a>.</p>
+</footer>
+</div>
+</body>
+</html>
